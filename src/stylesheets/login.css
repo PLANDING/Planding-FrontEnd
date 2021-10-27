@@ -6,8 +6,13 @@
   padding: 50px 0;
   margin-top: 50px;
 }
+.login .logo-wrapper{
+  width: 50%;
+  justify-content: center;
+}
 .login .wrapper{
   width: 50%;
+  margin-top: 50px;
 }
 .login form{
   width: 100%;

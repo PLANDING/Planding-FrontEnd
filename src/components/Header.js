@@ -9,8 +9,9 @@ const Header=()=>{
         history.push("/"+e.target.id);
     }
     return(<div className="header row-container">
-    <div>
-        {/*로고*/}
+    <div className="row-container logo-wrapper" onClick={onClickNav} >
+        <img src="logo.png" width="100px"/>
+        <span>당신의 아이디어에 펀딩합니다</span>
     </div>
     <nav className="row-container">
         <button onClick={onClickNav} id="completion" className={location.pathname=="/completion"&&"cur"}>펀딩 완료</button>
