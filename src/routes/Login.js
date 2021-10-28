@@ -21,10 +21,11 @@ const Login = () => {
                 <hr className="green-hr" />
             </div>
             <div className="border-box col-container">
+                    <img src="logo.png" width="100px" />{/* 
                 <div className="row-container logo-wrapper">
                     <img src="logo.png" width="100px" />
                     <span>당신의 아이디어에 펀딩합니다</span>
-                </div>
+                </div> */}
                 <div className="wrapper col-container">
                     <form className="col-container">
                         <div className="row-container">
