@@ -1,7 +1,7 @@
 import react from "react";
-import "../stylesheets/completionCard.css"
+import "../stylesheets/card.css"
 const CompletionCard = ({ projectObj }) => {
-    return (<div className="completionCard">
+    return (<div className="Card completionCard">
         <div className="row-container top-wrapper">
             <span className="green-btn">{projectObj.isCompletion ? "모집 완료" : "모집 중"}</span>
             <h2>{projectObj.idea}</h2>
