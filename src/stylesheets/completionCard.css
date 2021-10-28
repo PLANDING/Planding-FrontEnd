@@ -1,0 +1,60 @@
+.completionCard{
+    box-shadow: 5px 5px 20px 2px #00000015;
+    width: 100%;
+    border-radius: 15px;
+    padding:30px;
+    box-sizing: border-box;
+}
+.completionCard h2{
+    margin: 0;
+}
+.completionCard .top-wrapper{
+    width: 100%;
+}
+.completionCard .top-wrapper .green-btn{
+    font-size: small;
+    padding:5px 10px;
+    margin-right: 10px;
+}
+.completionCard .top-wrapper .profile{
+    gap: 10px;
+    flex: 1;
+    justify-content: flex-end;
+    font-size: small;
+}
+.completionCard .main-wrapper{
+    font-size: small;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.completionCard .main-wrapper .interest-group{
+    padding: 20px 0;
+}
+.completionCard .main-wrapper>.row-container{
+    gap: 10px;
+    margin-top: 10px;
+}
+.completionCard .bottom-wrapper{
+    align-items: flex-end;
+    flex: 1;
+    align-self: flex-end;
+}
+.completionCard .bottom-wrapper>.col-container{
+    gap: 10px;
+}
+.completionCard .bottom-wrapper #d-day{
+    font-size: large;
+    font-weight: bold;
+    color: #37C56E;
+    text-align: center;
+}
+.completionCard .greyborder-btn span{
+    font-weight:normal;
+    margin-left: 5px;
+}
+.completionCard .grey-btn{
+    font-weight: normal;
+}
+.completionCard .funding-cnt{
+    color: #37C56E;
+}
