@@ -66,3 +66,86 @@ form input[type=submit]{
   align-self: flex-end;
   margin-bottom: 10px;
 }
+.grey-btn{
+  background-color: #EDF2F8;
+  padding: 5px 15px;
+  border-radius: 5px;
+  min-width: 50px;
+  text-align: center;
+  font-size: small;
+}
+.greyborder-btn{
+  border:solid thin #EDF2F8;
+  padding: 5px 15px;
+  border-radius: 5px;
+  min-width: 50px;
+  text-align: center;
+  font-size: small;
+}
+.profile-img{
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+/*completion & pregress card component*/
+.Card{
+  box-shadow: 5px 5px 20px 2px #00000015;
+  width: 100%;
+  border-radius: 15px;
+  padding:30px;
+  box-sizing: border-box;
+}
+.Card h2{
+  margin: 0;
+}
+.Card .top-wrapper{
+  width: 100%;
+}
+.Card .top-wrapper .green-btn{
+  font-size: small;
+  padding:5px 10px;
+  margin-right: 10px;
+}
+.Card .top-wrapper .profile{
+  gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
+  font-size: small;
+}
+.Card .main-wrapper{
+  font-size: small;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.Card .main-wrapper .interest-group{
+  padding: 20px 0;
+}
+.Card .main-wrapper>.row-container{
+  gap: 10px;
+  margin-top: 10px;
+}
+.Card .bottom-wrapper{
+  align-items: flex-end;
+  flex: 1;
+  align-self: flex-end;
+}
+.Card .bottom-wrapper>.col-container{
+  gap: 10px;
+}
+.Card .bottom-wrapper #d-day{
+  font-size: large;
+  font-weight: bold;
+  color: #37C56E;
+  text-align: center;
+}
+.Card .greyborder-btn span{
+  font-weight:normal;
+  margin-left: 5px;
+}
+.Card .grey-btn{
+  font-weight: normal;
+}
+.Card .funding-cnt{
+  color: #37C56E;
+}
