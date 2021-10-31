@@ -70,15 +70,14 @@ form input[type=submit]{
   background-color: #EDF2F8;
   padding: 5px 15px;
   border-radius: 5px;
-  min-width: 50px;
   text-align: center;
   font-size: small;
+  color: #5F5F5F;
 }
 .greyborder-btn{
   border:solid thin #EDF2F8;
   padding: 5px 15px;
   border-radius: 5px;
-  min-width: 50px;
   text-align: center;
   font-size: small;
 }
