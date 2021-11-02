@@ -1,0 +1,22 @@
+/*Header.js*/
+.header{
+  height: 100px;
+}
+.header .logo-wrapper{
+  margin-left: 50px;
+  cursor: pointer;
+}
+.header nav{
+  gap: 50px;
+  flex: 1;
+  justify-content: right;
+  margin-right: 50px;
+}
+.header .cur{
+  color: #37C56E;
+  font-weight: bold;
+}
+.header .border-btn{
+  font-size: small;
+  padding: 8px 20px;
+}

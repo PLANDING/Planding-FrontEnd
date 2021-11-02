@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
+*{
+  font-family: 'Noto Sans KR', sans-serif;
+}
+button{
+  all: unset;
+  cursor: pointer;
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.col-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.row-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.border-btn{
+  border: solid thin #37C56E;
+  border-radius: 5px;
+  color: #37C56E;
+  padding: 5px 15px;
+  font-size: small;
+}
+.green-btn{
+  border-radius: 5px;
+  background-color: #37C56E;
+  color: white;
+  padding: 10px 20px;
+}
+.border-box{
+  border: solid thin #37C56E;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.green-hr{
+  border: none;
+  border-top: solid thin #37C56E;
+}
+.top-div{
+  font-size: xx-large;
+  font-weight: bold;
+  width: 80%;
+  margin-top: 50px;
+}
+form :is(input[type=text],input[type=password],input[type=url]){
+  padding: 5px 10px;
+  border: solid thin #BCBCBC;
+  border-radius: 5px;
+}
+form input[type=submit]{
+  border: unset;
+  cursor: pointer;
+}
+.logo-wrapper span{
+  font-size: small;
+  font-weight: lighter;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
