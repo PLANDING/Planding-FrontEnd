@@ -1,6 +1,7 @@
 import react from "react";
 import Gage from "./Gage";
 import "../stylesheets/card.css"
+
 const ProgressCard = ({ projectObj }) => {
     return (<div className="Card progressCard">
         <div className="row-container top-wrapper">

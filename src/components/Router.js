@@ -5,7 +5,7 @@ import FundingCompletion from "../routes/FundingCompletion";
 import FundingCreation from "../routes/FundingCreation";
 import FundingProgress from "../routes/FundingProgress";
 import Login from "../routes/Login";
-import Main from "../routes/Main";
+import Main from "../routes/Main.jsx";
 import Profile from "../routes/Profile";
 import Project from "../routes/Project";
 import Register from "../routes/Register";
