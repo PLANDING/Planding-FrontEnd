@@ -1,8 +1,8 @@
 import react, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import TopDIv from "../components/TopDIv";
 import Header from "../components/Header";
-import ProgressCard from "../components/ProgressCard";
-import "../stylesheets/progress.css"
+import ProgressCard from "../components/FundingProgress/ProgressCard";
+import { CardWrapper } from "./FundingCompletion";
 const FundingProgress = () => {
     /*dummyData*/
     const projectObj = {
@@ -13,31 +13,18 @@ const FundingProgress = () => {
         Category: { name: "인공지능" }
         //+ funding count
     }
-    const history = useHistory();
     const [preogressArr, setProgressArr] = useState([]);
     useEffect(() => {
         //get projects data form server
         setProgressArr([projectObj, projectObj]);
     }, []);
-    const onClickCreation = () => {
-        history.push("/creation");
-    }
     return (<>
         <Header />
         <div className="progress main-container">
-            <div className="top-div">
-                <div className="row-container wrapper">
-                    <div className="col-container">
-                        <span>펀딩 진행</span>
-                        <span className="small">프로젝트에 펀딩하세요!</span>
-                    </div>
-                    <button className="green-btn" onClick={onClickCreation}>펀딩 생성</button>
-                </div>
-                <hr className="green-hr" />
-            </div>
-            <div className="col-container card-wrapper">
+            <TopDIv pageLabel={"펀딩 진행"} subLabel={"프로젝트에 펀딩하세요!"} isProgress/>
+            <CardWrapper className="col-container">
                 {preogressArr.map(progress => <ProgressCard projectObj={progress} />)}
-            </div>
+            </CardWrapper>
         </div>
     </>);
 }

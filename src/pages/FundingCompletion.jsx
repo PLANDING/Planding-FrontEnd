@@ -1,7 +1,8 @@
 import react, { useEffect, useState } from "react";
-import CompletionCard from "../components/CompletionCard";
+import styled from "styled-components";
+import TopDIv from "../components/TopDIv";
+import CompletionCard from "../components/FundingCompletion/CompletionCard";
 import Header from "../components/Header";
-import "../stylesheets/completion.css"
 const FundingCompletion = () => {
     /*dummyData*/
     const projectObj = {
@@ -21,17 +22,16 @@ const FundingCompletion = () => {
     return (<>
         <Header />
         <div className="completion main-container">
-            <div className="top-div">
-                <div className="col-container">
-                    <span>펀딩 완료</span>
-                    <span className="small">프로젝트에 참여하세요!</span>
-                </div>
-                <hr className="green-hr" />
-            </div>
-            <div className="col-container card-wrapper">
+            <TopDIv pageLabel={"펀딩완료"} subLabel={"프로젝트에 참여하세요!"}/>
+
+            <CardWrapper className="col-container">
                 {completionArr.map(completion => <CompletionCard projectObj={completion} />)}
-            </div>
+            </CardWrapper>
         </div>
     </>);
 }
+export const CardWrapper=styled.div`
+    width: 80%;
+    gap: 20px;
+`
 export default FundingCompletion;

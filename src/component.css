@@ -23,67 +23,8 @@ button{
   flex-direction: row;
   align-items: center;
 }
-.border-btn{
-  border: solid thin #37C56E;
-  border-radius: 5px;
-  color: #37C56E;
-  padding: 5px 15px;
-  font-size: small;
-}
-.green-btn{
-  border-radius: 5px;
-  background-color: #37C56E;
-  color: white;
-  padding: 10px 20px;
-}
-.border-box{
-  border: solid thin #37C56E;
-  border-radius: 10px;
-  padding: 10px 20px;
-}
-.green-hr{
-  border: none;
-  border-top: solid thin #37C56E;
-}
-.top-div{
-  font-size: xx-large;
-  font-weight: bold;
-  width: 80%;
-  margin-top: 50px;
-}
 form :is(input[type=text],input[type=password],input[type=url]){
   padding: 5px 10px;
   border: solid thin #BCBCBC;
   border-radius: 5px;
-}
-form input[type=submit]{
-  border: unset;
-  cursor: pointer;
-}
-.logo-wrapper span{
-  font-size: small;
-  font-weight: lighter;
-  align-self: flex-end;
-  margin-bottom: 10px;
-}
-.grey-btn{
-  background-color: #EDF2F8;
-  padding: 5px 15px;
-  border-radius: 5px;
-  text-align: center;
-  font-size: small;
-  color: #5F5F5F;
-}
-.greyborder-btn{
-  border:solid thin #EDF2F8;
-  padding: 5px 15px;
-  border-radius: 5px;
-  text-align: center;
-  font-size: small;
-}
-.profile-img{
-  overflow: hidden;
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
 }
