@@ -1,12 +1,25 @@
+import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
+import Modal from "../common/Modal";
 import ProfileBox from "../common/ProfileBox"
 
 const ContentBox = ({ user, content, isGreen }) => {
+    const [isOpenMenu, setIsOpenMenu]=useState(false);
+    const onClickMenu=()=>{
+        setIsOpenMenu(prev=>!prev);
+    }
     return (
         <Wrapper isGreen={isGreen}>
             <div className="row-container">
                 <h4>기획 내용</h4>
                 <ProfileBox nickName={user.nickName} />
+                <span onClick={onClickMenu}>메뉴</span>
+                {isOpenMenu&&<Modal setIsOpen={setIsOpenMenu}>
+                    <Menu className="col-container">
+                        <span id="edit">수정</span>
+                        <span id="del">삭제</span>
+                    </Menu>
+                    </Modal>}
             </div>
             <Content>{content.split("\n").map(line => <>{line}<br /></>)}</Content>
         </Wrapper>
@@ -32,4 +45,30 @@ h4{
 const Content=styled.div`
     padding: 20px;
     min-height: 300px;
+`
+const Menu=styled.div`
+width: 50px;
+text-align: center;
+position: absolute;
+background: white;
+font-size: small;
+padding: 0px 20px;
+transform: translate(-80%, 30%);
+border-radius: 5px;
+color: #5F5F5F;
+border: solid thin #37C56E;
+span{
+    padding: 10px;
+}
+#del:hover{
+    color: #F55959;
+}
+#edit{
+    border-bottom: solid thin #37C56E;
+}
+#edit:hover{
+    color: #37C56E;
+}
+
+box-shadow: 2px 2px 10px 2px #00000020;
 `
