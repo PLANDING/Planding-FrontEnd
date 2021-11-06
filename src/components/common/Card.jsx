@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import GreenBtn from "./Button";
 import GreenLabel from "./Label";
 
 const Card = styled.div`
@@ -22,9 +21,9 @@ export const Wrapper = styled.div`
   color: #37C56E;
 }
 `
-export const ProjectHead = ({ label, idea, headilne, children }) => {
+export const ProjectHead = ({ label, idea, headilne, children, width, isDetail }) => {
   return(
-  <Container className="row-container top-wrapper">
+  <Container width={width} isDetail={isDetail}>
     <div className="col-container">
       <div className="row-container">
         <GreenLabel>{label}</GreenLabel>
@@ -32,19 +31,26 @@ export const ProjectHead = ({ label, idea, headilne, children }) => {
       </div>
       <span>{headilne}</span>
     </div>
-    <div className="side">{children}</div>
+    <Side>{children}</Side>
   </Container>);
 }
 const Container = styled.div`
-width: 100%;
+width: ${props=>props.width?props.width:"100%"};
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding-bottom:${props=>props.isDetail&&"30px"};
+&>.col-container>span{
+  margin-top: ${props=>props.isDetail&&"30px"};
+}
 h2{
   margin: 0;
   margin-left: 10px;
 }
-.side{
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-}
+`
+const Side=styled.div`
+display: flex;
+flex: 1;
+justify-content: flex-end;
 `
 export default Card;
