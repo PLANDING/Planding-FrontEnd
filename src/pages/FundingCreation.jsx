@@ -1,12 +1,12 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import GreenBtn, { GrayBtn } from "../components/common/Button";
 import InterestForm from "../components/common/InterestForm";
-import TopDiv from "../components/TopDIv";
-import Header from "../components/Header";
-import MemberForm from "../components/FundingCreation/MemberForm";
 import Select from "../components/common/Select";
+import MemberForm from "../components/FundingCreation/MemberForm";
+import Header from "../components/common/Header";
+import TopDiv from "../components/common/TopDIv";
 const FundingCreation = () => {
     const history=useHistory();
     /*dummy data */

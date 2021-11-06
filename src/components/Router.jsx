@@ -1,5 +1,4 @@
-import react from "react";
-import { BrowserRouter, Switch, Route} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Alert from "../pages/Alert";
 import FundingCompletion from "../pages/FundingCompletion";
 import FundingCompletionDetail from "../pages/FundingCompletionDetail";

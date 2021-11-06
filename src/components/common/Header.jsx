@@ -1,7 +1,7 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
-import { GreenBorderBtn } from './common/Button';
+import { GreenBorderBtn } from './Button';
 import ProfileBox from './ProfileBox';
 const Header=()=>{
     const [isLoggedIn, setIsLoggedIn]=useState(false);
