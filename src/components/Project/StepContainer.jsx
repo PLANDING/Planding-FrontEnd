@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import arrowImg from "../../assets/imgs/arrow.png"
 import arrowUpImg from "../../assets/imgs/arrowUp.png"
 import doneImg from "../../assets/imgs/done.png"
 import doneFillImg from "../../assets/imgs/doneFill.png"
+import GreenBtn from "../common/Button";
 
 const StepContainer = ({ curr }) => {
     const [curriculum, setCurriculum] = useState(curr);
@@ -35,6 +37,7 @@ const StepContainer = ({ curr }) => {
             setCurriculum(prev => ++prev);
         }
     }
+    const history=useHistory();
     const currArr = [
         [{ content: "팀 빌딩 확정", curr: 1 }, { content: "협업 툴 및 팀 규칙 정하기", curr: 2 }, { content: "펀딩 된 아이디어 기반으로 아이디어 브레인스토밍", curr: 3 }, { content: "시장 조사 (SWOT)", curr: 4 }],
         [{ content: "아이디어 구체화 / 개발동기", curr: 5 }, { content: "아이디어 구체화 / 개발 목적 및 필요성", curr: 6 }, { content: "아이디어 구체화 / 비즈니스 모델 캔버스 구상하기", curr: 7 }, { content: "파트 정하기 (프론트, 백, 데이터 정하기)", curr: 8 }],
@@ -56,6 +59,7 @@ const StepContainer = ({ curr }) => {
                     {dropMenu == `step${idx + 1}` && <DropDown>{
                         curr.map(arr => <div className="row-container">
                             <span style={{ "color": curriculum >= arr.curr && "#37C56E" }}>{arr.content}</span>
+                            {arr.curr==1&&curriculum==0&&<GreenBtn onClick={()=>{history.push("/project/matching")}}>개발자 매칭 추천</GreenBtn>}
                             <img id={arr.curr} src={curriculum >= arr.curr ? doneFillImg : doneImg} onClick={onClickDone} width="24px" />
                         </div>)
                     }</DropDown>}
@@ -90,6 +94,9 @@ width: 80%;
 const DropDown = styled.div`
 border: solid thin #37C56E;
 border-radius: 0 0 10px 10px;
+button{
+    margin-right: 20px;
+}
 &>div{
     border-top: solid thin #37C56E;
     padding: 20px;
