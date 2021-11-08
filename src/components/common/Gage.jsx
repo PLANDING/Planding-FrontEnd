@@ -6,7 +6,7 @@ const Gage=({gage, width})=>{
 }
 const GageContainer= styled.div`
 background-color: #EDF2F8;
-width:${prop=>prop.size?prop.size:"300px"};
+width:${prop=>prop.width?prop.width:"300px"};
 height: 10px;
 &>div{
 background-color: #37C56E;

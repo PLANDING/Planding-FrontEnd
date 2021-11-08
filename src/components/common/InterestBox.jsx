@@ -3,7 +3,7 @@ import { GrayLabel } from "./Label";
 
 const InterestBox = ({interestArr}) => {
     return (
-        <Container className="row-container">
+        <Container>
             {interestArr.map(interest =>
                 <GrayLabel>{interest.name}</GrayLabel>)}
         </Container>
@@ -12,6 +12,11 @@ const InterestBox = ({interestArr}) => {
 const Container=styled.div`
 padding: 20px 0;
 gap: 10px;
+div{
+    font-size: small;
+    display: inline-block;
+    margin: 0 5px 5px 0; 
+}
 &>div{
     font-weight: normal;
 }

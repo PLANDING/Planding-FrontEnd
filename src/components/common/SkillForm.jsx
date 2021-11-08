@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import  { GreenBorderBtn } from "./Button";
+import { GreenBorderBtn } from "./Button";
 import GreenLabel from "./Label";
 import Select from "./Select";
 

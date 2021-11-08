@@ -11,7 +11,7 @@ const CompletionCard = ({ projectObj }) => {
     }
     return (<Card onClick={onClickCard}>
         <ProjectHead label={projectObj.isCompletion ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
-        <ProfileBox profileUrl="user.png" nickName={projectObj.User.nickName} />
+        <ProfileBox nickName={projectObj.User.nickName} />
         </ProjectHead>
         <div className="row-container">
 

@@ -1,5 +1,5 @@
-import { GreenBorderBtn } from "../common/Button";
 import { Devider, InfoWrapper } from "../../pages/Register";
+import { GreenBorderBtn } from "../common/Button";
 
 const PersonalInfo = ({registerInfo, onChangeInfo}) => {
     return (<>

@@ -2,8 +2,8 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { GreenBorderBtn } from "../components/common/Button";
 import Header from "../components/common/Header";
-import TopDiv from "../components/common/TopDIv";
 import LoginForm from "../components/Login/LoginForm";
+import TopDiv from "../components/common/TopDIv";
 
 const Login = () => {
     const history = useHistory();
