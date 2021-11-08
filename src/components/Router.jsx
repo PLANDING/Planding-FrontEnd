@@ -24,7 +24,8 @@ const AppRouter=()=>{
                 <Route exact path="/completion/detail" component={FundingCompletionDetail}/>
                 <Route path="/creation" component={FundingCreation}/>
                 <Route path="/profile" component={Profile}/>
-                <Route path="/project" component={Project}/>
+                <Route exact path="/project" component={Project}/>
+                <Route exact path="/project/matching"/>
                 <Route path="/alert" component={Alert}/>
             </Switch>
         </BrowserRouter>
