@@ -1,3 +1,5 @@
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router";
 import Card, { ProjectHead, Wrapper } from "../common/Card";
 import InterestBox from "../common/InterestBox";
@@ -22,7 +24,7 @@ const CompletionCard = ({ projectObj }) => {
                 <InterestBox interestArr={projectObj.Interests} />
 
                 <div className="row-container">
-                    <span>펀딩 이력</span>
+                    <span>펀딩 이력 <FontAwesomeIcon icon={faDollarSign}/></span>
                     <span id="funding-cnt">{ }1,200</span>
                 </div>
             </Wrapper>
