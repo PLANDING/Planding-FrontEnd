@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import userImg from "../../assets/imgs/user.png"
+
 const ProfileBox = ({profileUrl, nickName, size}) => {
     return (
         <ProfileWrapper className="row-container" size={size}>
