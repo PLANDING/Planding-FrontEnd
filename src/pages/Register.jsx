@@ -5,6 +5,7 @@ import Header from "../components/common/Header";
 import PersonalInfo from "../components/Register/PersonalInfo";
 import SkillInfo from "../components/Register/SkillInfo";
 import TopDiv from "../components/common/TopDIv";
+
 const Register = () => {
     /*dummy data*/
     const [registerInfo, setRegisterInfo] = useState({

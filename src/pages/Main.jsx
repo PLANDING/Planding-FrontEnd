@@ -1,6 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
 import Header from '../components/common/Header';
-import MainProjectCard from '../components/MainProjectCard';
+import MainFundingCompletion from '../components/Main/MainFundingCompletion';
+import MainProjectCard from '../components/Main/MainProjectCard';
 
 const projectObj = {
     idea: "이미지 인식을 활용한 앱 서비스",
@@ -15,9 +17,21 @@ const Main = () => {
     return (
         <>
         <Header />
-        <MainProjectCard projectObj={projectObj}/>
+        <Wrapper>
+            <MainFundingCompletion projectObj={projectObj} bgcolor={"#37C56E"}/>
+        </Wrapper>
+        
         </>
     );
 };
 
 export default Main;
+
+const Wrapper = styled.div`
+    display:flex;
+    flex-direction: column;
+    margin:50px 3%;
+    justify-content: center;
+    align-items: center;
+
+`

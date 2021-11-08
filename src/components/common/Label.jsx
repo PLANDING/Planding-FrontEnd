@@ -13,6 +13,7 @@ border-radius: 5px;
 color: #37C56E;
 padding: 5px 15px;
 font-size: small;`
+
 export const GrayLabel=styled.div`
 background-color: #EDF2F8;
 padding: 5px 15px;

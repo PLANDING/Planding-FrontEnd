@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
+import logoSrc from '../../assets/imgs/logo.png';
 import { GreenBorderBtn } from './Button';
 import ProfileBox from './ProfileBox';
+
 const Header=()=>{
     const [isLoggedIn, setIsLoggedIn]=useState(false);
     const location= useLocation();
@@ -13,7 +15,7 @@ const Header=()=>{
 
     return(<Container className="row-container">
     <LogoWrapper className="row-container" onClick={onClickNav} >
-        <img src={process.env.PUBLIC_URL+"/logo.png"} width="100px"/>
+        <img src={logoSrc} width="100px"/>
         <span>당신의 아이디어에 펀딩합니다</span>
     </LogoWrapper>
     <Nav className="row-container">

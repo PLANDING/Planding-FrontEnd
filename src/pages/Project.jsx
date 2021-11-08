@@ -1,4 +1,4 @@
-import react from "react";
+import React from 'react';
 import styled from "styled-components";
 import Gage from "../components/common/Gage";
 import Header from "../components/common/Header";
