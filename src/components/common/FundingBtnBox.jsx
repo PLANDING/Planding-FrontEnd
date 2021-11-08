@@ -1,5 +1,5 @@
-import GreenBtn from "./Button"
-import { BtnBox } from "./JoinBtnBox"
+import GreenBtn from "./Button";
+import { BtnBox } from "./JoinBtnBox";
 
 const FundingBtnBox = ({ dDay }) => {
     return (

@@ -1,7 +1,7 @@
-import react, { useEffect, useState } from "react";
-import TopDIv from "../components/TopDIv";
-import Header from "../components/Header";
+import { useEffect, useState } from "react";
 import ProgressCard from "../components/FundingProgress/ProgressCard";
+import Header from "../components/common/Header";
+import TopDIv from "../components/common/TopDIv";
 import { CardWrapper } from "./FundingCompletion";
 const FundingProgress = () => {
     /*dummyData*/
@@ -21,7 +21,7 @@ const FundingProgress = () => {
     return (<>
         <Header />
         <div className="progress main-container">
-            <TopDIv pageLabel={"펀딩 진행"} subLabel={"프로젝트에 펀딩하세요!"} isProgress/>
+            <TopDIv pageLabel={"펀딩 진행"} subLabel={"프로젝트에 펀딩하세요!"}  isProgress isGreen />
             <CardWrapper className="col-container">
                 {preogressArr.map(progress => <ProgressCard projectObj={progress} />)}
             </CardWrapper>

@@ -1,10 +1,10 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import GreenBtn from "../components/common/Button";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import PersonalInfo from "../components/Register/PersonalInfo";
-import SkillInfo from "../components/SkillInfo";
-import TopDiv from "../components/TopDIv";
+import SkillInfo from "../components/Register/SkillInfo";
+import TopDiv from "../components/common/TopDIv";
 const Register = () => {
     /*dummy data*/
     const [registerInfo, setRegisterInfo] = useState({

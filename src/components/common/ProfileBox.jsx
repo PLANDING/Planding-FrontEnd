@@ -1,10 +1,10 @@
 import styled from "styled-components";
-
+import userImg from "../../assets/imgs/user.png"
 const ProfileBox = ({profileUrl, nickName, size}) => {
     return (
         <ProfileWrapper className="row-container" size={size}>
             <div className="profile-img">
-                <img src={process.env.PUBLIC_URL + "/" + profileUrl} width="100%" />
+                <img src={profileUrl?profileUrl:userImg} width="100%" />
             </div>
             <span>{nickName}</span>
         </ProfileWrapper>

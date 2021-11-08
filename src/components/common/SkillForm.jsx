@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import  { GreenBorderBtn } from "./common/Button";
-import GreenLabel from "./common/Label";
+import { GreenBorderBtn } from "./Button";
+import GreenLabel from "./Label";
 import Select from "./Select";
 
 const SkillForm = () => {
