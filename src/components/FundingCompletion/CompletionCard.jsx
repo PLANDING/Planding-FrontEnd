@@ -1,10 +1,8 @@
-import react from "react";
 import { useHistory } from "react-router";
-import GreenLabel from "../common/Label";
-import ProfileBox from "../common/ProfileBox";
 import Card, { ProjectHead, Wrapper } from "../common/Card";
 import InterestBox from "../common/InterestBox";
 import JoinBtnBox from "../common/JoinBtnBox";
+import ProfileBox from "../common/ProfileBox";
 import RecruitmentBox from "../common/RecruitmentBox";
 const CompletionCard = ({ projectObj }) => {
     const history = useHistory();

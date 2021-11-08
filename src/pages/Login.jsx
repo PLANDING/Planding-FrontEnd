@@ -1,9 +1,8 @@
-import react, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import GreenBtn, { GreenBorderBtn } from "../components/common/Button";
-import TopDiv from "../components/TopDIv";
-import Header from "../components/Header";
+import { GreenBorderBtn } from "../components/common/Button";
+import Header from "../components/common/Header";
+import TopDiv from "../components/common/TopDIv";
 import LoginForm from "../components/Login/LoginForm";
 
 const Login = () => {

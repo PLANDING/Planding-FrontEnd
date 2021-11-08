@@ -1,8 +1,8 @@
-import react, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import TopDIv from "../components/TopDIv";
+import Header from "../components/common/Header";
+import TopDIv from "../components/common/TopDIv";
 import CompletionCard from "../components/FundingCompletion/CompletionCard";
-import Header from "../components/Header";
 const FundingCompletion = () => {
     /*dummyData*/
     const projectObj = {

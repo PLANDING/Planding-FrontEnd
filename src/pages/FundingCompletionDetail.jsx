@@ -1,14 +1,13 @@
-import react, { useEffect, useState } from "react";
-import Header from "../components/Header";
-import "../stylesheets/detail.css"
-import Comment from "../components/common/Comment.jsx"
-import TopDiv from "../components/TopDIv";
-import JoinBtnBox from "../components/common/JoinBtnBox";
-import GreenBtn, { GrayBorderBtn } from "../components/common/Button";
-import InterestBox from "../components/common/InterestBox";
-import ProfileBox from "../components/common/ProfileBox";
-import { ProjectHead } from "../components/common/Card";
 import styled from "styled-components";
+import GreenBtn, { GrayBorderBtn } from "../components/common/Button";
+import { ProjectHead } from "../components/common/Card";
+import Comment from "../components/common/Comment.jsx";
+import Header from "../components/common/Header";
+import InterestBox from "../components/common/InterestBox";
+import JoinBtnBox from "../components/common/JoinBtnBox";
+import ProfileBox from "../components/common/ProfileBox";
+import TopDiv from "../components/common/TopDIv";
+import "../stylesheets/detail.css";
 const FundingCompletionDetail = () => {
     /*dummyData*/
     const projectObj = {

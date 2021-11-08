@@ -1,6 +1,6 @@
-import react, { useEffect, useState } from "react";
-import TopDIv from "../components/TopDIv";
-import Header from "../components/Header";
+import { useEffect, useState } from "react";
+import Header from "../components/common/Header";
+import TopDIv from "../components/common/TopDIv";
 import ProgressCard from "../components/FundingProgress/ProgressCard";
 import { CardWrapper } from "./FundingCompletion";
 const FundingProgress = () => {

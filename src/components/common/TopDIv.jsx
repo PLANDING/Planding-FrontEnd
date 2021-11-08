@@ -1,6 +1,6 @@
 import { useHistory } from "react-router";
 import styled from "styled-components"
-import GreenBtn from "./common/Button";
+import GreenBtn from "./Button";
 
 const TopDiv = ({ pageLabel, subLabel, isProgress }) => {
     const Div = styled.div`   

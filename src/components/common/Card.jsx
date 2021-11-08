@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import GreenBtn from "./Button";
 import GreenLabel from "./Label";
 
 const Card = styled.div`

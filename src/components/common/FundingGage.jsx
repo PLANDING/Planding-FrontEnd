@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import Gage from "./Gage"
+import styled from "styled-components";
+import Gage from "./Gage";
 
 const FundingGage = ({ gage, fundingCnt }) => {
 

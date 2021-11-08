@@ -1,8 +1,7 @@
-import { useState } from "react";
-import GreenBtn from "./common/Button";
-import { Devider, InfoWrapper } from "../pages/Register";
-import InterestForm from "./InterestForm";
-import SkillForm from "./SkillForm";
+import { Devider, InfoWrapper } from "../../pages/Register";
+import GreenBtn from "../common/Button";
+import InterestForm from "../common/InterestForm";
+import SkillForm from "../common/SkillForm";
 
 const SkillInfo = ({registerInfo, onChangeInfo}) => {
 

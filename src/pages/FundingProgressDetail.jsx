@@ -1,7 +1,7 @@
-import react, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import GreenBtn from "../components/common/Button";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import ProgressCard from "../components/FundingProgress/ProgressCard";
 const FundingProgressDetail = () => {
     /*dummyData*/
