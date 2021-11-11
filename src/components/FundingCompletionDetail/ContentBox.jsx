@@ -1,3 +1,6 @@
+import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import Modal from "../common/Modal";
@@ -13,7 +16,7 @@ const ContentBox = ({ user, content, isGreen }) => {
             <div className="row-container">
                 <h4>기획 내용</h4>
                 <ProfileBox nickName={user.nickName} />
-                <span onClick={onClickMenu}>메뉴</span>
+                <FontAwesomeIcon id="menu" onClick={onClickMenu} icon={faEllipsisV}/>
                 {isOpenMenu&&<Modal setIsOpen={setIsOpenMenu}>
                     <Menu className="col-container">
                         <span id="edit">수정</span>
@@ -32,11 +35,16 @@ border-radius: 10px;
     border-bottom: solid thin #37C56E;
     padding: 0 20px;
     margin-top: 0;
-${props=>props.isGreen&&`
-    background-color: #37C56E;
-    border-radius: 8px 8px 0 0;
-    color:white;
-`}
+    #menu{
+        margin-left: 20px;
+        cursor: pointer;
+        color:${props=>props.isGreen?`#FFFFF`:`#37C56E`};
+    }
+    ${props=>props.isGreen&&`
+        background-color: #37C56E;
+        border-radius: 8px 8px 0 0;
+        color:white;
+    `}
 }
 h4{
     flex: 1;
@@ -47,7 +55,7 @@ const Content=styled.div`
     min-height: 300px;
 `
 const Menu=styled.div`
-width: 50px;
+width: 100px;
 text-align: center;
 position: absolute;
 background: white;
@@ -59,6 +67,7 @@ color: #5F5F5F;
 border: solid thin #37C56E;
 span{
     padding: 10px;
+    cursor: pointer;
 }
 #del:hover{
     color: #F55959;
