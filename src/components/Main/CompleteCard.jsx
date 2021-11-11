@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GreenBorderBtn } from '../common/Button';
 import InterestBox from '../common/InterestBox';
 import GreenLabel from '../common/Label';
 import ProfileBox from '../common/ProfileBox';
 import RecruitmentBox from '../common/RecruitmentBox';
 
-const MainProjectCard = ({projectObj}) => {
+const CompleteCard = ({projectObj}) => {
     return (
         <>
         <Wrapper>
@@ -27,7 +26,7 @@ const MainProjectCard = ({projectObj}) => {
     );
 };
 
-export default MainProjectCard;
+export default CompleteCard;
 
 const Wrapper = styled.div`
     width: 500px;
