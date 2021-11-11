@@ -28,6 +28,9 @@ const GlobalStyle = createGlobalStyle`
     border: solid thin #BCBCBC;
     border-radius: 5px;
     }   
+    a{
+        all: unset;
+    }
 `;
 
 export default GlobalStyle;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import LevelImgs from '../assets/objects/LevelImgs';
 import Gage from "../components/common/Gage";
 import Header from "../components/common/Header";
 import ProfileBox from "../components/common/ProfileBox";
@@ -16,36 +17,11 @@ const Project = () => {
         createdAt: new Date(),
         FudingCnt: 100,
         Users: [{ userId: 1 }, { userId: 1 }, { userId: 1 }],
-        curriculum: 5
+        curriculum: 0
     }
     let gage = myProjectObj.curriculum / 20 * 100;
     /*stpe img path */
-    const imgArr = [
-        {
-            fill: "oneFill.png",
-            unFill: "one.png"
-        },
-
-        {
-            fill: "twoFill.png",
-            unFill: "two.png"
-        },
-
-        {
-            fill: "threeFill.png",
-            unFill: "three.png"
-        },
-
-        {
-            fill: "fourFill.png",
-            unFill: "four.png"
-        },
-
-        {
-            fill: "fiveFill.png",
-            unFill: "five.png"
-        },
-    ]
+    
     return (<>
         <Header />
         <Container >
@@ -67,7 +43,7 @@ const Project = () => {
 
             <ProjectGage className="col-container">
                 <ImgBox>
-                    {imgArr.map((img, idx) => <img src={require("../assets/imgs/" + `${gage < (idx + 1) * 20 ? img.unFill : img.fill}`).default} width={idx == 4 ? "100px" : "50px"} />)}
+                    {LevelImgs.map((img, idx) => <img src={require("../assets/imgs/" + `${gage < (idx + 1) * 20 ? img.unFill : img.fill}`).default} width={idx == 4 ? "100px" : "50px"} />)}
 
                 </ImgBox>
                 <Gage width={"50%"} gage={gage} />
@@ -78,11 +54,10 @@ const Project = () => {
     </>);
 }
 export default Project;
-
-const Container = styled.div`
+export const Container = styled.div`
 box-shadow: 5px 5px 20px 10px #00000020;
 margin: 0 5%;
-margin-top: 20pxﬁ;
+margin-top: 20px;
 min-height: 100vh;
 padding: 50px 40px;
 border-radius: 20px 20px 0 0;

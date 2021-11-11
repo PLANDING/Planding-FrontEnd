@@ -7,6 +7,7 @@ import FundingProgress from "../pages/FundingProgress";
 import FundingProgressDetail from "../pages/FundingProgressDetail";
 import Login from "../pages/Login";
 import Main from "../pages/Main";
+import Matching from "../pages/Matching";
 import Profile from "../pages/Profile";
 import Project from "../pages/Project";
 import Register from "../pages/Register";
@@ -25,7 +26,7 @@ const AppRouter=()=>{
                 <Route path="/creation" component={FundingCreation}/>
                 <Route path="/profile" component={Profile}/>
                 <Route exact path="/project" component={Project}/>
-                <Route exact path="/project/matching"/>
+                <Route exact path="/project/matching" component={Matching}/>
                 <Route path="/alert" component={Alert}/>
             </Switch>
         </BrowserRouter>
