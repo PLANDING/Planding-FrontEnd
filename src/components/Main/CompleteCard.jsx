@@ -29,39 +29,35 @@ const CompleteCard = ({projectObj}) => {
 export default CompleteCard;
 
 const Wrapper = styled.div`
-    width: 500px;
-    height: 270px;
+    width: 32%;
+    padding: 20px;
     background-color : white;
     border: 0.5px solid #EBEBEB;
     box-shadow: 5px 5px 10px 5px rgba(255, 255, 255,0.25);
-    border-radius: 20px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     box-sizing:border-box;
+    height: 230px;
 `
 
 const Header = styled.div`
     display: flex;
-    width:500px;
-    justify-content: space-between;
     align-items:center;
-    padding: 30px 30px;
 `
 const Title = styled.span`
-    font-size: 20px;
-    line-height: 28px;
+    font-size: medium;
     color : black;
+    flex: 1;
 `
 const Body = styled.div`
-    padding:0px 30px;
 `
 
 const Footer = styled.div`
     gap:10px;
-    padding-left:30px;
     &>span{
         color:#37C56E;
         font-weight : bold;
-        font-size : 20px;
+        font-size : medium;
     }
 `
