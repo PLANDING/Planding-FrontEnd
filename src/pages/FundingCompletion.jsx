@@ -7,7 +7,8 @@ const FundingCompletion = () => {
     /*dummyData*/
     const projectObj = {
         idea: "이미지 인식을 활용한 앱 서비스",
-        isCompletion: false,
+        isCompletion: true,
+        isEnd:false,
         member_plan: 2,
         member_dev: 2,
         User: { nickName: "닉네임" },

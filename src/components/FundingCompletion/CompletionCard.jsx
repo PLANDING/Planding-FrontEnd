@@ -1,19 +1,20 @@
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router";
+import AcceptBtnBox from "../Alert/AcceptBtnBox";
 import Card, { ProjectHead, Wrapper } from "../common/Card";
 import InterestBox from "../common/InterestBox";
 import JoinBtnBox from "../common/JoinBtnBox";
 import ProfileBox from "../common/ProfileBox";
 import RecruitmentBox from "../common/RecruitmentBox";
-const CompletionCard = ({ projectObj }) => {
+const CompletionCard = ({ projectObj, usage }) => {
     const history = useHistory();
     const onClickCard = () => {
         history.push("/completion/detail");
     }
     return (<Card onClick={onClickCard}>
-        <ProjectHead label={projectObj.isCompletion ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
-        <ProfileBox nickName={projectObj.User.nickName} />
+        <ProjectHead label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
+            <ProfileBox nickName={projectObj.User.nickName} />
         </ProjectHead>
         <div className="row-container">
 
@@ -24,12 +25,12 @@ const CompletionCard = ({ projectObj }) => {
                 <InterestBox interestArr={projectObj.Interests} />
 
                 <div className="row-container">
-                    <span>펀딩 이력 <FontAwesomeIcon icon={faDollarSign}/></span>
+                    <span>펀딩 이력 <FontAwesomeIcon icon={faDollarSign} /></span>
                     <span id="funding-cnt">{ }1,200</span>
                 </div>
             </Wrapper>
+            {usage != "isNone" && (usage == "isAlert" ? <AcceptBtnBox dDay={3} /> : <JoinBtnBox dDay={3} />)}
 
-            <JoinBtnBox dDay={3} />
         </div>
 
     </Card>);
