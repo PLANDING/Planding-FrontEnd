@@ -40,7 +40,7 @@ const FundingProgressDetail = () => {
     }]
     return (<>
         <Header />
-        <div className="completion detail main-container">
+        <div className="main-container">
             <TopDiv pageLabel="펀딩 진행" subLabel="프로젝트에 펀딩하세요!" isGreen/>
             <ProjectHead label={projectObj.isCompletion ? "펀딩마감" : "펀딩진행 중"} idea={projectObj.idea} headilne={projectObj.headilne} width="80%" isDetail>
                 <SideBtnBox className="col-container">
@@ -65,41 +65,40 @@ const FundingProgressDetail = () => {
     </>);
 }
 const Wrapper = styled.div`
-display:flex;
-flex-direction: row;
-   align-items: flex-start;
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
     width: 80%;
     gap: 20px;
 `
 const Container = styled.div`
-   flex: 1;
-border: solid thin #37C56E;
-
-border-radius: 10px;
+    flex: 1;
+    border: solid thin #37C56E;
+    border-radius: 10px;
 `
 const SideBtnBox=styled.div`
-width: 240px;
-button{
-    padding: 5px 20px;
-}
-#d-day{
-    color: #37C56E;
-    flex: 1;
-}
-&>div:nth-child(1){
-    gap: 5px;
-    margin-bottom: 20px;
-}
-&>div:nth-child(1)>span{
-    font-weight: bold;
-    color: #5F5F5F;
-}
+    width: 240px;
+    button{
+        padding: 5px 20px;
+    }
+    #d-day{
+        color: #37C56E;
+        flex: 1;
+    }
+    &>div:nth-child(1){
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+    &>div:nth-child(1)>span{
+        font-weight: bold;
+        color: #5F5F5F;
+    }
 `
 const SideContainer = styled.div`
-gap: 30px;
-h4{
-    margin-top: 0;
-}
+    gap: 30px;
+    h4{
+        margin-top: 0;
+    }
 `
 
 
