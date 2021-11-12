@@ -3,6 +3,7 @@ import Alert from "../pages/Alert";
 import FundingCompletion from "../pages/FundingCompletion";
 import FundingCompletionDetail from "../pages/FundingCompletionDetail";
 import FundingCreation from "../pages/FundingCreation";
+import FundingEdit from "../pages/FundingEdit";
 import FundingProgress from "../pages/FundingProgress";
 import FundingProgressDetail from "../pages/FundingProgressDetail";
 import Login from "../pages/Login";
@@ -23,6 +24,7 @@ const AppRouter=()=>{
                 <Route exact path="/progress/detail" component={FundingProgressDetail}/>
                 <Route exact path="/completion" component={FundingCompletion}/>
                 <Route exact path="/completion/detail" component={FundingCompletionDetail}/>
+                <Route path="/modification" component={FundingEdit} />
                 <Route path="/creation" component={FundingCreation}/>
                 <Route path="/profile" component={Profile}/>
                 <Route exact path="/project" component={Project}/>
