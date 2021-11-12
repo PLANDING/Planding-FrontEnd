@@ -38,7 +38,7 @@ const FundingCompletionDetail = () => {
     }]
     return (<>
         <Header />
-        <div className="completion detail main-container">
+        <div className="main-container">
             <TopDiv pageLabel="펀딩 완료" subLabel="프로젝트에 참여하세요!" />
             <ProjectHead label={projectObj.isCompletion ? "모집 완료" : "모집 중"} idea={projectObj.idea} headilne={projectObj.headilne} width="80%" isDetail>
                 <JoinBtnBox dDay={3} width="240px" content={"모집 종료까지"} />
@@ -57,23 +57,22 @@ const FundingCompletionDetail = () => {
     </>);
 }
 const Wrapper = styled.div`
-display:flex;
-flex-direction: row;
-   align-items: flex-start;
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
     width: 80%;
     gap: 20px;
 `
 const Container = styled.div`
-   flex: 1;
-border: solid thin #37C56E;
-
-border-radius: 10px;
+    flex: 1;
+    border: solid thin #37C56E;
+    border-radius: 10px;
 `
 const SideContainer = styled.div`
-gap: 30px;
-h4{
-    margin-top: 0;
-}
+    gap: 30px;
+    h4{
+        margin-top: 0;
+    }
 `
 
 
