@@ -34,6 +34,7 @@ const ProgressFunding=styled.div`
     background-color: #37C562;
     box-shadow: 5px 5px 20px 2px #00000015;
     border-radius: 15px;
+    margin:20px 0;
     padding:0px 20px 20px 20px;
     box-sizing: border-box;
     &>p{
@@ -48,10 +49,9 @@ const ProgressProject=styled.div`
     background-color: #EDF2F8;
     box-shadow: 5px 5px 20px 2px #00000015;
     border-radius: 15px;
-    margin:20px;
+    margin:20px 0;
     padding:0px 20px 20px 20px;
     box-sizing: border-box;
-    gap:10px;
     &>p{
         color:#9B9B9B;
         font-size:15px;

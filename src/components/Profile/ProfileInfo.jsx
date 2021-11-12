@@ -11,9 +11,9 @@ import { GreenBorderBtn } from '../common/Button';
 const ProfileInfo = ({profile}) => {
     return (
         <>
-            <Card className="row-container">
+            <Card>
                 <Profile className="col-container">
-                    <ProfileBox size={"120px"} />
+                    <ProfileBox size={"150px"} />
                     <span style={{fontWeight:"bold", fontSize:"26px"}}>{profile.nickName}</span>
                     <div className="row-container" style={{gap:"10px"}}>
                         <img src={require("../../assets/imgs/" + LevelImgs[0].fill).default} width="24px" />
@@ -54,6 +54,8 @@ const Card = styled.div`
     padding: 30px;
     border-radius: 15px;
     gap: 20px;
+    display: flex;
+    align-items: flex-start;
 `
 const Profile = styled.div`
     flex: 0.2;

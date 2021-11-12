@@ -46,7 +46,7 @@ const ProfileWrapper = styled.div`
     margin-top: 50px;
 `
 const CardWrapper = styled.div`
-    width:60%;
+    width:65%;
 `
 
 const BtnWrapper = styled.div`

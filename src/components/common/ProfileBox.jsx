@@ -8,8 +8,8 @@ const ProfileBox = ({profileUrl, nickName, size}) => {
         history.push("/profile");
     }
     return (
-        <ProfileWrapper className="row-container" size={size} onClick={onClickProfile}>
-            <ImgWrapper>
+        <ProfileWrapper className="row-container" onClick={onClickProfile}>
+            <ImgWrapper size={size} >
                 <img src={profileUrl?profileUrl:userImg} width="100%" />
             </ImgWrapper>
             <span>{nickName}</span>
