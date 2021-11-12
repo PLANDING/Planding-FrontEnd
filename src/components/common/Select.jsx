@@ -1,32 +1,33 @@
 import styled from "styled-components";
-
-const Select= ({label, optionArr}) => {
-
+import arrowImg from "../../assets/imgs/arrow.png"
+const Select= ({label, optionArr, setValue}) => {
+    const onChange=(e)=>{
+        const {target:{value}}=e;
+        setValue(value);
+    }
     return (
-        <SelectBox className="select">
-            <select>
+        <Wrapper className="row-container">
+            <SelectBox onChange={onChange}>
                 <option value="defalut" disabled selected hidden>{label}</option>
-                {optionArr.map(option=><option value={option.value}>{option.key}</option>)}
-            </select>
-            <span id="sel-arrow"><img src="arrow.png" /></span>
-        </SelectBox>)
+                {optionArr.map(opt=><option value={opt}>{opt}</option>)}
+            </SelectBox>
+            <Button id="sel-arrow"><img src={arrowImg} /></Button>
+        </Wrapper>)
 }
 export default Select;
-const SelectBox = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center;
-select{
-appearance: none;
-padding: 5px 10px;
-padding-right: 40px;
-border: solid thin #BCBCBC;
-border-radius: 5px;
-min-width: 100px;
-color: #BCBCBC;
-}
-#sel-arrow img{
-width: 15px;
-transform: translate(-160%);
-}
+const Wrapper=styled.div``
+const SelectBox = styled.select`
+    appearance: none;
+    padding: 5px 10px;
+    padding-right: 40px;
+    border: solid thin #BCBCBC;
+    border-radius: 5px;
+    min-width: 100px;
+    color: #BCBCBC;
+`
+const Button=styled.span`
+    img{
+        width: 15px;
+        transform: translate(-160%);
+    }
 `
