@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { useHistory } from "react-router";
 import FundingForm from "../components/common/FundingForm";
 import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
-const FundingCreation = () => {
+const FundingEdit= () => {
     /*dummy data */
     const [fundingObj, setFundingObj] = useState({
-        idea: "",
-        headline: "",
-        category:"",
-        content: "",
-        member_plan: 0,
-        member_dev: 0,
+        idea: "테스트",
+        headline: "테스트",
+        category:"테스트",
+        content: "테스트",
+        member_plan: 2,
+        member_dev: 3,
     });
     const [skillArr, setSkillArr] = useState(["웹 프론트앤드", "데이터 분석"]);
     
@@ -21,9 +20,9 @@ const FundingCreation = () => {
     return (<>
         <Header />
         <div className="creation main-container">
-            <TopDiv pageLabel="펀딩 생성"/>
-            <FundingForm funding={fundingObj} skillArr={skillArr} onSubmit={onSubmit}/>
+            <TopDiv pageLabel="펀딩 수정"/>
+            <FundingForm funding={fundingObj} skill={skillArr} onSubmit={onSubmit}/>
         </div>
     </>);
 }
-export default FundingCreation;
+export default FundingEdit;
