@@ -1,17 +1,18 @@
 import { useHistory } from "react-router";
 import styled from "styled-components";
+import AcceptBtnBox from "../Alert/AcceptBtnBox";
 import Card, { ProjectHead, Wrapper } from "../common/Card";
 import FundingBtnBox from "../common/FundingBtnBox";
 import FundingGage from "../common/FundingGage";
 import InterestBox from "../common/InterestBox";
 import ProfileBox from "../common/ProfileBox";
-const ProgressCard = ({ projectObj }) => {
+const ProgressCard = ({ projectObj, usage }) => {
     const history = useHistory();
     const onClickCard = () => {
         history.push("/progress/detail");
     }
     return (<Card border onClick={onClickCard}>
-        <ProjectHead label={projectObj.isCompletion ? "펀딩마감" : "펀딩진행 중"} idea={projectObj.idea}>
+        <ProjectHead label={projectObj.isEnd ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea}>
         <ProfileBox  nickName={projectObj.User.nickName} />
         </ProjectHead>
         <div className="row-container">
@@ -26,7 +27,8 @@ const ProgressCard = ({ projectObj }) => {
                 <FundingGage gage={80} fundingCnt={1200} />
             </Wrapper>
 
-            <FundingBtnBox dDay={3} />
+            {usage!="isNone"&&(usage=="isAlert"?<AcceptBtnBox dDay={3} />:<FundingBtnBox dDay={3} />)}
+            
         </div>
     </Card>);
 }
