@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { GreenBorderBtn } from '../components/common/Button';
 import ProfileCard from '../components/Profile/ProfileCard'
 import CompleteProject from '../components/Profile/CompleteProject';
+import { Link } from 'react-router-dom';
 
 const Profile=()=>{
     const profile = {
@@ -31,7 +32,9 @@ const Profile=()=>{
             </ProfileWrapper>
             <CardWrapper className="col-container">
                 <BtnWrapper>
+                    <Link to="/profile/edit">
                     <GreenBorderBtn>프로필 수정</GreenBorderBtn>
+                    </Link>
                 </BtnWrapper>
                 <ProfileCard projectObj={projectObj}/>
                 <CompleteProject projectObj={projectObj}></CompleteProject>
