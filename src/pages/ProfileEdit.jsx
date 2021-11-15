@@ -3,16 +3,19 @@ import Header from '../components/common/Header';
 import PersonalInfo from '../components/ProfileEdit/PersonalInfo';
 import styled from 'styled-components';
 import SkillInfo from '../components/ProfileEdit/SkillInfo';
+import TopDiv from '../components/common/TopDIv';
 
 const ProfileEdit = () => {
     return (
         <>
         <Header />
+        <div className="main-container">
+        <TopDiv pageLabel={"프로필 수정"}/>
         <Form className="main-container">
             <PersonalInfo />
             <SkillInfo />
         </Form>
-        
+        </div>
         </>
     );
 };
