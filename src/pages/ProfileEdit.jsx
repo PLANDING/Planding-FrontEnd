@@ -4,6 +4,7 @@ import PersonalInfo from '../components/ProfileEdit/PersonalInfo';
 import styled from 'styled-components';
 import SkillInfo from '../components/ProfileEdit/SkillInfo';
 import TopDiv from '../components/common/TopDIv';
+import GreenBtn from '../components/common/Button';
 
 const ProfileEdit = () => {
     return (
@@ -14,6 +15,7 @@ const ProfileEdit = () => {
         <Form className="main-container">
             <PersonalInfo />
             <SkillInfo />
+            <GreenBtn>수정 완료</GreenBtn>
         </Form>
         </div>
         </>
@@ -23,13 +25,15 @@ const ProfileEdit = () => {
 export default ProfileEdit;
 
 const Form = styled.div`
-    width:100%;
     gap:70px;
     input{
         flex-grow : 1;
     }
     #label{
         width: 150px;
+    }
+    &>button{
+        width:30%;
     }
 `
 
