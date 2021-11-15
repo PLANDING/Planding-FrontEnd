@@ -13,12 +13,12 @@ const SkillInfo = () => {
                 <Container className="col-container">
                     <FieldWrapper className="row-container">
                         <span id="label">개인 사이트</span>
-                        <input type="url" name="site" value={""} placeholder="ex. 블로그, 노션 주소" />
+                        <input type="url" name="site"  placeholder="ex. 블로그, 노션 주소" />
                     </FieldWrapper>
 
                     <FieldWrapper className="row-container">
                         <span id="label">Github</span>
-                        <input type="url" name="gitHub" value={" "} placeholder=""/>
+                        <input type="url" name="gitHub"  placeholder=""/>
                         <GreenBtn >기술 스택 분석</GreenBtn>
                     </FieldWrapper>
 
