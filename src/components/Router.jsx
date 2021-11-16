@@ -12,6 +12,7 @@ import Matching from "../pages/Matching";
 import Profile from "../pages/Profile";
 import Project from "../pages/Project";
 import Register from "../pages/Register";
+import ProfileEdit from "../pages/ProfileEdit"
 
 const AppRouter=()=>{
     return(
@@ -26,7 +27,8 @@ const AppRouter=()=>{
                 <Route exact path="/completion/detail" component={FundingCompletionDetail}/>
                 <Route path="/modification" component={FundingEdit} />
                 <Route path="/creation" component={FundingCreation}/>
-                <Route path="/profile" component={Profile}/>
+                <Route exact path="/profile" component={Profile}/>
+                <Route exact path="/profile/edit" component={ProfileEdit}/>
                 <Route exact path="/project" component={Project}/>
                 <Route exact path="/project/matching" component={Matching}/>
                 <Route path="/alert" component={Alert}/>
