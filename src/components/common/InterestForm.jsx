@@ -4,7 +4,7 @@ import { GreenBorderBtn } from "./Button";
 import { GrayLabel } from "./Label";
 import Select from "./Select";
 
-const InterestForm = ({interstArr, setinterestArr}) => {
+const InterestForm = ({interestArr, setinterestArr}) => {
     const [first, setFirst]=useState("");
     const [second, setSecond]=useState("");
     const onClickAdd=()=>{
@@ -12,7 +12,7 @@ const InterestForm = ({interstArr, setinterestArr}) => {
     }
     const onClickDel=(e)=>{
         const {target:{name}}=e;
-        setinterestArr(interstArr.filter((it, idx)=>idx!=parseInt(name)));
+        setinterestArr(interestArr.filter((it, idx)=>idx!=parseInt(name)));
     }
     return (<>
         <div className="row-container">
@@ -22,7 +22,7 @@ const InterestForm = ({interstArr, setinterestArr}) => {
         </div>
 
         <TagWrapper className="row-container">{
-            interstArr.map((interest,idx) => 
+            interestArr?.map((interest,idx) => 
             <GrayLabel>{interest}
             <button name={idx} id="del-btn" onClick={onClickDel}>x</button>
             </GrayLabel>)}

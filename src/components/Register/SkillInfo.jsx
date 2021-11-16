@@ -4,7 +4,7 @@ import GreenBtn from "../common/Button";
 import InterestForm from "../common/InterestForm";
 import SkillForm from "../common/SkillForm";
 
-const SkillInfo = ({registerInfo, onChangeInfo}) => {
+const SkillInfo = ({registerInfo, onChangeInfo, interestArr, setInterestArr, skillArr,setSkillArr}) => {
 
     return (
         <>
@@ -27,12 +27,12 @@ const SkillInfo = ({registerInfo, onChangeInfo}) => {
 
                 <Wrapper className="col-container">
                     <span id="label">기술 스택</span>
-                    <SkillForm/>
+                    <SkillForm skillArr={skillArr} setSkillArr={setSkillArr}/>
                 </Wrapper>
 
                 <Wrapper className="col-container">
                     <span id="label">관심 분야</span>
-                    <InterestForm />
+                    <InterestForm  interestArr={interestArr} setInterestArr={setInterestArr}/>
                 </Wrapper>
             </InfoWrapper>
         </>

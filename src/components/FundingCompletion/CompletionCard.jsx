@@ -18,7 +18,7 @@ const CompletionCard = ({ projectObj, usage }) => {
         </ProjectHead>
         <div className="row-container">
 
-            <Wrapper className="col-contaienr">
+            <Wrapper className="col-container">
 
                 <RecruitmentBox member_plan={projectObj.member_plan} member_dev={projectObj.member_dev} />
 

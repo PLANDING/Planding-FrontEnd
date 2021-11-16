@@ -41,7 +41,7 @@ const FundingForm = ({ funding, skill, onSubmit }) => {
 
             <Wrapper>
                 <Label>기술 카테고리</Label>
-                <InterestForm interstArr={skillArr} setinterestArr={setSkillArr}/>
+                <InterestForm interestArr={skillArr} setinterestArr={setSkillArr}/>
             </Wrapper>
 
             <Wrapper>

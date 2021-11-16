@@ -15,6 +15,8 @@ const Register = () => {
         site: "",
         gitHub: "",
     })
+    const [interestArr,setInterestArr]=useState([]);
+    const [skillArr,setSkillArr]=useState([]);
     const onChangeInfo=(e)=>{
         const {target:{name, value}}=e;
         setRegisterInfo(prev=>({...prev, [name]:value}));
@@ -25,7 +27,7 @@ const Register = () => {
             <TopDiv pageLabel={"회원 가입"} />
             <Form className="col-container">
                 <PersonalInfo registerInfo={registerInfo} onChangeInfo={onChangeInfo}/>
-                <SkillInfo  registerInfo={registerInfo} onChangeInfo={onChangeInfo}/>
+                {/* <SkillInfo  registerInfo={registerInfo} onChangeInfo={onChangeInfo} /> */}
                 <GreenBtn>회원 가입</GreenBtn>
             </Form>
         </div>

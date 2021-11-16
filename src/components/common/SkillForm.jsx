@@ -21,7 +21,7 @@ const SkillForm = ({ skillArr, setSkillArr }) => {
             </div>
 
             <TagWrapper className="row-container">{
-                skillArr.map((skill, idx) =>
+                skillArr?.map((skill, idx) =>
                     <GreenLabel>{skill}
                         <button name={idx} id="del-btn" onClick={onClickDel}>x</button>
                     </GreenLabel>)}
