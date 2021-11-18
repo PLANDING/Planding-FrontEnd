@@ -1,21 +1,21 @@
 import styled from "styled-components";
 import arrowImg from "../../assets/imgs/arrow.png"
-const Select= ({label, optionArr, setValue}) => {
-    const onChange=(e)=>{
-        const {target:{value}}=e;
+const Select = ({ label, optionArr, setValue }) => {
+    const onChange = (e) => {
+        const { target: { value } } = e;
         setValue(value);
     }
     return (
         <Wrapper className="row-container">
             <SelectBox onChange={onChange}>
                 <option value="defalut" disabled selected hidden>{label}</option>
-                {optionArr.map(opt=><option value={opt}>{opt}</option>)}
+                {optionArr.map(opt => <option value={opt}>{opt}</option>)}
             </SelectBox>
-            <Button id="sel-arrow"><img src={arrowImg} /></Button>
+            <Button type="button" id="sel-arrow"><img src={arrowImg} /></Button>
         </Wrapper>)
 }
 export default Select;
-const Wrapper=styled.div``
+const Wrapper = styled.div``
 const SelectBox = styled.select`
     appearance: none;
     padding: 5px 10px;
@@ -24,8 +24,11 @@ const SelectBox = styled.select`
     border-radius: 5px;
     min-width: 100px;
     color: #BCBCBC;
+    background-color: transparent;
+    cursor: pointer;
 `
-const Button=styled.span`
+const Button = styled.button`
+    z-index: -10;
     img{
         width: 15px;
         transform: translate(-160%);
