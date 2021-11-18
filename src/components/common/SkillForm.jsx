@@ -2,37 +2,43 @@ import { useState } from "react";
 import styled from "styled-components";
 import { GreenBorderBtn } from "./Button";
 import GreenLabel from "./Label";
-import Select from "./Select";
 
 const SkillForm = ({ skillArr, setSkillArr }) => {
-    const [first, setFirst] = useState("");
-    const [second, setSecond] = useState("");
+    const [skill, setSkill] = useState("");
     const onClickAdd = () => {
-        second && setSkillArr(prev => ([...prev, second]));
+        skill && setSkillArr(prev => ([...prev, skill]));
+        setSkill("");
     }
     const onClickDel = (e) => {
         const { target: { name } } = e;
         setSkillArr(skillArr.filter((it, idx) => idx != parseInt(name)));
-        return (<>
-            <div className="row-container select-wrapper">
-                <Select label={"분야"} optionArr={[]} />
-                <Select label={"언어|프레임워크|라이브러리"} optionArr={[]} />
-                <GreenBorderBtn onClick={onClickAdd}>추가</GreenBorderBtn>
-            </div>
-
-            <TagWrapper className="row-container">{
-                skillArr?.map((skill, idx) =>
-                    <GreenLabel>{skill}
-                        <button name={idx} id="del-btn" onClick={onClickDel}>x</button>
-                    </GreenLabel>)}
-            </TagWrapper>
-        </>)
     }
+    return (<div className="col-container">
+        <Wrapper className="row-container">
+            <input type="text" value={skill} onChange={(e) => setSkill(e.target.value)} />
+            <GreenBorderBtn type="button" onClick={onClickAdd}>추가</GreenBorderBtn>
+        </Wrapper>
+
+        {skillArr.length > 0 && <TagWrapper className="row-container">{
+            skillArr.map((skill, idx) =>
+                <GreenLabel>{skill}
+                    <button type="button" name={idx} id="del-btn" onClick={onClickDel}>x</button>
+                </GreenLabel>)}
+        </TagWrapper>}
+    </div>)
+
 }
 export default SkillForm;
+const Wrapper = styled.div`
+&>button{
+    margin-left: 5px;
+    font-size: small;
+    padding: 5px 15px;
+}
+`
 const TagWrapper = styled.div`
     margin-top: 30px;
-    gap: 20px;
+    gap: 10px;
     #del-btn{
         padding: 0;
         padding-left: 10px;
