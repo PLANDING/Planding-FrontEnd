@@ -6,12 +6,12 @@ import FundingBtnBox from "../common/FundingBtnBox";
 import FundingGage from "../common/FundingGage";
 import InterestBox from "../common/InterestBox";
 import ProfileBox from "../common/ProfileBox";
-const ProgressCard = ({ projectObj, usage }) => {
+const ProgressCard = ({ projectObj, usage , idx}) => {
     const history = useHistory();
     const onClickCard = () => {
         history.push("/progress/detail");
     }
-    return (<Card border onClick={onClickCard}>
+    return (<Card border onClick={onClickCard} id={idx}>
         <ProjectHead label={projectObj.isEnd ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea}>
         <ProfileBox  nickName={projectObj.User.nickName} />
         </ProjectHead>

@@ -24,7 +24,7 @@ const ProfileEdit = () => {
 
 export default ProfileEdit;
 
-const Form = styled.div`
+const Form = styled.form`
     gap:70px;
     input{
         flex-grow : 1;

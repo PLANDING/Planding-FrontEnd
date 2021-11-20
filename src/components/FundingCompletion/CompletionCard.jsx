@@ -7,18 +7,18 @@ import InterestBox from "../common/InterestBox";
 import JoinBtnBox from "../common/JoinBtnBox";
 import ProfileBox from "../common/ProfileBox";
 import RecruitmentBox from "../common/RecruitmentBox";
-const CompletionCard = ({ projectObj, usage }) => {
+const CompletionCard = ({ projectObj, usage, idx }) => {
     const history = useHistory();
     const onClickCard = () => {
         history.push("/completion/detail");
     }
-    return (<Card onClick={onClickCard}>
+    return (<Card onClick={onClickCard} id={idx}>
         <ProjectHead label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
             <ProfileBox nickName={projectObj.User.nickName} />
         </ProjectHead>
         <div className="row-container">
 
-            <Wrapper className="col-contaienr">
+            <Wrapper className="col-container">
 
                 <RecruitmentBox member_plan={projectObj.member_plan} member_dev={projectObj.member_dev} />
 
