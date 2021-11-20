@@ -24,7 +24,7 @@ const FundingProgress = () => {
         <div className="progress main-container">
             <TopDIv pageLabel={"펀딩 진행"} subLabel={"프로젝트에 펀딩하세요!"}  isProgress isGreen />
             <CardWrapper className="col-container">
-                {preogressArr.map(progress => <ProgressCard projectObj={progress} />)}
+                {preogressArr.map((progress, idx) => <ProgressCard projectObj={progress} idx={idx}/>)}
             </CardWrapper>
         </div>
     </>);
