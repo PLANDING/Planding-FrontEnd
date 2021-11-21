@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { GreenBorderBtn } from "./Button";
+import { GreenBorderLabel } from "./Label";
 import Select from "./Select";
 
 const InterestForm = ({ interestArr, setInterestArr }) => {
@@ -27,11 +28,11 @@ const InterestForm = ({ interestArr, setInterestArr }) => {
             <GreenBorderBtn type="button" onClick={onClickAdd}>추가</GreenBorderBtn>
         </div>
 
-        {interestArr.length > 0 && <TagWrapper className="row-container">{
+        {interestArr.length > 0 && <TagWrapper>{
             interestArr.map((interest, idx) =>
-                <GreenBorderBtn>{interest.split(":")[1]}
+                <GreenBorderLabel>{interest.split(":")[1]}
                     <button type="button" name={idx} id="del-btn" onClick={onClickDel}>X</button>
-                </GreenBorderBtn>)}
+                </GreenBorderLabel>)}
         </TagWrapper>}
     </>)
 }
@@ -41,6 +42,10 @@ const TagWrapper = styled.div`
     #del-btn{
         padding: 0;
         padding-left: 10px;
+    }
+    &>div{
+        display: inline-block;
+        margin: 0 10px 10px 0; 
     }
 `
 export default InterestForm;

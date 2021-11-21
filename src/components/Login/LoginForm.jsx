@@ -21,6 +21,7 @@ const LoginForm = () => {
         e.preventDefault();
         try{
             axios.post("/auth",{...input}).then(res=>{
+                console.log(res.data);
                 if(res.status===204){
                     /* 로그인 정보 없을 경우 */
                     setNotice("회원 정보가 없거나, 정보가 일치하지 않습니다.");
@@ -51,13 +52,10 @@ const LoginForm = () => {
     )
 }
 const Form = styled.form`
-width: 100%;
-gap: 30px;
+    width: 100%;
+    gap: 30px;
 `
 const Wrapper=styled.div`
-    input::placeholder{
-        color: #BCBCBC;
-    }
     span{
         width: 100px;
     }

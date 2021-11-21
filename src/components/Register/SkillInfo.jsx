@@ -14,33 +14,33 @@ const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, sk
             </Devider>
             <InfoWrapper className="col-container">
 
-                <Wrapper className="row-container">
+                <FieldWrapper className="row-container">
                     <span id="label">개인 사이트</span>
                     <input type="url" name="site" value={registerInfo.site} placeholder="ex. 블로그, 노션 주소" onChange={onChangeInfo} />
-                </Wrapper>
+                </FieldWrapper>
 
-                <Wrapper className="row-container">
+                <FieldWrapper className="row-container">
                     <span id="label">Github</span>
                     <input type="url" name="gitHub" value={registerInfo.git} placeholder="" onChange={onChangeInfo} />
                     <GreenBtn type="button">기술 스택 분석</GreenBtn>
-                </Wrapper>
+                </FieldWrapper>
 
-                <Wrapper skill>
+                <FieldWrapper skill>
                     <span id="label">기술 스택</span>
                     <SkillForm skillArr={skillArr} setSkillArr={setSkillArr} />
-                </Wrapper>
+                </FieldWrapper>
 
-                <Wrapper className="col-container">
+                <FieldWrapper className="col-container">
                     <span id="label">관심 분야</span>
                     <InterestForm interestArr={interestArr} setInterestArr={setInterestArr} />
-                </Wrapper>
+                </FieldWrapper>
             </InfoWrapper>
         </>
     )
 }
 export default SkillInfo;
 
-const Wrapper = styled.div`
+export const FieldWrapper = styled.div`
     &>button{
         margin-left: 5px;
         font-size: small;

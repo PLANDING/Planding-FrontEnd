@@ -28,6 +28,9 @@ const GlobalStyle = createGlobalStyle`
     border: solid thin #BCBCBC;
     border-radius: 5px;
     }   
+    input::placeholder{
+        color: #BCBCBC;
+    }
     a{
         all: unset;
     }
