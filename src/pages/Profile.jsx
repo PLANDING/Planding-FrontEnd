@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from '../components/common/Header';
 import ProfileInfo from '../components/Profile/ProfileInfo';
 import styled from 'styled-components';
@@ -6,15 +6,18 @@ import { GreenBorderBtn } from '../components/common/Button';
 import ProfileCard from '../components/Profile/ProfileCard'
 import CompleteProject from '../components/Profile/CompleteProject';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import axios from "axios";
+import { setUserInfo } from "../modules/user";
+import { setProfileInfo } from "../modules/profile";
 
 const Profile=()=>{
-    const profile = {
-        nickName: "gamza",
-        git: "https://github.com/PLANDING",
-        site: "https://www.notion.so/",
-        Interests: [{ name: "데이터 분석" }, { name: "빅데이터" }],
-        Skills: [{ name: "R" }, { name: "python" }],
-    }
+    const dispatch=useDispatch();
+    const history=useHistory();
+    const {userObj}=useSelector(state=>({userObj:state.user.userObj})); //계정 user 정보
+    
     const projectObj = {
         idea: "이미지 인식을 활용한 앱 서비스",
         isCompletion: false,
@@ -23,19 +26,31 @@ const Profile=()=>{
         Category: { name: "인공지능" }
         //+ funding count
     }
+    const {profileObj}=useSelector(state=>({profileObj:state.profile.profileObj})); //prifile user 정보
+    useEffect(()=>{
+        axios.get(`/user/${profileObj.id}`)
+            .then(res=>dispatch(setProfileInfo(res.data.user)));
+    },[])
+
+    /*계정 user 정보 Get -> 프로픨 수정*/
+    const onClickEdit=()=>{
+        axios.get(`/user/${userObj.id}`).then(res=>{
+            dispatch(setUserInfo(res.data.user));
+            history.push("/profile/edit");
+        });
+    }
     return(
     <>
         <Header/>
         <div className="main-container">
             <ProfileWrapper className="col-container">
-                <ProfileInfo profile={profile}/>
+                <ProfileInfo profile={profileObj}/>
             </ProfileWrapper>
             <CardWrapper className="col-container">
+                {userObj.id==profileObj.id&&
                 <BtnWrapper>
-                    <Link to="/profile/edit">
-                    <GreenBorderBtn>프로필 수정</GreenBorderBtn>
-                    </Link>
-                </BtnWrapper>
+                    <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
+                </BtnWrapper>}
                 <ProfileCard projectObj={projectObj}/>
                 <CompleteProject projectObj={projectObj}></CompleteProject>
             </CardWrapper>

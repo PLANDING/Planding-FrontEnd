@@ -13,7 +13,7 @@ const ProfileInfo = ({profile}) => {
         <>
             <Card>
                 <Profile className="col-container">
-                    <ProfileBox size={"150px"} />
+                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg} />
                     <span style={{fontWeight:"bold", fontSize:"26px"}}>{profile.nickName}</span>
                     <div className="row-container" style={{gap:"10px"}}>
                         <img src={require("../../assets/imgs/" + LevelImgs[0].fill).default} width="24px" />
@@ -23,7 +23,7 @@ const ProfileInfo = ({profile}) => {
                 <Content className="col-container">
                     <div className="row-container">
                         <span><FontAwesomeIcon icon={faGithub} /> Github</span>
-                        <a href={profile.git}>{profile.git}</a>
+                        <a href={profile.github}>{profile.github}</a>
                     </div>
                     <div className="row-container">
                         <span>Dev Blog</span>
@@ -32,13 +32,13 @@ const ProfileInfo = ({profile}) => {
                     <LabelWrapper className="col-container">
                         <span>관심분야</span>
                         <div>
-                            {profile.Interests.map(interest => <GreenBorderLabel>{interest.name}</GreenBorderLabel>)}
+                            {profile.Interests?.map(interest => <GreenBorderLabel>{interest.name}</GreenBorderLabel>)}
                         </div>
                     </LabelWrapper>
                     <LabelWrapper className="col-container">
                         <span>기술 스택</span>
                         <div>
-                            {profile.Skills.map(skill => <GreenLabel>{skill.name}</GreenLabel>)}
+                            {profile.Skills?.map(skill => <GreenLabel>{skill.name}</GreenLabel>)}
                         </div>
                     </LabelWrapper>  
                 </Content>

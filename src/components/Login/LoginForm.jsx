@@ -21,7 +21,6 @@ const LoginForm = () => {
         e.preventDefault();
         try{
             axios.post("/auth",{...input}).then(res=>{
-                console.log(res.data);
                 if(res.status===204){
                     /* 로그인 정보 없을 경우 */
                     setNotice("회원 정보가 없거나, 정보가 일치하지 않습니다.");
