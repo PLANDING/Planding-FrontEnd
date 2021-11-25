@@ -10,14 +10,16 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import axios from "axios";
-import { setUserInfo } from "../modules/user";
+import { setLoggedInfo, setUserInfo } from "../modules/user";
 import { setProfileInfo } from "../modules/profile";
+import { Cookies } from "react-cookie";
 
-const Profile=()=>{
-    const dispatch=useDispatch();
-    const history=useHistory();
-    const {userObj}=useSelector(state=>({userObj:state.user.userObj})); //계정 user 정보
-    
+const Profile = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const cookie=new Cookies;
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
+
     const projectObj = {
         idea: "이미지 인식을 활용한 앱 서비스",
         isCompletion: false,
@@ -26,36 +28,44 @@ const Profile=()=>{
         Category: { name: "인공지능" }
         //+ funding count
     }
-    const {profileObj}=useSelector(state=>({profileObj:state.profile.profileObj})); //prifile user 정보
-    useEffect(()=>{
+    const { profileObj } = useSelector(state => ({ profileObj: state.profile.profileObj })); //prifile user 정보
+    useEffect(() => {
         axios.get(`/user/${profileObj.id}`)
-            .then(res=>dispatch(setProfileInfo(res.data.user)));
-    },[])
+            .then(res => dispatch(setProfileInfo(res.data.user)));
+    }, [])
 
     /*계정 user 정보 Get -> 프로픨 수정*/
-    const onClickEdit=()=>{
-        axios.get(`/user/${userObj.id}`).then(res=>{
+    const onClickEdit = () => {
+        axios.get(`/user/${userObj.id}`).then(res => {
             dispatch(setUserInfo(res.data.user));
             history.push("/profile/edit");
         });
     }
-    return(
-    <>
-        <Header/>
-        <div className="main-container">
-            <ProfileWrapper className="col-container">
-                <ProfileInfo profile={profileObj}/>
-            </ProfileWrapper>
-            <CardWrapper className="col-container">
-                {userObj.id==profileObj.id&&
-                <BtnWrapper>
-                    <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
-                </BtnWrapper>}
-                <ProfileCard projectObj={projectObj}/>
-                <CompleteProject projectObj={projectObj}></CompleteProject>
-            </CardWrapper>
-        </div>
-    </>);
+
+    /*계정 user 정보 Get -> 프로픨 수정*/
+    const onClickLogout = () => {
+        dispatch(setLoggedInfo(false, null));
+        cookie.remove('token');
+        history.push("/");
+    }
+    return (
+        <>
+            <Header />
+            <div className="main-container">
+                <ProfileWrapper className="col-container">
+                    <ProfileInfo profile={profileObj} />
+                </ProfileWrapper>
+                <CardWrapper className="col-container">
+                    {userObj.id == profileObj.id &&
+                        <BtnWrapper>
+                            <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
+                            <RedBorderBtn onClick={onClickLogout}>로그아웃</RedBorderBtn>
+                        </BtnWrapper>}
+                    <ProfileCard projectObj={projectObj} />
+                    <CompleteProject projectObj={projectObj}></CompleteProject>
+                </CardWrapper>
+            </div>
+        </>);
 }
 
 export default Profile;
@@ -70,4 +80,14 @@ const CardWrapper = styled.div`
 const BtnWrapper = styled.div`
     display:flex;
     justify-content: end;
+    gap: 10px;
+`
+const RedBorderBtn = styled.button`
+    border: solid thin #F55959;
+    border-radius: 5px;
+    color: #F55959;
+    padding: 5px 15px;
+    font-size: small;
+    text-align: center;
+
 `
