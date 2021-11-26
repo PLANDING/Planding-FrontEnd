@@ -4,16 +4,16 @@ import FundingForm from "../components/common/FundingForm";
 import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
 const FundingCreation = () => {
-    /*dummy data */
+    /*init data */
     const [fundingObj, setFundingObj] = useState({
         idea: "",
         headline: "",
-        category:"",
         content: "",
         member_plan: 0,
         member_dev: 0,
     });
-    const [skillArr, setSkillArr] = useState(["웹 프론트앤드", "데이터 분석"]);
+    const [interestArr, setInterestArr] = useState([]);
+    const [category, setCategory] = useState();
     
     const onSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +22,7 @@ const FundingCreation = () => {
         <Header />
         <div className="creation main-container">
             <TopDiv pageLabel="펀딩 생성"/>
-            <FundingForm funding={fundingObj} skillArr={skillArr} onSubmit={onSubmit}/>
+            <FundingForm interestArr={interestArr} setInterestArr={setInterestArr} fundingObj={fundingObj} setFundingObj={setFundingObj} setCategory={setCategory} onSubmit={onSubmit}/>
         </div>
     </>);
 }
