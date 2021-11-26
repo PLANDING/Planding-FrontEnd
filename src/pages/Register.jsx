@@ -30,17 +30,20 @@ const Register = () => {
 
   const onChangeInfo = (e) => {
     const { target: { name, value } } = e;
-    setRegisterInfo(prev => ({ ...prev, [name]: value }));
-    name == "email" && setCheck(p=>({...p, email:""}));
-    name == "nickName" && setCheck(p=>({...p, nickName:""}));
-    name == "pw" && checkedValidPW(value);
 
+    setRegisterInfo(prev => ({ ...prev, [name]: value }));
+    /* 중복확인 및 일치 여부 판별 */
+    name == "email" && setCheck(p => ({ ...p, email: "" }));
+    name == "nickName" && setCheck(p => ({ ...p, nickName: "" }));
+    name == "pw" && checkedValidPW(value);
     name == "pwCheck" && setCheck(p => ({ ...p, pwCheck: registerInfo.pw == value ? "사용 가능" : "비밀번호가 일치하지 않습니다." }));
 
   }
 
+  /* 비밀번호 조건 검사 */
   const checkedValidPW = (value) => {
     let valPw = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/g;
+
     if (!valPw.test(value)) {
       setCheck(p => ({ ...p, pw: '8-16자, 숫자/영문/특수문자 각 1자리 이상' }));
     }
@@ -53,6 +56,7 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     try {
+
       if (check.email != "사용 가능" || check.pw != "사용 가능" || check.pwCheck != "사용 가능" || check.nickName != "사용 가능") {
         throw new Error("기재사항 조건들을 확인해주세요.");
       }
@@ -60,9 +64,10 @@ const Register = () => {
         throw new Error("필수 항목을 기재해주세요.");
       }
 
-      axios.post("/auth", { ...registerInfo, interestArr: interestArr, skillArr: skillArr }).then(res => {
+      axios.post("/auth/register", { ...registerInfo, interestArr: interestArr, skillArr: skillArr }).then(res => {
         res.status == 200 && history.push("/login");
-      })
+      });
+
     }
     catch (error) {
       alert(error.message);

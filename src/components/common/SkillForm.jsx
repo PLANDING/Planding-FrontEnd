@@ -15,11 +15,11 @@ const SkillForm = ({ skillArr, setSkillArr }) => {
     }
     return (<div className="col-container">
         <Wrapper className="row-container">
-            <input type="text" value={skill} onChange={(e) => setSkill(e.target.value)} />
+            <input type="text" placeholder="언어|프레임워크|라이브러리" value={skill} onChange={(e) => setSkill(e.target.value)} />
             <GreenBorderBtn type="button" onClick={onClickAdd}>추가</GreenBorderBtn>
         </Wrapper>
 
-        {skillArr.length > 0 && <TagWrapper className="row-container">{
+        {skillArr.length > 0 && <TagWrapper>{
             skillArr.map((skill, idx) =>
                 <GreenLabel>{skill}
                     <button type="button" name={idx} id="del-btn" onClick={onClickDel}>x</button>
@@ -42,6 +42,10 @@ const TagWrapper = styled.div`
     #del-btn{
         padding: 0;
         padding-left: 10px;
+    }
+    &>div{
+        display: inline-block;
+        margin: 0 10px 10px 0; 
     }
 `
 
