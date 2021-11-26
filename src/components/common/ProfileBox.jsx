@@ -5,7 +5,7 @@ import styled from "styled-components";
 import userImg from "../../assets/imgs/user.png"
 import { setProfileInfo } from "../../modules/profile";
 
-const ProfileBox = ({profileUrl, nickName, size, userId}) => {
+const ProfileBox = ({profileUrl, nickName, size, userId, borderNone}) => {
     const dispatch=useDispatch();
     const history=useHistory();
 
@@ -18,7 +18,7 @@ const ProfileBox = ({profileUrl, nickName, size, userId}) => {
     }
     return (
         <ProfileWrapper className="row-container" onClick={onClickProfile}>
-            <ImgWrapper size={size} >
+            <ImgWrapper size={size} borderNone={borderNone}>
                 <img src={profileUrl?profileUrl:userImg} width="100%" />
             </ImgWrapper>
             <span>{nickName}</span>
@@ -45,4 +45,9 @@ const ImgWrapper=styled.div`
     &:hover{
         border: solid 2px #37C56E;
     }
+    ${props=>props.borderNone&&`
+    &:hover{
+        border: none;
+    }
+    `}
 `

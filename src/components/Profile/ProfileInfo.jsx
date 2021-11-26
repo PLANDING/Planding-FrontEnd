@@ -6,19 +6,30 @@ import GreenLabel, { GreenBorderLabel } from '../common/Label';
 import ProfileBox from '../common/ProfileBox';
 import LevelImgs from "../../assets/objects/LevelImgs";
 import Gage from '../common/Gage';
-import { GreenBorderBtn } from '../common/Button';
 
-const ProfileInfo = ({profile}) => {
+const ProfileInfo = ({ profile }) => {
     return (
         <>
             <Card>
                 <Profile className="col-container">
-                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg} />
-                    <span style={{fontWeight:"bold", fontSize:"26px"}}>{profile.nickName}</span>
-                    <div className="row-container" style={{gap:"10px"}}>
-                        <img src={require("../../assets/imgs/" + LevelImgs[0].fill).default} width="24px" />
-                        <Gage gage={40} width={'150px'}/>
-                    </div>
+                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg} borderNone/>
+                    <span style={{ fontWeight: "bold", fontSize: "26px" }}>{profile.nickName}</span>
+                    <LevelWrapper className="col-container" >
+
+                        <div className="row-container" style={{ gap: "10px" }}>
+                            <img src={require("../../assets/imgs/" + LevelImgs[0].fill).default} width="24px" />
+                            <Gage gage={40} width={'150px'} />
+                        </div>
+
+                        <Tooltip className="tooltip" >
+                            <span>**스택레벨 이란?</span>
+                            <p >
+                                <div>총 5레벨 {LevelImgs.map((it,idx) => <><img src={require("../../assets/imgs/" + `${it.fill}`).default} />{idx<4&&'→'}</>)}</div><br/>
+                                플랜딩 프로젝트 완료 시 증가되는 평가지표입니다.
+                            </p>
+                        </Tooltip>
+                    </LevelWrapper>
+
                 </Profile>
                 <Content className="col-container">
                     <div className="row-container">
@@ -40,7 +51,7 @@ const ProfileInfo = ({profile}) => {
                         <div>
                             {profile.Skills?.map(skill => <GreenLabel>{skill.name}</GreenLabel>)}
                         </div>
-                    </LabelWrapper>  
+                    </LabelWrapper>
                 </Content>
             </Card>
         </>
@@ -68,6 +79,15 @@ const Profile = styled.div`
     &>div:nth-child(2){
         gap: 5px;
     }
+    .level:hover > .tootip{
+        display: block;
+    }
+`
+const LevelWrapper = styled.div`
+
+    &:hover > .tooltip{
+    display: block;
+  }
 `
 const Content = styled.div`
     gap: 10px;
@@ -85,4 +105,28 @@ const LabelWrapper = styled.div`
         display: inline-block;
         margin-right: 5px;
     }   
+`
+const Tooltip = styled.div`
+    display: none;
+    position: absolute;
+    transform: translate(0, 100px);
+    border: solid thin #37C56E;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: xx-small;
+    background-color: white;
+    line-height:2;
+    font-weight: lighter;
+    &>span:nth-child(1){
+        color: #37C56E;
+    }
+    img{
+        width: 20px;
+    }
+    div{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 5px;
+    }
 `
