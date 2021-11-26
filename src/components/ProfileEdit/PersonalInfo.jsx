@@ -5,47 +5,61 @@ import profile from '../../assets/imgs/user.png'
 import { GreenBorderBtn } from '../common/Button';
 import ProfileBox from '../common/ProfileBox';
 import { GreenBorderLabel } from '../common/Label';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-const PersonalInfo = () => {
+const PersonalInfo = ({ profileObj, onChangeInfo, checkNick, setCheckNick}) => {
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const [imgFile, setImgFile] = useState({
-        file:'',
-        fileURL:'',
+        file: '',
+        fileURL: '',
     });
 
-    const handlerChange = (e) =>{
+    const handlerChange = (e) => {
         e.preventDefault();
         const file = e.target.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
-        
-        reader.onloadend = () =>{ 
+
+        reader.onloadend = () => {
             const fileURL = reader.result;
-            setImgFile({...imgFile, file, fileURL})
+            setImgFile({ ...imgFile, file, fileURL })
         }
 
-        
+
+    }
+    const onClickCheck = () => {
+        if(userObj.nickName===profileObj.nickName)return;
+        let valNick = /^[가-힣a-z0-9]{2,20}$/g;
+        !valNick.test(profileObj.nickName) ?
+            setCheckNick("2-20자 영소문자/한글/숫자 [공백 및 특수문자 불가]")
+            :
+            axios.get(`/auth/check/nickName/${profileObj.nickName}`)
+                .then(res => setCheckNick(res.data.isExisted ? "이미 사용중입니다." : "사용 가능" ));
     }
     return (
         <>
             <Wrapper className="col-container">
-                <TopDiv pageLabel={"개인 정보"} isGreen={true}/>
+                <TopDiv pageLabel={"개인 정보"} isGreen={true} />
                 <Container className="row-container">
-                <Photo className="col-container">
-                    <img src={imgFile.fileURL? imgFile.fileURL :  profile} alt="profile"/>
-                    <label for="inputImg"><GreenBorderLabel>이미지 선택</GreenBorderLabel></label>
-                    <input type="file" id="inputImg" accept="image/*" onChange={handlerChange}/>
-                    
-                </Photo>
-                <NickName className="col-container">
-                    <span id="label">닉네임</span>
-                    <div className="row-container" style={{gap:"10px"}}>
-                    <input type="text" name="nickName" placeholder=""/>
-                    <GreenBorderBtn>중복확인</GreenBorderBtn>
-                    </div>
-                </NickName>
+                    <Photo className="col-container">
+                        <img src={imgFile.fileURL ? imgFile.fileURL : profile} alt="profile" />
+                        <label for="inputImg"><GreenBorderBtn type="button">이미지 선택</GreenBorderBtn></label>
+                        <input type="file" id="inputImg" accept="image/*" onChange={handlerChange} />
+
+                    </Photo>
+                    <NickName className="col-container" checking={checkNick=="사용 가능"}>
+                        <span id="label">닉네임</span>
+                        <div className="row-container" style={{ gap: "10px" }}>
+                            <input type="text" name="nickName" value={profileObj.nickName} onChange={onChangeInfo} placeholder="" />
+                            <GreenBorderBtn type="button" onClick={onClickCheck}>중복확인</GreenBorderBtn>
+                        </div>
+                        {(checkNick != "" && checkNick != "사용 가능") && <Notice>{checkNick}</Notice>}
+                    </NickName>
+
                 </Container>
             </Wrapper>
-            
+
         </>
     );
 };
@@ -56,9 +70,10 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     width:70%;
-    gap:100px;
+    gap:50px;
     &>div{
         font-size:medium;
+        font-weight: normal;
     }
 `
 const Container = styled.div`
@@ -69,22 +84,37 @@ const Photo = styled.div`
     flex-grow :1;
     gap:20px;
     width:150px;
+    align-items: center;
     img{
         border-radius: 50%;
+        width: 100%;
     }
     input{
         display:none;
     }
-    div{
+    label{
+        width: 100%;
+    }
+    button{
         text-align: center;
         cursor: pointer;
+        box-sizing: border-box;
+        width: 100%;
+
     }
 `
 
 const NickName = styled.div`
     flex-grow : 1;
-    gap:10px;
+    gap:20px;
     &>span{
-        font-size: large;
+        font-size: medium;
     }
+    input[name=nickName]{
+        ${props => props.checking&&`border: solid 2px #37C56E;`}
+    }
+`
+const Notice = styled.div`
+    font-size: x-small;
+    color:#F55959;
 `

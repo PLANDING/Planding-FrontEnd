@@ -13,12 +13,11 @@ const Header = () => {
     const location = useLocation();
     const history = useHistory();
 
-    const isLoggedIn = useSelector(state => ({ isLoggedIn: state.user.isLoggedIn }));
+    const { isLoggedin, userObj } = useSelector(state => ({ isLoggedin: state.user.isLoggedin, userObj: state.user.userObj }));
 
     const onClickNav = (e) => {
         history.push("/" + e.target.id);
     }
-
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const onClickAlert = () => {
@@ -31,16 +30,16 @@ const Header = () => {
         </LogoWrapper>
 
         <Nav className="row-container">
-            <Button onClick={onClickNav} id="completion" cur={location.pathname == "/completion" }>펀딩 완료</Button>
+            <Button onClick={onClickNav} id="completion" cur={location.pathname == "/completion"}>펀딩 완료</Button>
             <Button onClick={onClickNav} id="progress" cur={location.pathname == "/progress"}>펀딩 진행</Button>
             <Button onClick={onClickNav} id="project" cur={location.pathname == "/project"}>나의 프로젝트</Button>
-            {isLoggedIn ?
+            {isLoggedin ?
                 <>
                     <AlertButton>
                         <FontAwesomeIcon id="bell" icon={faBell} color={"#37C56E"} onClick={onClickAlert} />
                         <Modal setIsOpen={setIsOpenModal}>{isOpenModal && <AlertModal />}</Modal>
                     </AlertButton>
-                    <ProfileBox onClick={onClickNav} id="profile" />
+                    <ProfileBox onClick={onClickNav} id="profile" userId={userObj.id} />
                 </>
                 :
                 <GreenBorderBtn onClick={onClickNav} id="login">로그인</GreenBorderBtn>}
@@ -67,13 +66,17 @@ const Nav = styled.nav`
     justify-content: right;
     margin-right: 50px;
 `
-const Button=styled.button`
-    ${props=>props.cur&&`
+const Button = styled.button`
+    ${props => props.cur && `
         color: #37C56E;
         font-weight: bold;
     `}
+    &:hover{
+        color: #37C56E;
+        font-weight: bold;
+    }
 `
-const AlertButton=styled.button`
+const AlertButton = styled.button`
     #bell{
         font-size: x-large;
     }

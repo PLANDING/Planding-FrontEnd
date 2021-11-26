@@ -4,8 +4,9 @@ import GreenBtn from '../common/Button';
 import InterestForm from '../common/InterestForm';
 import SkillForm from '../common/SkillForm';
 import TopDiv from '../common/TopDIv';
+import { FieldWrapper } from '../Register/SkillInfo';
 
-const SkillInfo = () => {
+const SkillInfo = ({profileObj,onChangeInfo, interestArr, setInterestArr, skillArr, setSkillArr }) => {
     return (
         <>
          <Wrapper className="col-container">
@@ -13,24 +14,24 @@ const SkillInfo = () => {
                 <Container className="col-container">
                     <FieldWrapper className="row-container">
                         <span id="label">개인 사이트</span>
-                        <input type="url" name="site"  placeholder="ex. 블로그, 노션 주소" />
+                        <input type="url" name="site"  placeholder="ex. 블로그, 노션 주소"  value={profileObj.site} onChange={onChangeInfo}/>
                     </FieldWrapper>
 
                     <FieldWrapper className="row-container">
                         <span id="label">Github</span>
-                        <input type="url" name="gitHub"  placeholder=""/>
+                        <input type="url" name="github"  placeholder="Github 주소" value={profileObj.github} onChange={onChangeInfo}/>
                         <GreenBtn >기술 스택 분석</GreenBtn>
                     </FieldWrapper>
 
-                    {/* <FieldWrapper className="col-container">
+                    <FieldWrapper skill>
                         <span id="label">기술 스택</span>
-                        <SkillForm/>
-                    </FieldWrapper> */}
+                        <SkillForm skillArr={skillArr} setSkillArr={setSkillArr}/>
+                    </FieldWrapper> 
 
-                    {/* <FieldWrapper className="col-container">
+                    <FieldWrapper className="col-container">
                         <span id="label">관심 분야</span>
-                        <InterestForm interst={["java"]}/>
-                    </FieldWrapper> */}
+                        <InterestForm interestArr={interestArr} setInterestArr={setInterestArr}  />
+                    </FieldWrapper>
                 </Container>
             </Wrapper>   
         </>
@@ -39,38 +40,21 @@ const SkillInfo = () => {
 
 export default SkillInfo;
 
-const InfoWrapper=styled.div`
-  align-items: center;
-  gap: 30px;
-  &>div{
-    width: 65%;
-  }
-  button{
-    margin-left: 5px;
-    font-size: small;
-    padding: 5px 15px;
-  }
-  &>.col-container #label{
-    margin-bottom: 30px;
-  }
-`
-
 const Wrapper = styled.div`
     width:70%;
-    gap:100px;
+    gap:50px;
     align-items: center;
     &>div{
         font-size:medium;
+        font-weight: normal;
     }
 `
 const Container = styled.div`
     gap:30px;
+    width: 45%;
+    &>.col-container #label{
+    margin-bottom: 30px;
+  }
+    
 `
 
-const FieldWrapper = styled.div`
-    button{
-    margin-left: 5px;
-    font-size: small;
-    padding: 5px 15px;
-  }
-`

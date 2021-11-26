@@ -1,11 +1,20 @@
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import userImg from "../../assets/imgs/user.png"
+import { setProfileInfo } from "../../modules/profile";
 
-const ProfileBox = ({profileUrl, nickName, size}) => {
+const ProfileBox = ({profileUrl, nickName, size, userId}) => {
+    const dispatch=useDispatch();
     const history=useHistory();
+
+    /*prifile user 정보 Get */
     const onClickProfile=()=>{
-        history.push("/profile");
+        axios.get(`/user/${userId}`).then(res=>{
+            dispatch(setProfileInfo(res.data.user));
+            history.push("/profile");
+        })
     }
     return (
         <ProfileWrapper className="row-container" onClick={onClickProfile}>
@@ -33,4 +42,7 @@ const ImgWrapper=styled.div`
     height: 40px;`
     }
     border-radius: 30px;
+    &:hover{
+        border: solid 2px #37C56E;
+    }
 `
