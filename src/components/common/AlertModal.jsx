@@ -1,25 +1,31 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
-
-const AlertModal = () => {
+/* Header 알림 모달창 component */
+const AlertModal = ({ userId }) => {
     const history = useHistory();
-    /*dummy data */
-    const arr = [{ content: "‘happy’님이 플랜딩의 추천시스템을 통해 당신에게 개발 협업을 요청했습니다." },
-    { content: "‘이미지 인식을 활용한 앱서비스’ 프로젝트 펀딩이 마감되었습니다." }];
-
     const [alertArr, setAlertArr] = useState([]);
+
+    /* 최근 10개 알림 받기 */
     useEffect(() => {
-        setAlertArr(arr);
-    }, [])
+        axios.get(`/alert/limit/${userId}`).then(res => {
+            setAlertArr(res.data.Alerts);
+        })
+    }, []);
+
+    /* 알림 페이지로 이동 */
     const onClickDetail = () => {
         history.push("/alert");
     }
     return (
         <Container className="col-container">
             <Wrapper>
-                {alertArr.map(alert => <Box>{alert.content}</Box>)}
+                {alertArr.length == 0 ?
+                    <Box none>{'알림이 없습니다.'}</Box>
+                    :
+                    alertArr.map(alert => <Box>'{alert.User.nickName}'{alert.content}</Box>)}
             </Wrapper>
             <Button onClick={onClickDetail}>자세히 보기</Button>
         </Container>
@@ -34,6 +40,7 @@ const Container = styled.div`
     transform: translate(-50%,10%);
     width: 300px; 
     min-height: 300px;
+    z-index: 999;
 `
 const Wrapper = styled.div`
     flex: 1;
@@ -41,8 +48,12 @@ const Wrapper = styled.div`
 const Box = styled.div`
     font-size: small;
     margin: 15px;
-    border-bottom: solid thin #bdbdbd;
+    border-bottom: solid thin #dbdbdb;
     padding-bottom: 10px;
+    ${props => props.none &&
+        `text-align:center;
+        color: #dbdbdb;
+    `}
 `
 const Button = styled.button`
     background-color: #37C56E;
