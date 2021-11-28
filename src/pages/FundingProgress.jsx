@@ -3,7 +3,9 @@ import ProgressCard from "../components/FundingProgress/ProgressCard";
 import Header from "../components/common/Header";
 import TopDIv from "../components/common/TopDIv";
 import { CardWrapper } from "./FundingCompletion";
+import { useSelector } from "react-redux";
 const FundingProgress = () => {
+    const {userObj}=useSelector(state=>({userObj:state.user.userObj}));
     /*dummyData*/
     const projectObj = {
         idea: "이미지 인식을 활용한 앱 서비스",
@@ -16,7 +18,6 @@ const FundingProgress = () => {
     }
     const [preogressArr, setProgressArr] = useState([]);
     useEffect(() => {
-        //get projects data form server
         setProgressArr([projectObj, projectObj]);
     }, []);
     return (<>
@@ -24,7 +25,7 @@ const FundingProgress = () => {
         <div className="progress main-container">
             <TopDIv pageLabel={"펀딩 진행"} subLabel={"프로젝트에 펀딩하세요!"}  isProgress isGreen />
             <CardWrapper className="col-container">
-                {preogressArr.map(progress => <ProgressCard projectObj={progress} />)}
+                {preogressArr.map(progress => <ProgressCard projectObj={progress} usage={userObj.id===progress.User.id&&"isNone"} />)}
             </CardWrapper>
         </div>
     </>);
