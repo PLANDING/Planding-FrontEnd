@@ -1,4 +1,8 @@
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import AlertCard from "../components/Alert/AlertCard";
@@ -6,27 +10,30 @@ import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
 
 const Alert = () => {
-    /*dummy data */
-    const arr = [{
-        content: "‘happy’님이 플랜딩의 추천시스템을 통해 당신에게 개발 협업을 요청했습니다.",
-        projectId: "1",
-        fromUserId: "1"
-    },
-    {
-        content: "‘이미지 인식을 활용한 앱서비스’ 프로젝트 펀딩이 마감되었습니다.",
-        projectId: "1"
-    }];
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
 
     const [alertArr, setAlertArr] = useState([]);
+    /* 모든 alert get  */
     useEffect(() => {
-        setAlertArr(arr);
-    }, [])
+        axios.get(`/alert/${userObj.id}`).then(res => {
+            setAlertArr(res.data.Alerts);
+        });
+    }, []);
+
     return (<>
         <Header />
         <Container className="main-container">
             <TopDiv pageLabel={"알림함"} />
             <AlertContainer className="col-container">
-                {alertArr.map(alert => <AlertCard content={alert.content} projectId={alert.projectId} fromUserId={alert.fromUserId} />)}
+                
+                {alertArr.length == 0 ?
+                    <NoticeBox className="row-container">
+                        <FontAwesomeIcon icon={faSearch} style={{ "font-size": "50px", "color": "#37C56E" }} />
+                        {'알림 내역이 없습니다.'}
+                    </NoticeBox>
+                    :
+                    alertArr.map(alert => <AlertCard content={alert.content} date={alert.createdAt} projectId={alert.ProjectId} fromUser={alert.User} />)}
+
             </AlertContainer>
         </Container>
     </>);
@@ -40,4 +47,11 @@ const AlertContainer = styled.div`
     border-radius: 10px;
     margin-top: 20px;
     gap: 30px;
+`
+const NoticeBox = styled.div`
+    justify-content: center;
+    font-weight: lighter;
+    color: #bdbdbd;
+    gap: 10px;
+    padding: 20px 0;
 `
