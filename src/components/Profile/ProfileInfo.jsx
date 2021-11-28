@@ -12,13 +12,13 @@ const ProfileInfo = ({ profile }) => {
         <>
             <Card>
                 <Profile className="col-container">
-                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg} borderNone/>
+                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg.url} borderNone/>
                     <span style={{ fontWeight: "bold", fontSize: "26px" }}>{profile.nickName}</span>
                     <LevelWrapper className="col-container" >
 
                         <div className="row-container" style={{ gap: "10px" }}>
-                            <img src={require("../../assets/imgs/" + LevelImgs[0].fill).default} width="24px" />
-                            <Gage gage={40} width={'150px'} />
+                            <img src={require("../../assets/imgs/" + LevelImgs[profile.level/4].fill).default} width="24px" />
+                            <Gage gage={profile.level*10} width={'150px'} />
                         </div>
 
                         <Tooltip className="tooltip" >

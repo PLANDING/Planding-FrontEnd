@@ -28,11 +28,18 @@ const ProfileEdit = () => {
 
     const onSubmit=(e)=>{
         e.preventDefault();
+        const formData=new FormData();
         try{
             if(userObj.nickName!=profileObj.nickName&&checkNick!="사용 가능"){
                 throw new Error("닉네임 중복확인 해주세요.")
             }
-            axios.patch(`/user/${userObj.id}`,{...profileObj, skillArr:skillArr, interestArr:interestArr})
+            formData.append('nickName', profileObj.nickName);
+            formData.append('site', profileObj.site);
+            formData.append('github', profileObj.github);
+            formData.append('skillArr', skillArr);
+            formData.append('interestArr', interestArr);
+            formData.append('profileImg', profileObj.profileImg);
+            axios.patch(`/user/${userObj.id}`,formData)
                 .then(res=>{
                     res.status==200&&history.push("/profile");
                 })
@@ -46,7 +53,7 @@ const ProfileEdit = () => {
             <div className="main-container">
                 <TopDiv pageLabel={"프로필 수정"} />
                 <Form className="main-container" onSubmit={onSubmit}>
-                    <PersonalInfo profileObj={profileObj} onChangeInfo={onChangeInfo} checkNick={checkNick} setCheckNick={setCheckNick} />
+                    <PersonalInfo profileObj={profileObj} setProfileObj={setProfileObj} onChangeInfo={onChangeInfo} checkNick={checkNick} setCheckNick={setCheckNick} />
                     <SkillInfo profileObj={profileObj} onChangeInfo={onChangeInfo} interestArr={interestArr} setInterestArr={setInterestArr} skillArr={skillArr} setSkillArr={setSkillArr} />
                     <GreenBtn>수정 완료</GreenBtn>
                 </Form>

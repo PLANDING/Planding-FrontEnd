@@ -8,16 +8,15 @@ import { GreenBorderLabel } from '../common/Label';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-const PersonalInfo = ({ profileObj, onChangeInfo, checkNick, setCheckNick}) => {
+const PersonalInfo = ({ profileObj, setProfileObj,onChangeInfo, checkNick, setCheckNick}) => {
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const [imgFile, setImgFile] = useState({
-        file: '',
-        fileURL: '',
-    });
-
+        fileURL: userObj.ProfileImg.url,
+    }); 
     const handlerChange = (e) => {
         e.preventDefault();
         const file = e.target.files[0];
+        setProfileObj(p=>({...p, profileImg:e.target.files[0]}));
         let reader = new FileReader();
         reader.readAsDataURL(file);
 
@@ -43,9 +42,9 @@ const PersonalInfo = ({ profileObj, onChangeInfo, checkNick, setCheckNick}) => {
                 <TopDiv pageLabel={"개인 정보"} isGreen={true} />
                 <Container className="row-container">
                     <Photo className="col-container">
-                        <img src={imgFile.fileURL ? imgFile.fileURL : profile} alt="profile" />
-                        <label for="inputImg"><GreenBorderBtn type="button">이미지 선택</GreenBorderBtn></label>
-                        <input type="file" id="inputImg" accept="image/*" onChange={handlerChange} />
+                        <ProfileBox profileUrl={imgFile.fileURL ? imgFile.fileURL : profile} size={"150px"} borderNone/>
+                        <label htmlFor="inputImg"><GreenBorderLabel>이미지 선택</GreenBorderLabel></label>
+                        <input type="file" id="inputImg" onChange={handlerChange} />
 
                     </Photo>
                     <NickName className="col-container" checking={checkNick=="사용 가능"}>
@@ -85,23 +84,16 @@ const Photo = styled.div`
     gap:20px;
     width:150px;
     align-items: center;
-    img{
-        border-radius: 50%;
-        width: 100%;
-    }
     input{
         display:none;
     }
     label{
         width: 100%;
     }
-    button{
+    label>div{
         text-align: center;
         cursor: pointer;
-        box-sizing: border-box;
-        width: 100%;
-
-    }
+    }  
 `
 
 const NickName = styled.div`
