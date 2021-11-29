@@ -41,13 +41,14 @@ const ImgWrapper=styled.div`
     `width: 40px;
     height: 40px;`
     }
-    border-radius: 30px;
+    border-radius: 50%;
+    border: solid thin #dbdbdb;
     &:hover{
         border: solid 2px #37C56E;
     }
     ${props=>props.borderNone&&`
     &:hover{
-        border: none;
+        border: solid thin #dbdbdb;
     }
     `}
 `
