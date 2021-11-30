@@ -1,5 +1,6 @@
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
@@ -19,8 +20,12 @@ const Header = () => {
         history.push("/" + e.target.id);
     }
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [alertArr, setAlertArr] = useState([]);
 
     const onClickAlert = () => {
+        axios.get(`/alert/limit/${userObj.id}`).then(res => {
+            setAlertArr(res.data.Alerts);
+        })
         setIsOpenModal(prev => !prev);
     }
     return (<Container className="row-container">
@@ -37,7 +42,7 @@ const Header = () => {
                 <>
                     <AlertButton>
                         <FontAwesomeIcon id="bell" icon={faBell} color={"#37C56E"} onClick={onClickAlert} />
-                        <Modal setIsOpen={setIsOpenModal}>{isOpenModal && <AlertModal userId={userObj.id}/>}</Modal>
+                        <Modal setIsOpen={setIsOpenModal}>{isOpenModal && <AlertModal alertArr={alertArr}/>}</Modal>
                     </AlertButton>
                     <ProfileBox onClick={onClickNav} profileUrl={userObj.ProfileImg?.url} id="profile" userId={userObj.id} />
                 </>

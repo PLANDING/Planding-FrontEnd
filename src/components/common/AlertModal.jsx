@@ -1,19 +1,8 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { useHistory } from "react-router";
-import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 /* Header 알림 모달창 component */
-const AlertModal = ({ userId }) => {
+const AlertModal = ({ alertArr }) => {
     const history = useHistory();
-    const [alertArr, setAlertArr] = useState([]);
-
-    /* 최근 10개 알림 받기 */
-    useEffect(() => {
-        axios.get(`/alert/limit/${userId}`).then(res => {
-            setAlertArr(res.data.Alerts);
-        })
-    }, []);
 
     /* 알림 페이지로 이동 */
     const onClickDetail = () => {
