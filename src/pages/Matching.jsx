@@ -51,12 +51,13 @@ font-size: x-large;
 font-weight: lighter;
 width: 100%;
 text-align: center;
-border-bottom: solid thin #bcbcbc;
 color: #37C56E;
-padding-bottom: 30px;
+padding-bottom: 50px;
+border-bottom: solid thin #dddddd;
 `
 const MainContainer = styled.div`
 padding: 50px;
+margin-top: 50px;
 `
 const Wrapper = styled.div`
 gap: 30px;
