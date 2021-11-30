@@ -27,7 +27,7 @@ const FundingCompletion = () => {
             <TopDIv pageLabel={"펀딩완료"} subLabel={"프로젝트에 참여하세요!"}/>
 
             <CardWrapper className="col-container">
-                {completionArr.map((completion, idx) => <CompletionCard idx={idx} projectObj={completion} usage={userObj.id===completion.User.id&&"isNone"} />)}
+                {completionArr.map((completion, idx) => <CompletionCard idx={idx} projectObj={completion} usage={userObj.id===completion.User.id&&"isNone"}  />)}
             </CardWrapper>
         </div>
     </>);
