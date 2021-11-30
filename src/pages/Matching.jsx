@@ -7,7 +7,19 @@ import MatchingCard from "../components/Matching/MatchingCard";
 import { Container } from "./Project";
 
 const Matching = () => {
+    /*dummyData*/
+    const projectObj = {
+        idea: "이미지 인식을 활용한 앱 서비스",
+        isCompletion: true,
+        isEnd:false,
+        member_plan: 2,
+        member_dev: 2,
+        User: { nickName: "닉네임" },
+        Interests: [{ name: "안드로이드" }, { name: "데이터 분석" }, { name: "앱 서버" }],
+        //+ funding count
+    }
     const profile = {
+        id:0,
         nickName: "gamza",
         git: "https://github.com/PLANDING",
         site: "https://www.notion.so/",
@@ -26,7 +38,7 @@ const Matching = () => {
                 <MainContainer>
                     <VerLine />
                     <Wrapper className="col-container">
-                        {devProfileArr.map(profile => <MatchingCard profile={profile} />)}
+                        {devProfileArr.map(profile => <MatchingCard profile={profile} projectObj={projectObj}/>)}
                     </Wrapper>
                 </MainContainer>
             </Container>

@@ -5,9 +5,25 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import GreenLabel, { GreenBorderLabel } from "../common/Label";
 import GreenBtn from "../common/Button";
 import LevelImgs from "../../assets/objects/LevelImgs";
-const MatchingCard = ({ profile }) => {
+import axios from "axios";
+import { useSelector } from "react-redux";
+const MatchingCard = ({ profile ,projectObj}) => {
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
+    const alertObj = {
+        from: userObj.id,
+        to: profile.id,
+        projectId: projectObj.id,
+    };
+    /* 참여하기 요청 */
+    const onClickCollabo = () => {
+        if (window.confirm('해당 프로젝트에 협업요청 하시겠습니까?\n(개발자가 수락 시, 프로젝트에 참여가능 합니다.)')) {
+            axios.post('/alert/request',
+                { ...alertObj, content: `님이 플랜딩의 추천시스템을 통해 개발 협업을 요청했습니다.` })
+                .then(res => res.status == 200 && alert('협업요청이 완료되었습니다.'));
+        }
+    }
     return (<Container className="row-container">
-        <GreenBtn>협업요청</GreenBtn>
+        <GreenBtn onClick={onClickCollabo}>협업요청</GreenBtn>
         <hr />
         <Card className="row-container">
             <Profile className="col-container">
@@ -18,14 +34,14 @@ const MatchingCard = ({ profile }) => {
                 </div>
             </Profile>
             <Content className="col-container">
-                <div className="row-container">
+                <Wrapper className="row-container">
                     <span><FontAwesomeIcon icon={faGithub} /> Github</span>
                     <a href={profile.git}>{profile.git}</a>
-                </div>
-                <div className="row-container">
+                </Wrapper>
+                <Wrapper className="row-container">
                     <span>Dev Blog</span>
                     <a href={profile.site}>{profile.site}</a>
-                </div>
+                </Wrapper>
                 <LabelWrapper className="col-container">
                     <span>관심분야</span>
                     <div>
@@ -34,9 +50,7 @@ const MatchingCard = ({ profile }) => {
                 </LabelWrapper>
                 <LabelWrapper className="col-container">
                     <span>기술 스택</span>
-                    <div>
-                        {profile.Skills.map(skill => <GreenLabel>{skill.name}</GreenLabel>)}
-                    </div>
+                    <div>{profile.Skills.map(skill => <GreenLabel>{skill.name}</GreenLabel>)}</div>
                 </LabelWrapper>
             </Content>
         </Card>
@@ -92,4 +106,6 @@ gap: 10px;
     display: inline-block;
     margin-right: 5px;
 }   
+`
+const Wrapper = styled.div`  
 `
