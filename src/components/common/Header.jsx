@@ -37,9 +37,9 @@ const Header = () => {
                 <>
                     <AlertButton>
                         <FontAwesomeIcon id="bell" icon={faBell} color={"#37C56E"} onClick={onClickAlert} />
-                        <Modal setIsOpen={setIsOpenModal}>{isOpenModal && <AlertModal />}</Modal>
+                        <Modal setIsOpen={setIsOpenModal}>{isOpenModal && <AlertModal userId={userObj.id}/>}</Modal>
                     </AlertButton>
-                    <ProfileBox onClick={onClickNav} id="profile" userId={userObj.id} />
+                    <ProfileBox onClick={onClickNav} profileUrl={userObj.ProfileImg?.url} id="profile" userId={userObj.id} />
                 </>
                 :
                 <GreenBorderBtn onClick={onClickNav} id="login">로그인</GreenBorderBtn>}

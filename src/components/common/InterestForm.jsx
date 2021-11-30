@@ -5,6 +5,7 @@ import { GreenBorderLabel } from "./Label";
 import Select from "./Select";
 
 const InterestForm = ({ interestArr, setInterestArr }) => {
+    /*interest option Arr */
     const interestObj = {
         "기획": ["UI/UX 기획", "게임 기획", "프로젝트 매니저", "제품 기획"],
         "프론트엔드": ["iOS", "안드로이드", "웹 프론트엔드", "웹 퍼블리셔"],
@@ -13,10 +14,11 @@ const InterestForm = ({ interestArr, setInterestArr }) => {
 
     const [first, setFirst] = useState(""); //분야
     const [second, setSecond] = useState(""); //소분야
-
+    /* 추가 btn */
     const onClickAdd = () => {
-        second && (!interestArr.includes(second) && setInterestArr(prev => ([...prev, `${first}:` + second])));
+        second && (!interestArr.includes(first+':'+second) && setInterestArr(prev => ([...prev, `${first}:` + second])));
     }
+    /*interest block 삭제 */
     const onClickDel = (e) => {
         const { target: { name } } = e;
         setInterestArr(interestArr.filter((it, idx) => idx != parseInt(name)));

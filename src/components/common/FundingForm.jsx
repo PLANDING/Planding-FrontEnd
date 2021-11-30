@@ -1,25 +1,21 @@
-import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import GreenBtn, { GrayBtn } from "./Button";
 import InterestForm from "./InterestForm";
 import Select from "./Select";
 import MemberForm from "../FundingCreation/MemberForm";
-const FundingForm = ({ funding, skill, onSubmit }) => {
+const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, setCategory,onSubmit, }) => {
     const history = useHistory();
-    /*dummy data */
-    const [fundingObj, setFundingObj] = useState(funding);
-    const [skillArr, setSkillArr] = useState(skill);
-
     const onChangeFunding = (e) => {
         const { target: { name, value } } = e;
         setFundingObj(prev => ({ ...prev, [name]: value }));
     }
     const onClickBack = () => {
         if (window.confirm("내용이 저장되지 않습니다. 정말 작성을 취소하시겠습니까?")) {
-            history.push("/progress");
+            history.goBack();
         }
     }
+    const categoryArr = ["공유서비스", "여행", "소셜네트워크", "뷰티/패션", "이커머스", "엔터테인먼트/게임", "헬스/스포츠", "뉴스/정보", "금융", "부동산/인테리어", "교육"];
     return (
         <Form onSubmit={onSubmit} >
             <input type="text" value={fundingObj.idea} placeholder="프로젝트명" name="idea" onChange={onChangeFunding} />
@@ -31,7 +27,7 @@ const FundingForm = ({ funding, skill, onSubmit }) => {
 
             <Wrapper>
                 <Label>주제 카테고리</Label>
-                <Select label="카테고리" optionArr={[]} />
+                <Select label="카테고리" optionArr={categoryArr} setValue={setCategory}/>
             </Wrapper>
 
             <Wrapper>
@@ -41,7 +37,7 @@ const FundingForm = ({ funding, skill, onSubmit }) => {
 
             <Wrapper>
                 <Label>기술 카테고리</Label>
-                <InterestForm interestArr={skillArr} setinterestArr={setSkillArr}/>
+                <InterestForm interestArr={interestArr} setInterestArr={setInterestArr} />
             </Wrapper>
 
             <Wrapper>
@@ -93,7 +89,7 @@ display:flex;
 flex-direction:column;
 justify-content: center;
 `
-const Label=styled.span`
+const Label = styled.span`
     font-size: x-large;
     font-weight: bold;
     margin-bottom: 30px;
