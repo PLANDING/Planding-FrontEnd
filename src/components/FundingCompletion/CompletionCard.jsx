@@ -30,7 +30,7 @@ const CompletionCard = ({ projectObj, usage, idx }) => {
                     </div>
 
                 </Wrapper>
-                {/* Button Group */}
+                {/* Button Group */} 
                 {/*usage=="isNone" -> none btn*/}
                 {usage != "isNone" &&
                     (usage == "isAlert" ?
