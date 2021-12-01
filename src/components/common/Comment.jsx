@@ -27,7 +27,7 @@ const Comment = ({ projectId, commentObj, isUser }) => {
                     {isUser && <Button onClick={onClickDel}>삭제</Button>}
                 </Side>
             </div>
-            <Content className="content">{commentObj.content}</Content>
+            <Content className="content">{commentObj.content.split("\n").map(line => <>{line}<br /></>)}</Content>
         </Wrapper>);
 
 }
