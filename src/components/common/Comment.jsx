@@ -1,33 +1,56 @@
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setProjectInfo } from "../../modules/project";
+import DateBox from "./DateBox";
 import ProfileBox from "./ProfileBox";
-const Comment = ({ commentObj, isUser }) => {
-    let date=new Date(commentObj.date);
-    const Comment=styled.div`
-    padding: 20px;
-        border-top: solid thin #e4e4e4;
-        .side{
-        flex: 1;
-        justify-content: flex-end;
-        gap: 10px;
-        font-size: x-small;
-        color: #bdbdbd;
-        align-self: flex-start;
+const Comment = ({ projectId, commentObj, isUser }) => {
+    const dispatch = useDispatch();
+    const onClickDel = () => {
+        if (window.confirm('댓글을 삭제하시겠습니까?')) {
+            axios.delete(`/comment/${commentObj.id}`)
+                .then(res => {
+                    res.status == 200 &&
+                        axios.get(`/project/progress/detail/${projectId}`)
+                            .then(res => {
+                                dispatch(setProjectInfo(res.data.project));
+                            });
+                });
+        }
     }
-    .content{
-        font-size: small;
-        margin-top: 10px;
-    } `
     return (
-    <Comment className="col-container">
-        <div className="row-container">
-            <ProfileBox profileUrl={commentObj.User.profileUrl} nickName={commentObj.User.nickName}/>
-            <div className="row-container side">
-                <span>{date.getFullYear()+"."+("0"+date.getMonth()).slice(-2)+"."+("0"+date.getDate()).slice(-2)}</span>
-                {isUser && <span>삭제</span>}
+        <Wrapper className="col-container">
+            <div className="row-container">
+                <ProfileBox profileUrl={commentObj.User.ProfileImg.url} nickName={commentObj.User.nickName} />
+                <Side className="row-container">
+                    <DateBox dateString={commentObj.createdAt} />
+                    {isUser && <Button onClick={onClickDel}>삭제</Button>}
+                </Side>
             </div>
-        </div>
-        <span className="content">{commentObj.content}</span>
-    </Comment>);
+            <Content className="content">{commentObj.content}</Content>
+        </Wrapper>);
 
 }
 export default Comment;
+const Wrapper = styled.div`
+    padding: 20px;
+    border-top: solid thin #e4e4e4;
+`
+const Side = styled.div`
+    flex: 1;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: x-small;
+    color: #bdbdbd;
+    align-self: flex-start;
+`
+const Content = styled.div`
+    font-size: small;
+    margin-top: 10px;
+`
+const Button = styled.button`
+    &:hover{
+        color:#F55959
+    }
+    
+`
