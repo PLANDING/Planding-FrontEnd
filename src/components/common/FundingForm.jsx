@@ -4,6 +4,7 @@ import GreenBtn, { GrayBtn } from "./Button";
 import InterestForm from "./InterestForm";
 import Select from "./Select";
 import MemberForm from "../FundingCreation/MemberForm";
+
 const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, setCategory,onSubmit, }) => {
     const history = useHistory();
     const onChangeFunding = (e) => {
