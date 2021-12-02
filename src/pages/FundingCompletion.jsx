@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Header from "../components/common/Header";
 import TopDIv from "../components/common/TopDIv";
 import CompletionCard from "../components/FundingCompletion/CompletionCard";
 const FundingCompletion = () => {
+    const {userObj}=useSelector(state=>({userObj:state.user.userObj}));
     /*dummyData*/
     const projectObj = {
         idea: "이미지 인식을 활용한 앱 서비스",
@@ -17,16 +19,15 @@ const FundingCompletion = () => {
     }
     const [completionArr, setCompletionArr] = useState([]);
     useEffect(() => {
-        //get projects data form server
         setCompletionArr([projectObj, projectObj]);
-    }, [])
+    }, []);
     return (<>
         <Header />
         <div className="completion main-container">
             <TopDIv pageLabel={"펀딩완료"} subLabel={"프로젝트에 참여하세요!"}/>
 
             <CardWrapper className="col-container">
-                {completionArr.map((completion, idx) => <CompletionCard idx={idx} projectObj={completion} />)}
+                {completionArr.map((completion, idx) => <CompletionCard idx={idx} projectObj={completion} usage={userObj.id===completion.User.id&&"isNone"} />)}
             </CardWrapper>
         </div>
     </>);

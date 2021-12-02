@@ -10,6 +10,7 @@ import MemberBox from "../components/FundingCompletionDetail/MemberBox";
 const FundingCompletionDetail = () => {
     /*dummyData*/
     const projectObj = {
+        id:0,
         idea: "이미지 인식을 활용한 앱 서비스",
         isCompletion: false,
         headilne: "프로젝트 주제 설명",
@@ -41,16 +42,16 @@ const FundingCompletionDetail = () => {
         <div className="main-container">
             <TopDiv pageLabel="펀딩 완료" subLabel="프로젝트에 참여하세요!" />
             <ProjectHead label={projectObj.isCompletion ? "모집 완료" : "모집 중"} idea={projectObj.idea} headilne={projectObj.headilne} width="80%" isDetail>
-                <JoinBtnBox dDay={3} width="240px" content={"모집 종료까지"} />
+                <JoinBtnBox project={projectObj} dDay={3} width="240px" content={"모집 종료까지"} />
             </ProjectHead>
             <Wrapper>
                 <Container className="col-container">
                     <ContentBox user={projectObj.User} content={projectObj.content} />
-                    <CommentForm user={projectObj.User} commentArr={Comments} />
+                    <CommentForm projectId={projectObj.id} commentArr={Comments} />
                 </Container>
                 <SideContainer className="col-container">
                     <CategoryBox category={projectObj.Category.name} interestArr={projectObj.Interests} />
-                    <MemberBox user={projectObj.User} member_plan={projectObj.member_plan} member_dev={projectObj.member_dev} />
+                    <MemberBox user={projectObj.User} projectId={projectObj.id} member_plan={projectObj.member_plan} member_dev={projectObj.member_dev} />
                 </SideContainer>
             </Wrapper>
         </div>

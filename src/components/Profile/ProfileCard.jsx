@@ -3,17 +3,17 @@ import styled from 'styled-components';
 import FundingCard from './FundingCard';
 import ProjectCard from './ProjectCard';
 
-const ProfileCard = ({projectObj}) => {
+const ProfileCard = ({profileObj}) => {
     return (
         <>
             <Card className="row-container">
                 <ProgressFunding className="col-container">
                     <p>진행중인 펀딩</p>
-                    <FundingCard projectObj={projectObj}/>
+                    <FundingCard projectObj={profileObj.Progress}/>
                 </ProgressFunding>
                 <ProgressProject className="col-container">
                     <p>진행중인 프로젝트</p>
-                    <ProjectCard projectObj={projectObj}/>
+                    <ProjectCard projectObj={profileObj.Completion}/>
                 </ProgressProject>
             </Card>
         </>

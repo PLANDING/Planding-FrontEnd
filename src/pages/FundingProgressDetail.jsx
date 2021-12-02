@@ -1,61 +1,47 @@
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react/cjs/react.development";
 import styled from "styled-components";
+import GreenBtn from "../components/common/Button";
 import { ProjectHead } from "../components/common/Card";
-import JoinBtnBox from "../components/common/JoinBtnBox";
+import FundingBtnBox from "../components/common/FundingBtnBox";
+import FundingGage from "../components/common/FundingGage";
 import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
-import ContentBox from "../components/FundingCompletionDetail/ContentBox";
-import CommentForm from "../components/FundingCompletionDetail/CommentForm";
 import CategoryBox from "../components/FundingCompletionDetail/CategoryBox";
-import MemberBox from "../components/FundingCompletionDetail/MemberBox";
-import FundingGage from "../components/common/FundingGage";
-import GreenBtn from "../components/common/Button";
+import CommentForm from "../components/FundingCompletionDetail/CommentForm";
+import ContentBox from "../components/FundingCompletionDetail/ContentBox";
+import { setProjectInfo } from "../modules/project";
 const FundingProgressDetail = () => {
-    /*dummyData*/
-    const projectObj = {
-        idea: "이미지 인식을 활용한 앱 서비스",
-        isCompletion: false,
-        headilne: "프로젝트 주제 설명",
-        content: "소개 \n 주요기능",
-        member_plan: 2,
-        member_dev: 2,
-        User: { nickName: "닉네임" },
-        Category: { name: "인공지능" },
-        Interests: [{ name: "안드로이드" }, { name: "데이터 분석" }, { name: "앱 서버" }],
-        //+ funding count
-    }
-    const Comments = [{
-        User: {
-            id: "",
-            nickName: "사용자1",
-        },
-        content: "댓글내용",
-        date: new Date(),
-    }, {
-        User: {
-            id: "",
-            nickName: "사용자2",
-        },
-        content: "댓글내용",
-        date: new Date(),
-    }]
+    const dispatch = useDispatch();
+    const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
+    const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
+    const date = Math.ceil(ms / (1000 * 3600 * 24));
+
+
+    const {userObj}=useSelector(state=>({userObj:state.user.userObj}));
+    const [isFunding, setIsFunding] = useState(projectObj.Fundings.findIndex(i => i.User.id == userObj.id) != -1);
+    useEffect(() => {
+        axios.get(`/project/progress/detail/${projectObj.id}`)
+            .then(res => {
+                dispatch(setProjectInfo(res.data.project));
+            });
+    }, []);
     return (<>
         <Header />
         <div className="main-container">
-            <TopDiv pageLabel="펀딩 진행" subLabel="프로젝트에 펀딩하세요!" isGreen/>
-            <ProjectHead label={projectObj.isCompletion ? "펀딩마감" : "펀딩진행 중"} idea={projectObj.idea} headilne={projectObj.headilne} width="80%" isDetail>
+            <TopDiv pageLabel="펀딩 진행" subLabel="프로젝트에 펀딩하세요!" isGreen />
+            <ProjectHead label={date > 7 ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea} headilne={projectObj.headline} width="80%" isDetail>
                 <SideBtnBox className="col-container">
-                    <div className="row-container">
-                        <span>펀딩 종료까지</span>
-                        <span id="d-day">D-{5}</span>
-                        <GreenBtn>펀딩 하기</GreenBtn>
-                    </div>
-                <FundingGage gage={80} fundingCnt={100} width={"200px"}/>
+                    <FundingBtnBox dDay={7 - date} projectId={projectObj.id} userId={userObj.id} isfunding={isFunding} content="펀딩 종료까지" isRow/>
+                    <FundingGage gage={(projectObj.Fundings.length * 500 / 30).toFixed(1)} fundingCnt={projectObj.Fundings.length * 500} width={"200px"} />
                 </SideBtnBox>
             </ProjectHead>
             <Wrapper>
                 <Container className="col-container">
-                    <ContentBox user={projectObj.User} content={projectObj.content} isGreen/>
-                    <CommentForm user={projectObj.User} commentArr={Comments} />
+                    <ContentBox writer={projectObj.User} content={projectObj.content} isGreen />
+                    <CommentForm commentArr={projectObj.Comments} projectId={projectObj.id} />
                 </Container>
                 <SideContainer className="col-container">
                     <CategoryBox category={projectObj.Category.name} interestArr={projectObj.Interests} />
@@ -76,7 +62,7 @@ const Container = styled.div`
     border: solid thin #37C56E;
     border-radius: 10px;
 `
-const SideBtnBox=styled.div`
+const SideBtnBox = styled.div`
     width: 240px;
     button{
         padding: 5px 20px;
