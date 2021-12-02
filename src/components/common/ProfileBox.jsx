@@ -33,6 +33,7 @@ const ProfileWrapper=styled.div`
     cursor: pointer;
 ` 
 const ImgWrapper=styled.div`
+    background-color: white;
     overflow: hidden;
     ${props=>props.size?
     `width:${props.size};
