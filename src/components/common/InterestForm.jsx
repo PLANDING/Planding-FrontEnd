@@ -17,6 +17,7 @@ const InterestForm = ({ interestArr, setInterestArr }) => {
     /* 추가 btn */
     const onClickAdd = () => {
         second && (!interestArr.includes(first+':'+second) && setInterestArr(prev => ([...prev, `${first}:` + second])));
+        setFirst("");
     }
     /*interest block 삭제 */
     const onClickDel = (e) => {
