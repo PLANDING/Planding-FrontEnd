@@ -12,7 +12,7 @@ const ProfileInfo = ({ profile }) => {
         <>
             <Card>
                 <Profile className="col-container">
-                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg.url} borderNone/>
+                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg?.url} borderNone/>
                     <span style={{ fontWeight: "bold", fontSize: "26px" }}>{profile.nickName}</span>
                     <LevelWrapper className="col-container" >
 

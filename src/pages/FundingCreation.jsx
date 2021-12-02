@@ -3,8 +3,11 @@ import { useHistory } from "react-router";
 import FundingForm from "../components/common/FundingForm";
 import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
+import axios from "axios";
+
 const FundingCreation = () => {
     /*init data */
+    const history = useHistory();
     const [fundingObj, setFundingObj] = useState({
         idea: "",
         headline: "",
@@ -17,6 +20,14 @@ const FundingCreation = () => {
     
     const onSubmit = (e) => {
         e.preventDefault();
+        try{
+            axios.post("/project/creation",{...fundingObj, interestArr, category}).then(res => {
+                res.status ==  200 && history.push("/progress");
+            });
+        }
+        catch(error){
+            alert(error.message);
+        }
     }
     return (<>
         <Header />

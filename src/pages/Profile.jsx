@@ -61,8 +61,9 @@ const Profile = () => {
                             <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
                             <RedBorderBtn onClick={onClickLogout}>로그아웃</RedBorderBtn>
                         </BtnWrapper>}
-                    <ProfileCard projectObj={projectObj} />
-                    <CompleteProject projectObj={projectObj}></CompleteProject>
+                    <ProfileCard profileObj={profileObj} /> 
+                    {/* 
+                    <CompleteProject profileObj={profileObj}></CompleteProject> */}
                 </CardWrapper>
             </div>
         </>);
