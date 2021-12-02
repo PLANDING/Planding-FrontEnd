@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const PersonalInfo = ({ profileObj, setProfileObj,onChangeInfo, checkNick, setCheckNick}) => {
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const [imgFile, setImgFile] = useState({
-        fileURL: userObj.ProfileImg.url,
+        fileURL: userObj.ProfileImg?.url,
     }); 
     const handlerChange = (e) => {
         e.preventDefault();

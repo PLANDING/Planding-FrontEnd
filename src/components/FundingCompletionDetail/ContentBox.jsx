@@ -1,14 +1,16 @@
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import Modal from "../common/Modal";
 import ProfileBox from "../common/ProfileBox"
 
-const ContentBox = ({ user, content, isGreen }) => {
+const ContentBox = ({ writer, content, isGreen }) => {
     const history = useHistory();
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const onClickMenu = () => {
         setIsOpenMenu(prev => !prev);
@@ -17,14 +19,16 @@ const ContentBox = ({ user, content, isGreen }) => {
         const { target: { id } } = e;
         id == "edit" ?
             history.push("/modification")
-            :  history.push("/modification")
+            : history.push("/modification");
     }
+
     return (
         <Wrapper isGreen={isGreen}>
             <div className="row-container">
                 <Headline>기획 내용</Headline>
-                <ProfileBox nickName={user.nickName} />
-                <FontAwesomeIcon id="menu" onClick={onClickMenu} icon={faEllipsisV} />
+                <ProfileBox nickName={writer.nickName} userId={writer.id} profileUrl={writer.ProfileImg?.url} />
+                {userObj.id === writer.id &&
+                    <FontAwesomeIcon id="menu" onClick={onClickMenu} icon={faEllipsisV} />}
                 {isOpenMenu &&
                     <Modal setIsOpen={setIsOpenMenu}>
                         <Menu className="col-container">
