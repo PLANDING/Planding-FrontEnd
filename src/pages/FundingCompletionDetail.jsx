@@ -7,36 +7,20 @@ import ContentBox from "../components/FundingCompletionDetail/ContentBox";
 import CommentForm from "../components/FundingCompletionDetail/CommentForm";
 import CategoryBox from "../components/FundingCompletionDetail/CategoryBox";
 import MemberBox from "../components/FundingCompletionDetail/MemberBox";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
+import { setProjectInfo } from "../modules/project";
 const FundingCompletionDetail = () => {
-    /*dummyData*/
-    const projectObj = {
-        id:0,
-        idea: "이미지 인식을 활용한 앱 서비스",
-        isCompletion: false,
-        headilne: "프로젝트 주제 설명",
-        content: "소개 \n 주요기능",
-        member_plan: 2,
-        member_dev: 2,
-        User: { nickName: "닉네임" },
-        Category: { name: "인공지능" },
-        Interests: [{ name: "안드로이드" }, { name: "데이터 분석" }, { name: "앱 서버" }],
-        //+ funding count
-    }
-    const Comments = [{
-        User: {
-            id: "",
-            nickName: "사용자1",
-        },
-        content: "댓글내용",
-        date: new Date(),
-    }, {
-        User: {
-            id: "",
-            nickName: "사용자2",
-        },
-        content: "댓글내용",
-        date: new Date(),
-    }]
+    const dispatch = useDispatch();
+    const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
+
+    useEffect(() => {
+        axios.get(`/project/completion/detail/${projectObj.id}`)
+            .then(res => {
+                dispatch(setProjectInfo(res.data.project));
+            });
+    }, []);
     return (<>
         <Header />
         <div className="main-container">
@@ -46,8 +30,8 @@ const FundingCompletionDetail = () => {
             </ProjectHead>
             <Wrapper>
                 <Container className="col-container">
-                    <ContentBox user={projectObj.User} content={projectObj.content} />
-                    <CommentForm projectId={projectObj.id} commentArr={Comments} />
+                    <ContentBox writer={projectObj.User} content={projectObj.content} />
+                    <CommentForm projectId={projectObj.id} commentArr={projectObj.Comments} />
                 </Container>
                 <SideContainer className="col-container">
                     <CategoryBox category={projectObj.Category.name} interestArr={projectObj.Interests} />
