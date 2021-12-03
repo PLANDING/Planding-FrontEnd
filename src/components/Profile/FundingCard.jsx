@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import FundingGage from '../common/FundingGage';
 
 const FundingCard = ({ projectObj }) => {
-    const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
+    const ms = new Date().getTime() - new Date(projectObj?.createdAt).getTime();
     const date = Math.ceil(ms / (1000 * 3600 * 24));
     return (
         <>
             {projectObj === undefined ?
-                <Notice>진행중인 프로젝트가 없습니다.</Notice>
+                <Notice>진행중인 펀딩이 없습니다.</Notice>
                 :
                 <Wrapper className="col-container">
                     <Title>{projectObj.idea}</Title>
