@@ -1,56 +1,56 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useState } from 'react/cjs/react.development';
 import styled from "styled-components";
 import LevelImgs from '../assets/objects/LevelImgs';
+import DateBox from '../components/common/DateBox';
 import Gage from "../components/common/Gage";
 import Header from "../components/common/Header";
 import ProfileBox from "../components/common/ProfileBox";
 import StepContainer from "../components/Project/StepContainer";
 
 const Project = () => {
-    /*dummy data */
-    const myProjectObj = {
-        projectId: 1,
-        idea: "이미지 인식 앱서비스",
-        headline: "",
-        content: "",
-        category: "",
-        createdAt: new Date(),
-        FudingCnt: 100,
-        Users: [{ userId: 1 }, { userId: 1 }, { userId: 1 }],
-        curriculum: 0
-    }
-    let gage = myProjectObj.curriculum / 20 * 100;
-    /*stpe img path */
-    
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
+    const [myProjectObj, setMyProjectObj] = useState();
+    let gage = myProjectObj?.curriculum / 20 * 100;
+
+    useEffect(() => {
+        axios.get(`/myProject/${userObj.id}`).then(res => {
+            console.log(res.data);
+            setMyProjectObj(res.data.myProject);
+        })
+    }, [])
     return (<>
         <Header />
-        <Container >
-            <div className="row-container">
-                <InfoBox className="col-container">
-                    <span id="date">{new Date(myProjectObj.createdAt).getFullYear() + "." + new Date(myProjectObj.createdAt).getMonth() + "." + new Date(myProjectObj.createdAt).getDate() + "-"}</span>
-                    <span id="funding">펀딩 이력 <span>{myProjectObj.FudingCnt}</span></span>
-                </InfoBox>
-                <MemberBox className="row-container">
-                    <span>팀원</span>
-                    {myProjectObj.Users.map(user => <ProfileBox />)}
-                </MemberBox>
-            </div>
+        {myProjectObj !== undefined &&
+            <Container >
+                <div className="row-container">
+                    <InfoBox className="col-container">
+                        <DateBox dateString={myProjectObj.Project.createdAt} />
+                        <span id="funding">펀딩 이력 <span>{myProjectObj.FudingCnt}</span></span>
+                    </InfoBox>
+                    <MemberBox className="row-container">
+                        <span>팀원</span>
+                        {myProjectObj.UserProjects.map(Member => <ProfileBox profileUrl={Member.User.ProfileImg?.url} />)}
+                    </MemberBox>
+                </div>
 
-            <NameBox className="col-container">
-                <span id="idea">{myProjectObj.idea}</span>
-                <span>프로젝트 {Math.ceil((new Date().getTime() - new Date(myProjectObj.createdAt).getTime()) / (1000 * 3600 * 24)) + 1}일 째</span>
-            </NameBox>
+                <NameBox className="col-container">
+                    <span id="idea">{myProjectObj.Project.idea}</span>
+                    <span>프로젝트 {Math.ceil((new Date().getTime() - new Date(myProjectObj.Project.createdAt).getTime()) / (1000 * 3600 * 24)) + 1}일 째</span>
+                </NameBox>
 
-            <ProjectGage className="col-container">
-                <ImgBox>
-                    {LevelImgs.map((img, idx) => <img src={require("../assets/imgs/" + `${gage < (idx + 1) * 20 ? img.unFill : img.fill}`).default} width={idx == 4 ? "100px" : "50px"} />)}
+                <ProjectGage className="col-container">
+                    <ImgBox>
+                        {LevelImgs.map((img, idx) => <img src={require("../assets/imgs/" + `${gage < (idx + 1) * 20 ? img.unFill : img.fill}`).default} width={idx == 4 ? "100px" : "50px"} />)}
 
-                </ImgBox>
-                <Gage width={"50%"} gage={gage} />
-            </ProjectGage>
+                    </ImgBox>
+                    <Gage width={"50%"} gage={gage} />
+                </ProjectGage>
 
-            <StepContainer curr={myProjectObj.curriculum} />
-        </Container>
+                <StepContainer curr={myProjectObj.curriculum} />
+            </Container>}
     </>);
 }
 export default Project;
