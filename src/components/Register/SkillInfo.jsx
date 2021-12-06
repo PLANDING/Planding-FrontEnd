@@ -1,10 +1,40 @@
+import React,{useEffect, useState} from 'react';
 import styled from "styled-components";
 import { Devider, InfoWrapper } from "../../pages/Register";
 import GreenBtn from "../common/Button";
 import InterestForm from "../common/InterestForm";
 import SkillForm from "../common/SkillForm";
+import axios from "axios";
 
 const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, skillArr, setSkillArr }) => {
+    const [repoName, setRepoName] = useState('');
+    const [languageArr, setLanguageArr] = useState([]);
+
+    const handleClick = async () => {
+        const id = registerInfo.github.split('/')[3];
+        try{
+            const { data } = await axios.get(`https://api.github.com/users/${id}/repos`)
+            // console.log(data);
+            data.map((data) =>{
+                setRepoName(data.languages_url);
+            });
+        } catch(error){
+            alert(error.message);
+        }
+    }
+
+    const getLanguage = async (repoName) => {
+        try{
+            const { data } = await axios.get(repoName);
+            setSkillArr(lang => [...lang, ...Object.keys(data)]);
+        } catch(error){
+            alert(error.message);
+        }
+    }
+
+    useEffect(() => {
+        getLanguage(repoName);
+    }, [repoName]);
 
     return (
         <>
@@ -21,8 +51,8 @@ const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, sk
 
                 <FieldWrapper className="row-container">
                     <span id="label">Github</span>
-                    <input type="url" name="gitHub" value={registerInfo.git} placeholder="" onChange={onChangeInfo} />
-                    <GreenBtn type="button">기술 스택 분석</GreenBtn>
+                    <input type="url" name="github" value={registerInfo.github} placeholder="" onChange={onChangeInfo} />
+                    <GreenBtn type="button" onClick={handleClick}>기술 스택 분석</GreenBtn>
                 </FieldWrapper>
 
                 <FieldWrapper skill>
