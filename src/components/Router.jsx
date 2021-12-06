@@ -30,7 +30,7 @@ const AppRouter=()=>{
                 <Route exact path="/profile" component={Profile}/>
                 <Route exact path="/profile/edit" component={ProfileEdit}/>
                 <Route exact path="/project" component={Project}/>
-                <Route exact path="/project/matching" component={Matching}/>
+                <Route exact path="/project/matching/:projectId" component={Matching}/>
                 <Route path="/alert" component={Alert}/>
             </Switch>
         </BrowserRouter>
