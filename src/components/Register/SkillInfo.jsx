@@ -8,13 +8,11 @@ import axios from "axios";
 
 const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, skillArr, setSkillArr }) => {
     const [repoName, setRepoName] = useState('');
-    const [languageArr, setLanguageArr] = useState([]);
 
     const handleClick = async () => {
         const id = registerInfo.github.split('/')[3];
         try{
             const { data } = await axios.get(`https://api.github.com/users/${id}/repos`)
-            // console.log(data);
             data.map((data) =>{
                 setRepoName(data.languages_url);
             });
