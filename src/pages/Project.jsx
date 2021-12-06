@@ -16,16 +16,16 @@ const Project = () => {
     let gage = myProjectObj?.curriculum / 20 * 100;
 
     useEffect(() => {
-        axios.get(`/myProject/${userObj.id}`).then(res => {
-            console.log(res.data);
-            setMyProjectObj(res.data.myProject);
-        })
-    }, [])
+        axios.get(`/myProject/${userObj.id}`)
+            .then(res => {
+                setMyProjectObj(res.data.myProject);
+            });
+    })
     return (<>
         <Header />
         {myProjectObj !== undefined &&
             <Container >
-                <div className="row-container">
+                <Wrapper className="row-container">
                     <InfoBox className="col-container">
                         <DateBox dateString={myProjectObj.Project.createdAt} />
                         <span id="funding">펀딩 이력 <span>{myProjectObj.FudingCnt}</span></span>
@@ -34,7 +34,7 @@ const Project = () => {
                         <span>팀원</span>
                         {myProjectObj.UserProjects.map(Member => <ProfileBox profileUrl={Member.User.ProfileImg?.url} />)}
                     </MemberBox>
-                </div>
+                </Wrapper>
 
                 <NameBox className="col-container">
                     <span id="idea">{myProjectObj.Project.idea}</span>
@@ -43,70 +43,66 @@ const Project = () => {
 
                 <ProjectGage className="col-container">
                     <ImgBox>
-                        {LevelImgs.map((img, idx) => <img src={require("../assets/imgs/" + `${gage < (idx + 1) * 20 ? img.unFill : img.fill}`).default} width={idx == 4 ? "100px" : "50px"} />)}
-
+                        {LevelImgs.map((img, idx) =>
+                            <img src={require("../assets/imgs/" + `${gage < (idx + 1) * 20 ? img.unFill : img.fill}`).default} width={idx == 4 ? "100px" : "50px"} />)}
                     </ImgBox>
                     <Gage width={"50%"} gage={gage} />
                 </ProjectGage>
-
-                <StepContainer curr={myProjectObj.curriculum} />
+                <StepContainer curr={myProjectObj.curriculum} projectId={myProjectObj.id} memberCnt={myProjectObj.UserProjects.length} />
             </Container>}
     </>);
 }
 export default Project;
 export const Container = styled.div`
-box-shadow: 5px 5px 20px 10px #00000020;
-margin: 0 5%;
-margin-top: 20px;
-min-height: 100vh;
-padding: 50px 40px;
-border-radius: 20px 20px 0 0;
+    box-shadow: 5px 5px 20px 10px #00000020;
+    margin: 0 5%;
+    margin-top: 20px;
+    min-height: 100vh;
+    padding: 50px 40px;
+    border-radius: 20px 20px 0 0;
 `
 const InfoBox = styled.div`
-flex: 1;
-gap: 10px;
-#date{
-    font-weight: lighter;
-}
-#funding{
-    font-weight: bold;
-    font-size: small;
-    span{
-        color: #37C56E;
-        margin-left: 10px;
+    flex: 1;
+    gap: 10px;
+    #funding{
+        font-weight: bold;
+        font-size: small;
+        span{
+            color: #37C56E;
+            margin-left: 10px;
+        }
     }
-}
 
 `
 const MemberBox = styled.div`
-gap: 10px;
+    gap: 10px;
 `
 const NameBox = styled.div`
-align-items: center;
-padding: 20px 0;
-span{
-    color: #5F5F5F;
-    font-weight: lighter;
-}
-#idea{
-    color: black;
-    font-size: xx-large;
-    font-weight: bold;
-    margin-bottom: 20px;
+    align-items: center;
+    padding: 20px 0;
+    span{
+        color: #5F5F5F;
+        font-weight: lighter;
+    }
+    #idea{
+        color: black;
+        font-size: xx-large;
+        font-weight: bold;
+        margin-bottom: 20px;
 
-}
+    }
 `
 const ImgBox = styled.div`
-display: flex;
-padding-left: 9%;
-box-sizing:border-box;
-width: 55%;
-align-items: flex-end;
-gap: 13%;
-margin-bottom: 20px;
+    display: flex;
+    padding-left: 9%;
+    box-sizing:border-box;
+    width: 55%;
+    align-items: flex-end;
+    gap: 13%;
+    margin-bottom: 20px;
 `
 const ProjectGage = styled.div`
-align-items: center;
-padding: 30px 0;
-
+    align-items: center;
+    padding: 30px 0;
 `
+const Wrapper=styled.div``
