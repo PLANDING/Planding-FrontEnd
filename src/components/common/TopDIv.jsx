@@ -1,12 +1,6 @@
-import { useHistory } from "react-router";
 import styled from "styled-components";
-import GreenBtn from "./Button";
 
-const TopDiv = ({ pageLabel, subLabel, isProgress , isGreen}) => {
-    const history = useHistory();
-    const onClickCreation = () => {
-        history.push("/creation");
-    }
+const TopDiv = ({ pageLabel, subLabel, isGreen , children}) => {
     return (
         <Div isGreen={isGreen}>
             <div className="row-container wrapper">
@@ -14,7 +8,7 @@ const TopDiv = ({ pageLabel, subLabel, isProgress , isGreen}) => {
                     <span>{pageLabel}</span>
                     <span className="sub-label">{subLabel}</span>
                 </div>
-                {isProgress && <GreenBtn onClick={onClickCreation}>펀딩 생성</GreenBtn>}
+                {children}
             </div>
             <GreenHr />
         </Div>
