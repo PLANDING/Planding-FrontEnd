@@ -20,7 +20,7 @@ const SkillForm = ({ skillArr, setSkillArr }) => {
         </Wrapper>
 
         {skillArr.length > 0 && <TagWrapper>{
-            skillArr.map((skill, idx) =>
+            skillArr.filter((item,idx) => {return skillArr.indexOf(item) === idx}).map((skill, idx) =>
                 <GreenLabel>{skill}
                     <button type="button" name={idx} id="del-btn" onClick={onClickDel}>x</button>
                 </GreenLabel>)}

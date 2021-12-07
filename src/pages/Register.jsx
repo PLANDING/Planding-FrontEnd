@@ -16,7 +16,7 @@ const Register = () => {
     pwCheck: "",
     nickName: "",
     site: "",
-    gitHub: "",
+    github: "",
   })
   const [check, setCheck] = useState({
     email: "",
