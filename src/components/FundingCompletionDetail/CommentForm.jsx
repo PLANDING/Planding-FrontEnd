@@ -31,7 +31,7 @@ const CommentForm = ({ commentArr, projectId }) => {
         <Container>
             <div id="label">댓글</div>
             <From className="row-container" onSubmit={onSubmit}>
-                <ProfileBox profileUrl={userObj.ProfileImg.url} borderNone />
+                <ProfileBox profileUrl={userObj.ProfileImg?.url} borderNone />
                 <textarea type="text" placeholder="댓글을 입력해주세요. (최대 300자)" value={comment} onChange={onChange} maxLength={300} />
                 <GreenBtn>작성</GreenBtn>
             </From>

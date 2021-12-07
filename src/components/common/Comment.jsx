@@ -21,7 +21,7 @@ const Comment = ({ projectId, commentObj, isUser }) => {
     return (
         <Wrapper className="col-container">
             <div className="row-container">
-                <ProfileBox profileUrl={commentObj.User.ProfileImg.url} nickName={commentObj.User.nickName} />
+                <ProfileBox profileUrl={commentObj.User.ProfileImg?.url} nickName={commentObj.User.nickName} />
                 <Side className="row-container">
                     <DateBox dateString={commentObj.createdAt} />
                     {isUser && <Button onClick={onClickDel}>삭제</Button>}
