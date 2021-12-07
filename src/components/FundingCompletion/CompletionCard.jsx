@@ -1,6 +1,9 @@
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { setProjectInfo } from "../../modules/project";
 import AcceptBtnBox from "../Alert/AcceptBtnBox";
 import Card, { ProjectHead, Wrapper } from "../common/Card";
 import InterestBox from "../common/InterestBox";
@@ -9,13 +12,18 @@ import ProfileBox from "../common/ProfileBox";
 import RecruitmentBox from "../common/RecruitmentBox";
 const CompletionCard = ({ projectObj, usage, idx }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     /*상세 페이지 이동 */
     const onClickCard = () => {
-        history.push("/completion/detail");
+        axios.get(`/project/completion/detail/${projectObj.id}`)
+            .then(res => {
+                dispatch(setProjectInfo(res.data.project));
+                history.push("/completion/detail");
+            })
     }
     return (<Card onClick={onClickCard} id={idx}>
             <ProjectHead label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
-                <ProfileBox nickName={projectObj.User.nickName} />
+                <ProfileBox nickName={projectObj.User.nickName} profileUrl={projectObj.User.ProfileImg?.url}/>
             </ProjectHead>
 
             <div className="row-container">
