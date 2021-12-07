@@ -21,10 +21,10 @@ export const Wrapper = styled.div`
   color: #37C56E;
 }
 `
-export const ProjectHead = ({ label, idea, headilne, children, width, isDetail }) => {
+export const ProjectHead = ({ label, idea, headilne, children, width, isDetail , onClickCard}) => {
   return (
-    <Container width={width} isDetail={isDetail}>
-      <div className="col-container">
+    <Container width={width} isDetail={isDetail} >
+      <div className="col-container" onClick={onClickCard}>
         <div className="row-container">
           {(label == "펀딩 마감" || label == "모집 완료") ? <GrayLabel>{label}</GrayLabel> : <GreenLabel>{label}</GreenLabel>}
           <h2>{idea}</h2>
