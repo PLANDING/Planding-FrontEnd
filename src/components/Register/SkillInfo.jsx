@@ -31,7 +31,7 @@ const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, sk
     }
 
     useEffect(() => {
-        getLanguage(repoName);
+        repoName && getLanguage(repoName);
     }, [repoName]);
 
     return (
