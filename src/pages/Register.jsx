@@ -33,10 +33,10 @@ const Register = () => {
 
     setRegisterInfo(prev => ({ ...prev, [name]: value }));
     /* 중복확인 및 일치 여부 판별 */
-    name == "email" && setCheck(p => ({ ...p, email: "" }));
-    name == "nickName" && setCheck(p => ({ ...p, nickName: "" }));
-    name == "pw" && checkedValidPW(value);
-    name == "pwCheck" && setCheck(p => ({ ...p, pwCheck: registerInfo.pw == value ? "사용 가능" : "비밀번호가 일치하지 않습니다." }));
+    name === "email" && setCheck(p => ({ ...p, email: "" }));
+    name === "nickName" && setCheck(p => ({ ...p, nickName: "" }));
+    name === "pw" && checkedValidPW(value);
+    name === "pwCheck" && setCheck(p => ({ ...p, pwCheck: registerInfo.pw == value ? "사용 가능" : "비밀번호가 일치하지 않습니다." }));
 
   }
 
@@ -57,15 +57,15 @@ const Register = () => {
     e.preventDefault();
     try {
 
-      if (check.email != "사용 가능" || check.pw != "사용 가능" || check.pwCheck != "사용 가능" || check.nickName != "사용 가능") {
+      if (check.email !== "사용 가능" || check.pw !== "사용 가능" || check.pwCheck !== "사용 가능" || check.nickName !== "사용 가능") {
         throw new Error("기재사항 조건들을 확인해주세요.");
       }
-      if (registerInfo.email == "" || registerInfo.pw == "" || registerInfo.nickName == "") {
+      if (registerInfo.email === "" || registerInfo.pw === "" || registerInfo.nickName === "") {
         throw new Error("필수 항목을 기재해주세요.");
       }
 
       axios.post("/auth/register", { ...registerInfo, interestArr: interestArr, skillArr: skillArr }).then(res => {
-        res.status == 200 && history.push("/login");
+        res.status === 201 && history.push("/login");
       });
 
     }
