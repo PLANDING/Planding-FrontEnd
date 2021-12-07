@@ -8,7 +8,7 @@ const Select = ({ label, optionArr, setValue }) => {
     return (
         <Wrapper className="row-container">
             <SelectBox onChange={onChange}>
-                <option value="defalut" disabled selected hidden>{label}</option>
+                <option value="defalut" selected hidden>{label}</option>
                 {optionArr.map(opt => <option value={opt}>{opt}</option>)}
             </SelectBox>
             <Button type="button" id="sel-arrow"><img src={arrowImg} /></Button>
