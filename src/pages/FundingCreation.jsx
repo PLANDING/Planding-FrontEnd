@@ -4,10 +4,12 @@ import FundingForm from "../components/common/FundingForm";
 import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
 import axios from "axios";
+import { useSelector } from 'react-redux';
 
 const FundingCreation = () => {
     /*init data */
     const history = useHistory();
+    const {userObj}=useSelector(state=>({userObj:state.user.userObj}));
     const [fundingObj, setFundingObj] = useState({
         idea: "",
         headline: "",
@@ -21,7 +23,7 @@ const FundingCreation = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         try{
-            axios.post("/project/creation",{...fundingObj, interestArr, category}).then(res => {
+            axios.post(`/project/creation/${userObj.id}`,{...fundingObj, interestArr, category}).then(res => {
                 res.status ==  200 && history.push("/progress");
             });
         }
