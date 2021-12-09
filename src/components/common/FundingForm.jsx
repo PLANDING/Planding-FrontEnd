@@ -16,7 +16,7 @@ const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, s
             history.goBack();
         }
     }
-    const categoryArr = ["공유서비스", "여행", "소셜네트워크", "뷰티/패션", "이커머스", "엔터테인먼트/게임", "헬스/스포츠", "뉴스/정보", "금융", "부동산/인테리어", "교육"];
+    const categoryArr = ["공유서비스", "여행", "소셜네트워크", "뷰티/패션", "이커머스", "엔터테인먼트/게임", "헬스/스포츠", "뉴스/정보", "금융", "부동산/인테리어", "교육", "라이프"];
     return (
         <Form onSubmit={onSubmit} >
             <input type="text" value={fundingObj.idea} placeholder="프로젝트명" name="idea" onChange={onChangeFunding} />
@@ -50,7 +50,7 @@ const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, s
                 </div>
             </Wrapper>
             <BtnGroup>
-                <GrayBtn onClick={onClickBack}>취소</GrayBtn>
+                <GrayBtn type="button" onClick={onClickBack}>취소</GrayBtn>
                 <GreenBtn>생성</GreenBtn>
             </BtnGroup>
         </Form>);

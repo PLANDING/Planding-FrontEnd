@@ -13,9 +13,9 @@ const MemberForm = ({ fundingObj, setFundingObj, type }) => {
         <MemberBox className="row-container">
             <span>{type == "member_plan" ? "기획" : "개발"}</span>
             <div className="row-container">
-                <button id="plan" onClick={onClickMinus}>-</button>
+                <button type="button" id="plan" onClick={onClickMinus}>-</button>
                 <span id="green">{fundingObj[type]}</span>
-                <button id="plan" onClick={onClickPlus}>+</button>
+                <button type="button" id="plan" onClick={onClickPlus}>+</button>
             </div>
         </MemberBox>
     );
