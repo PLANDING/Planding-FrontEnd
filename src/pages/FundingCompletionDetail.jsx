@@ -25,7 +25,7 @@ const FundingCompletionDetail = () => {
         <Header />
         <div className="main-container">
             <TopDiv pageLabel="펀딩 완료" subLabel="프로젝트에 참여하세요!" />
-            <ProjectHead label={projectObj.isCompletion ? "모집 완료" : "모집 중"} idea={projectObj.idea} headilne={projectObj.headilne} width="80%" isDetail>
+            <ProjectHead label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea} headilne={projectObj.headline} width="80%" isDetail>
                 <JoinBtnBox project={projectObj} dDay={3} width="240px" content={"모집 종료까지"} />
             </ProjectHead>
             <Wrapper>

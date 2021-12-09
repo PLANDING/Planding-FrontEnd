@@ -32,7 +32,7 @@ const FundingProgressDetail = () => {
         <Header />
         <div className="main-container">
             <TopDiv pageLabel="펀딩 진행" subLabel="프로젝트에 펀딩하세요!" isGreen />
-            <ProjectHead label={date > 7 ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea} headilne={projectObj.headline} width="80%" isDetail>
+            <ProjectHead label={projectObj.isEnd? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea} headilne={projectObj.headline} width="80%" isDetail>
                 <SideBtnBox className="col-container">
                     <FundingBtnBox dDay={7 - date} projectId={projectObj.id} userId={userObj.id} isfunding={isFunding} content="펀딩 종료까지" isRow/>
                     <FundingGage gage={(projectObj.Fundings.length * 500 / 30).toFixed(1)} fundingCnt={projectObj.Fundings.length * 500} width={"200px"} />
