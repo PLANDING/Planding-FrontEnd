@@ -12,7 +12,7 @@ import InterestBox from "../common/InterestBox";
 import JoinBtnBox from "../common/JoinBtnBox";
 import ProfileBox from "../common/ProfileBox";
 import RecruitmentBox from "../common/RecruitmentBox";
-const CompletionCard = ({ projectObj, usage, idx }) => {
+const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
@@ -52,7 +52,7 @@ const CompletionCard = ({ projectObj, usage, idx }) => {
             {/*usage=="isNone" -> none btn*/}
             {!isEnd && usage != "isNone" &&
                 (usage == "isAlert" ?
-                    <AcceptBtnBox dDay={3} />
+                    <AcceptBtnBox dDay={3} projectId={projectObj.id} alertId={alertId}/>
                     :
                     <JoinBtnBox dDay={3} project={{ id: projectObj.id, user: projectObj.User.id }} />)}
         </div>
