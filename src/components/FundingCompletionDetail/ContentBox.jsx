@@ -1,16 +1,18 @@
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import Modal from "../common/Modal";
 import ProfileBox from "../common/ProfileBox"
 import axios from "axios";
+import { setProjectInfo } from '../../modules/project';
 
 const ContentBox = ({ writer, content, isGreen }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -35,6 +37,7 @@ const ContentBox = ({ writer, content, isGreen }) => {
             }
         }
     }
+
     return (
         <Wrapper isGreen={isGreen}>
             <div className="row-container">
