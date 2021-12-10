@@ -2,8 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import GreenBtn, { GrayBtn } from "./Button";
-const FundingBtnBox = ({ dDay, projectId, userId, isfunding, content, isRow }) => {
-    const [isFunding, setIsFunding] = useState(isfunding);
+const FundingBtnBox = ({ dDay, projectId, userId, isFunding, setIsFunding,content, isRow }) => {
     const onClickFunding = () => {
         isFunding ?
             axios.delete(`/funding/${projectId}/${userId}`)

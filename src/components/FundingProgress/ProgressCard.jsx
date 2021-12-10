@@ -14,9 +14,29 @@ import ProfileBox from "../common/ProfileBox";
 const ProgressCard = ({ projectObj, usage, idx }) => {
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const { isLoggedin, userObj } = useSelector(state => ({ isLoggedin: state.user.isLoggedin, userObj: state.user.userObj }));
+
+    const [progress, setProgress] = useState(projectObj);
     const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
     const date = Math.ceil(ms / (1000 * 3600 * 24));
-    const [isEnd, setIsEnd] = useState(projectObj.isEnd);
+    useEffect(() => {
+        if (!progress.isEnd && date > 7) {
+            progress.Fundings.length >= 6 && axios.patch(`/project/complete/${projectObj.id}`);
+
+            axios.patch(`/project/end/${projectObj.id}`)
+                .then(res => res.status === 200 && setProgress(p => ({ ...p, isEnd: true })));
+        }
+    }, []);
+
+    const [isFunding, setIsFunding] = useState(isLoggedin ? projectObj.Fundings.findIndex(i => i.User.id == userObj.id) != -1 : false);
+    useEffect(() => {
+        axios.get(`/project/card/${projectObj.id}`)
+            .then(res => {
+                res.status === 200 && setProgress(res.data.project);
+            });
+    }, [isFunding]);
+
     const onClickCard = () => {
         axios.get(`/project/progress/detail/${projectObj.id}`)
             .then(res => {
@@ -24,36 +44,28 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
                 history.push("/progress/detail");
             })
     }
-    useEffect(() => {
-        !isEnd && date > 7 &&
-            axios.patch(`/project/end/${projectObj.id}`)
-                .then(res => res.status === 200 && setIsEnd(true));
-    }, []);
-
-    const { isLoggedin, userObj } = useSelector(state => ({ isLoggedin: state.user.isLoggedin, userObj: state.user.userObj }));
-    const [isFunding, setIsFunding] = useState(isLoggedin ? projectObj.Fundings.findIndex(i => i.User.id == userObj.id) != -1 : false);
 
     return (<Card border id={idx}>
-        <ProjectHead label={isEnd ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea} onClickCard={onClickCard}>
-            <ProfileBox nickName={projectObj.User.nickName} userId={projectObj.User.id} profileUrl={projectObj.User.ProfileImg?.url} />
+        <ProjectHead label={progress.isEnd ? "펀딩 마감" : "펀딩진행 중"} idea={progress.idea} onClickCard={onClickCard}>
+            <ProfileBox nickName={progress.User.nickName} userId={progress.User.id} profileUrl={progress.User.ProfileImg?.url} />
         </ProjectHead>
         <div className="row-container" >
             <Wrapper className="col-contaienr main-wrapper" onClick={onClickCard}>
                 <CategoryWrapper className="row-container">
                     <span>카테고리</span><span>{">"}</span>
-                    <span>{projectObj.Category?.name}</span>
+                    <span>{progress.Category?.name}</span>
                 </CategoryWrapper>
 
-                <InterestBox interestArr={projectObj.Interests} />
+                <InterestBox interestArr={progress.Interests} />
 
-                <FundingGage gage={(projectObj.Fundings.length * 500 / 30).toFixed(1)} fundingCnt={projectObj.Fundings.length * 500} />
+                <FundingGage gage={(progress.Fundings.length * 500 / 30).toFixed(1)} fundingCnt={progress.Fundings.length * 500} />
             </Wrapper>
 
-            {!isEnd && usage !== "isNone" &&
+            {!progress.isEnd && usage !== "isNone" &&
                 (usage === "isAlert" ?
                     <AcceptBtnBox dDay={7 - date} />
                     :
-                    <FundingBtnBox dDay={7 - date} projectId={projectObj.id} userId={userObj?.id} isfunding={isFunding} />)}
+                    <FundingBtnBox dDay={7 - date} projectId={progress.id} userId={userObj?.id} isFunding={isFunding} setIsFunding={setIsFunding} />)}
 
         </div>
     </Card>);
@@ -62,6 +74,6 @@ export default ProgressCard;
 
 const CategoryWrapper = styled.div`
     span:nth-child(3){
-    font-weight: normal;
+        font-weight: normal;
     }
 `
