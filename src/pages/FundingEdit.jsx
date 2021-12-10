@@ -1,23 +1,28 @@
+import axios from 'axios';
 import { useState } from "react";
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import FundingForm from "../components/common/FundingForm";
 import Header from "../components/common/Header";
 import TopDiv from "../components/common/TopDIv";
 const FundingEdit= () => {
-    /*dummy data */
-    const [fundingObj, setFundingObj] = useState({
-        idea: "테스트",
-        headline: "테스트",
-        content: "테스트",
-        member_plan: 2,
-        member_dev: 3,
-    });
-    const [interestArr, setInterestArr] = useState(["프론트엔드:웹 프론트앤드", "백엔드:데이터 분석"]);
-    const [category, setCategory] = useState("공유서비스");
+    const history = useHistory();
+    const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
+    const [fundingObj, setFundingObj] = useState(projectObj);
+    const [interestArr, setInterestArr] = useState(projectObj.Interests.map(interest => interest.category + ":" + interest.name));
+    console.log(projectObj);
+    const [category, setCategory] = useState(projectObj.Category.name);
     
     const onSubmit = (e) => {
         e.preventDefault();
+        try{
+            axios.patch(`/project/${projectObj.id}`,{...fundingObj, interestArr, category}).then(res => {
+                res.status === 200 && history.push("/progress");
+            })
+        }catch(err){
+            alert(err.message);
+        }
     }
-    
     return (<>
         <Header />
         <div className="creation main-container">

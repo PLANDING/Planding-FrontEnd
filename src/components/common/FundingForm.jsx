@@ -5,7 +5,7 @@ import InterestForm from "./InterestForm";
 import Select from "./Select";
 import MemberForm from "../FundingCreation/MemberForm";
 
-const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, setCategory,onSubmit, }) => {
+const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, setCategory,onSubmit }) => {
     const history = useHistory();
     const onChangeFunding = (e) => {
         const { target: { name, value } } = e;
@@ -45,13 +45,12 @@ const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, s
                 <Label>모집 인원</Label>
                 <div className="row-container member-wrapper">
                     <MemberForm fundingObj={fundingObj} setFundingObj={setFundingObj} type="member_plan" />
-
                     <MemberForm fundingObj={fundingObj} setFundingObj={setFundingObj} type="member_dev" />
                 </div>
             </Wrapper>
             <BtnGroup>
-                <GrayBtn type="button" onClick={onClickBack}>취소</GrayBtn>
-                <GreenBtn>생성</GreenBtn>
+                <GrayBtn onClick={onClickBack}>취소</GrayBtn>
+                <GreenBtn>확인</GreenBtn>
             </BtnGroup>
         </Form>);
 }
