@@ -28,11 +28,11 @@ const Project = () => {
                 <Wrapper className="row-container">
                     <InfoBox className="col-container">
                         <DateBox dateString={myProjectObj.Project.createdAt} />
-                        <span id="funding">펀딩 이력 <span>{myProjectObj.FudingCnt}</span></span>
+                        <span id="funding">펀딩 이력 <span>{myProjectObj.Project.Fundings.length*500}</span></span>
                     </InfoBox>
                     <MemberBox className="row-container">
                         <span>팀원</span>
-                        {myProjectObj.UserProjects.map(Member => <ProfileBox profileUrl={Member.User.ProfileImg?.url} />)}
+                        {myProjectObj.UserProjects.map(Member => <ProfileBox userId={Member.User.id} profileUrl={Member.User.ProfileImg?.url} />)}
                     </MemberBox>
                 </Wrapper>
 

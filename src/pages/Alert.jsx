@@ -18,7 +18,7 @@ const Alert = () => {
         axios.get(`/alert/${userObj.id}`).then(res => {
             setAlertArr(res.data.Alerts);
         });
-    }, []);
+    });
 
     return (<>
         <Header />
@@ -32,7 +32,7 @@ const Alert = () => {
                         {'알림 내역이 없습니다.'}
                     </NoticeBox>
                     :
-                    alertArr.map(alert => <AlertCard content={alert.content} date={alert.createdAt} projectId={alert.ProjectId} fromUser={alert.User} />)}
+                    alertArr.map(alert => <AlertCard content={alert.content} date={alert.createdAt} projectId={alert.ProjectId} fromUser={alert.User} alertId={alert.id}/>)}
 
             </AlertContainer>
         </Container>

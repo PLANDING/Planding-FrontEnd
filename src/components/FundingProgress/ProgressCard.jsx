@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -13,6 +14,9 @@ import ProfileBox from "../common/ProfileBox";
 const ProgressCard = ({ projectObj, usage, idx }) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
+    const date = Math.ceil(ms / (1000 * 3600 * 24));
+    const [isEnd, setIsEnd] = useState(projectObj.isEnd);
     const onClickCard = () => {
         axios.get(`/project/progress/detail/${projectObj.id}`)
             .then(res => {
@@ -20,14 +24,17 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
                 history.push("/progress/detail");
             })
     }
-    const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
-    const date = Math.ceil(ms / (1000 * 3600 * 24));
+    useEffect(() => {
+        !isEnd && date > 7 &&
+            axios.patch(`/project/end/${projectObj.id}`)
+                .then(res => res.status === 200 && setIsEnd(true));
+    }, []);
 
-    const {isLoggedin, userObj}=useSelector(state=>({isLoggedin:state.user.isLoggedin, userObj:state.user.userObj}));
-    const [isFunding, setIsFunding] = useState(isLoggedin?projectObj.Fundings.findIndex(i => i.User.id == userObj.id) != -1:false);
+    const { isLoggedin, userObj } = useSelector(state => ({ isLoggedin: state.user.isLoggedin, userObj: state.user.userObj }));
+    const [isFunding, setIsFunding] = useState(isLoggedin ? projectObj.Fundings.findIndex(i => i.User.id == userObj.id) != -1 : false);
 
     return (<Card border id={idx}>
-        <ProjectHead label={date > 7 ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea} onClickCard={onClickCard}>
+        <ProjectHead label={isEnd ? "펀딩 마감" : "펀딩진행 중"} idea={projectObj.idea} onClickCard={onClickCard}>
             <ProfileBox nickName={projectObj.User.nickName} userId={projectObj.User.id} profileUrl={projectObj.User.ProfileImg?.url} />
         </ProjectHead>
         <div className="row-container" >
@@ -42,7 +49,11 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
                 <FundingGage gage={(projectObj.Fundings.length * 500 / 30).toFixed(1)} fundingCnt={projectObj.Fundings.length * 500} />
             </Wrapper>
 
-            {usage != "isNone" && (usage == "isAlert" ? <AcceptBtnBox dDay={7 - date} /> : <FundingBtnBox dDay={7 - date} projectId={projectObj.id} userId={userObj?.id} isfunding={isFunding} />)}
+            {!isEnd && usage !== "isNone" &&
+                (usage === "isAlert" ?
+                    <AcceptBtnBox dDay={7 - date} />
+                    :
+                    <FundingBtnBox dDay={7 - date} projectId={projectObj.id} userId={userObj?.id} isfunding={isFunding} />)}
 
         </div>
     </Card>);
