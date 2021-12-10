@@ -28,7 +28,7 @@ const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, c
 
             <Wrapper>
                 <Label>주제 카테고리</Label>
-                <Select label={category} optionArr={categoryArr} setValue={setCategory}/>
+                <Select label={category?category:"카테고리"} optionArr={categoryArr} setValue={setCategory}/>
             </Wrapper>
 
             <Wrapper>
