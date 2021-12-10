@@ -31,9 +31,10 @@ const StepContainer = ({ curr, projectId, memberCnt }) => {
             setDropMenu(event.target.id);
     }
     const onClickDone = (event) => {
-        const {target:{id}}=event;
+        const { target: { id } } = event;
         /* 커리 취소 */
         if (id == curriculum) {
+            id == 1 && axios.patch(`/project/end/del/${projectId}`);
             axios.patch(`/myProject/curriculum/${projectId}/${curriculum - 1}`)
                 .then(res => {
                     res.status === 200 && setCurriculum(prev => --prev);
@@ -42,14 +43,16 @@ const StepContainer = ({ curr, projectId, memberCnt }) => {
         /* 커리 완료 */
         if (id - 1 == curriculum) {
             if (id == 1) {
-                memberCnt < 2 && alert("팀원은 최소 2인 이상 모집되어야 합니다.");
+                if (memberCnt < 2) {
+                    alert("팀원은 최소 2인 이상 모집되어야 합니다.");
+                    return;
+                }
+                axios.patch(`/project/end/${projectId}`);
             }
-            else {
-                axios.patch(`/myProject/curriculum/${projectId}/${curriculum + 1}`)
-                    .then(res => {
-                        res.status === 200 && setCurriculum(prev => ++prev);
-                    });
-            }
+            axios.patch(`/myProject/curriculum/${projectId}/${curriculum + 1}`)
+                .then(res => {
+                    res.status === 200 && setCurriculum(prev => ++prev);
+                });
         }
     }
     const onClickMatching = () => {
@@ -80,7 +83,7 @@ const StepContainer = ({ curr, projectId, memberCnt }) => {
                             {curr.map(arr =>
                                 <CurriBox className="row-container">
                                     <span style={{ "color": curriculum >= arr.curr && "#37C56E" }}>{arr.content}</span>
-                                    {arr.curr == 1 && curriculum == 0 && <GreenBtn onClick={onClickMatching}>개발자 매칭 추천</GreenBtn>}
+                                    {arr.curr === 1 && curriculum === 0 && <GreenBtn onClick={onClickMatching}>개발자 매칭 추천</GreenBtn>}
                                     <img id={arr.curr} src={curriculum >= arr.curr ? doneFillImg : doneImg} onClick={onClickDone} width="24px" />
                                 </CurriBox>)}
                         </DropDown>}
