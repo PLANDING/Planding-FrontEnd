@@ -7,21 +7,34 @@ import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import Modal from "../common/Modal";
 import ProfileBox from "../common/ProfileBox"
+import axios from "axios";
 
 const ContentBox = ({ writer, content, isGreen }) => {
     const history = useHistory();
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
+    const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const onClickMenu = () => {
         setIsOpenMenu(prev => !prev);
     }
     const onClickEditDel = (e) => {
         const { target: { id } } = e;
-        id == "edit" ?
+        id === "edit" ?
             history.push("/modification")
-            : history.push("/modification");
+            : deleteProject();
     }
 
+    const deleteProject = async () => {
+        if(window.confirm("프로젝트를 삭제 하시겠습니까?")){
+            try{
+                await axios.delete(`/project/${projectObj.id}`).then(res => {
+                    res.status ===  200 && history.push("/progress");
+                });
+            }catch(error){
+                alert(error.message);
+            }
+        }
+    }
     return (
         <Wrapper isGreen={isGreen}>
             <div className="row-container">
