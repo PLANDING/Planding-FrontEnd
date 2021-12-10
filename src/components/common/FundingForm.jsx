@@ -5,7 +5,7 @@ import InterestForm from "./InterestForm";
 import Select from "./Select";
 import MemberForm from "../FundingCreation/MemberForm";
 
-const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, setCategory,onSubmit }) => {
+const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, category, setCategory,onSubmit }) => {
     const history = useHistory();
     const onChangeFunding = (e) => {
         const { target: { name, value } } = e;
@@ -28,7 +28,7 @@ const FundingForm = ({ interestArr, setInterestArr, fundingObj, setFundingObj, s
 
             <Wrapper>
                 <Label>주제 카테고리</Label>
-                <Select label="카테고리" optionArr={categoryArr} setValue={setCategory}/>
+                <Select label={category} optionArr={categoryArr} setValue={setCategory}/>
             </Wrapper>
 
             <Wrapper>

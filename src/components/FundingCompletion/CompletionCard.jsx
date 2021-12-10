@@ -20,7 +20,7 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
     const [isEnd, setIsEnd] = useState(projectObj.isEnd);
     /*상세 페이지 이동 */
     const onClickCard = () => {
-        axios.patch(`/project/completion/detail/${projectObj.id}`)
+        axios.get(`/project/progress/detail/${projectObj.id}`)
             .then(res => {
                 dispatch(setProjectInfo(res.data.project));
                 history.push("/completion/detail");

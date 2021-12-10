@@ -10,9 +10,8 @@ const FundingEdit= () => {
     const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
     const [fundingObj, setFundingObj] = useState(projectObj);
     const [interestArr, setInterestArr] = useState(projectObj.Interests.map(interest => interest.category + ":" + interest.name));
-    console.log(projectObj);
     const [category, setCategory] = useState(projectObj.Category.name);
-    
+    console.log(projectObj);
     const onSubmit = (e) => {
         e.preventDefault();
         try{
@@ -27,7 +26,7 @@ const FundingEdit= () => {
         <Header />
         <div className="creation main-container">
             <TopDiv pageLabel="펀딩 수정"/>
-            <FundingForm interestArr={interestArr} setInterestArr={setInterestArr} fundingObj={fundingObj} setFundingObj={setFundingObj} setCategory={setCategory} onSubmit={onSubmit}/>
+            <FundingForm interestArr={interestArr} setInterestArr={setInterestArr} fundingObj={fundingObj} setFundingObj={setFundingObj} category={category} setCategory={setCategory} onSubmit={onSubmit}/>
         </div>
     </>);
 }
