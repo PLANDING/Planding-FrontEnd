@@ -31,8 +31,8 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
             axios.get(`/project/end/${projectObj.id}`)
                 .then(res => res.status === 200 && setIsEnd(true));
     }, []);
-    return (<Card onClick={onClickCard} id={idx}>
-        <ProjectHead label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
+    return (<Card id={idx}>
+        <ProjectHead onClickCard={onClickCard} label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea}>
             <ProfileBox nickName={projectObj.User.nickName} profileUrl={projectObj.User.ProfileImg?.url} />
         </ProjectHead>
 
