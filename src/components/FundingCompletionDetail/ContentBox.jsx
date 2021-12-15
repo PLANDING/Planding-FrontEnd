@@ -1,19 +1,16 @@
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import Modal from "../common/Modal";
-import ProfileBox from "../common/ProfileBox"
-import axios from "axios";
-import { setProjectInfo } from '../../modules/project';
+import ProfileBox from "../common/ProfileBox";
 
 const ContentBox = ({ writer, isWriter, content, isGreen }) => {
     const history = useHistory();
-    const dispatch = useDispatch();
-    const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const onClickMenu = () => {
