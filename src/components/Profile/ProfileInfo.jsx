@@ -12,19 +12,19 @@ const ProfileInfo = ({ profile }) => {
         <>
             <Card>
                 <Profile className="col-container">
-                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg?.url} borderNone/>
+                    <ProfileBox size={"150px"} profileUrl={profile.ProfileImg?.url} borderNone />
                     <span style={{ fontWeight: "bold", fontSize: "26px" }}>{profile.nickName}</span>
                     <LevelWrapper className="col-container" >
 
                         <div className="row-container" style={{ gap: "10px" }}>
-                            <img src={require("../../assets/imgs/" + LevelImgs[profile.level/4].fill).default} width="24px" />
-                            <Gage gage={profile.level*10} width={'150px'} />
+                            <img src={require("../../assets/imgs/" + LevelImgs[profile.level / 4].fill).default} width="24px" />
+                            <Gage gage={profile.level % 5 * 10} width={'150px'} />
                         </div>
 
                         <Tooltip className="tooltip" >
                             <span>**스택레벨 이란?</span>
                             <p >
-                                <div>총 5레벨 {LevelImgs.map((it,idx) => <><img src={require("../../assets/imgs/" + `${it.fill}`).default} />{idx<4&&'→'}</>)}</div><br/>
+                                <div>총 5레벨 {LevelImgs.map((it, idx) => <><img src={require("../../assets/imgs/" + `${it.fill}`).default} />{idx < 4 && '→'}</>)}</div><br />
                                 플랜딩 프로젝트 완료 시 증가되는 평가지표입니다.
                             </p>
                         </Tooltip>
