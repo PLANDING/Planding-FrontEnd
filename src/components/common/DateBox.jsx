@@ -4,7 +4,7 @@ import styled from "styled-components";
 const DateBox=({dateString, side})=>{
     const date=new Date(dateString);
     return(
-        <Wrapper side={side}>{date.getFullYear()+"."+("0"+date.getMonth()).slice(-2)+"."+("0"+date.getDate()).slice(-2)}</Wrapper>
+        <Wrapper side={side}>{date.getFullYear()+"."+("0"+(date.getMonth()+1)).slice(-2)+"."+("0"+date.getDate()).slice(-2)}</Wrapper>
     );
 }
 export default DateBox;
