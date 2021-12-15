@@ -16,7 +16,7 @@ const FundingCompletionDetail = () => {
 
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
-    const [isWriter, setIsWriter] = useState(userObj.id === projectObj.User.id);
+    const [isWriter, setIsWriter] = useState(userObj?.id === projectObj.User.id);
 
     useEffect(() => {
         axios.get(`/project/completion/detail/${projectObj.id}`)

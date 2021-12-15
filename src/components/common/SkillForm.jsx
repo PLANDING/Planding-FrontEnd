@@ -19,12 +19,13 @@ const SkillForm = ({ skillArr, setSkillArr }) => {
             <GreenBorderBtn type="button" onClick={onClickAdd}>추가</GreenBorderBtn>
         </Wrapper>
 
-        {skillArr.length > 0 && <TagWrapper>{
-            skillArr.filter((item,idx) => {return skillArr.indexOf(item) === idx}).map((skill, idx) =>
-                <GreenLabel>{skill}
-                    <button type="button" name={idx} id="del-btn" onClick={onClickDel}>x</button>
-                </GreenLabel>)}
-        </TagWrapper>}
+        {skillArr.length > 0 &&
+            <TagWrapper>{
+                skillArr.map((skill, idx) =>
+                    <GreenLabel>{skill}
+                        <button type="button" name={idx} id="del-btn" onClick={onClickDel}>x</button>
+                    </GreenLabel>)}
+            </TagWrapper>}
     </div>)
 
 }

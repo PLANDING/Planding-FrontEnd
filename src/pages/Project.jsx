@@ -20,8 +20,8 @@ const Project = () => {
         axios.get(`/myProject/${userObj.id}`)
             .then(res => {
                 if (res.status === 200) {
-                    setMyProjectObj(res.data.myProject);
-                    setCurriculum(res.data.myProject.curriculum);
+                    setMyProjectObj(res.data.MyProject);
+                    setCurriculum(res.data.MyProject.curriculum);
                 }
             });
     }, [curriculum]);

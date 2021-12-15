@@ -20,7 +20,7 @@ const FundingCompletion = () => {
 
             <CardWrapper className="col-container">
                 {completionArr === undefined ? <Wrapper>잠시만 기다려주세요.</Wrapper> :
-                    completionArr.map((completion, idx) => <CompletionCard idx={idx} projectObj={completion} usage={userObj.id===completion.User.id&&"isNone"} />)}
+                    completionArr.map((completion, idx) => <CompletionCard idx={idx} projectObj={completion} usage={userObj?.id===completion.User.id&&"isNone"} />)}
             </CardWrapper>
         </div>
     </>);
