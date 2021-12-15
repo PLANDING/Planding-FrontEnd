@@ -8,12 +8,15 @@ import CommentForm from "../components/FundingCompletionDetail/CommentForm";
 import CategoryBox from "../components/FundingCompletionDetail/CategoryBox";
 import MemberBox from "../components/FundingCompletionDetail/MemberBox";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { setProjectInfo } from "../modules/project";
 const FundingCompletionDetail = () => {
     const dispatch = useDispatch();
+
+    const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const { projectObj } = useSelector(state => ({ projectObj: state.project.projectObj }));
+    const [isWriter, setIsWriter] = useState(userObj.id === projectObj.User.id);
 
     useEffect(() => {
         axios.get(`/project/completion/detail/${projectObj.id}`)
@@ -26,11 +29,11 @@ const FundingCompletionDetail = () => {
         <div className="main-container">
             <TopDiv pageLabel="펀딩 완료" subLabel="프로젝트에 참여하세요!" />
             <ProjectHead label={projectObj.isEnd ? "모집 완료" : "모집 중"} idea={projectObj.idea} headilne={projectObj.headline} width="80%" isDetail>
-                <JoinBtnBox project={projectObj} dDay={3} width="240px" content={"모집 종료까지"} />
+                {!isWriter&&<JoinBtnBox project={projectObj} dDay={3} width="240px" content={"모집 종료까지"} />}
             </ProjectHead>
             <Wrapper>
                 <Container className="col-container">
-                    <ContentBox writer={projectObj.User} content={projectObj.content} />
+                    <ContentBox writer={projectObj.User} isWriter={isWriter} content={projectObj.content} /> 
                     <CommentForm projectId={projectObj.id} commentArr={projectObj.Comments} />
                 </Container>
                 <SideContainer className="col-container">

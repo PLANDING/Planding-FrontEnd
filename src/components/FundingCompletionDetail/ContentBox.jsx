@@ -10,7 +10,7 @@ import ProfileBox from "../common/ProfileBox"
 import axios from "axios";
 import { setProjectInfo } from '../../modules/project';
 
-const ContentBox = ({ writer, content, isGreen }) => {
+const ContentBox = ({ writer, isWriter, content, isGreen }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
@@ -43,8 +43,7 @@ const ContentBox = ({ writer, content, isGreen }) => {
             <div className="row-container">
                 <Headline>기획 내용</Headline>
                 <ProfileBox nickName={writer.nickName} userId={writer.id} profileUrl={writer.ProfileImg?.url} />
-                {userObj.id === writer.id &&
-                    <FontAwesomeIcon id="menu" onClick={onClickMenu} icon={faEllipsisV} />}
+                {isWriter &&<FontAwesomeIcon id="menu" onClick={onClickMenu} icon={faEllipsisV} />}
                 {isOpenMenu &&
                     <Modal setIsOpen={setIsOpenMenu}>
                         <Menu className="col-container">
