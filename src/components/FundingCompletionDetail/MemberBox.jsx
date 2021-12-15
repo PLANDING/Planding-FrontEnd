@@ -7,7 +7,7 @@ import ProfileBox from "../common/ProfileBox"
 const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
     const alertObj = {
-        from: userObj.id,
+        from: userObj?.id,
         to: user.id,
         projectId: projectId,
     };
