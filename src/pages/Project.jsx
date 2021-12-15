@@ -13,7 +13,7 @@ import StepContainer from "../components/Project/StepContainer";
 const Project = () => {
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj }));
     const [myProjectObj, setMyProjectObj] = useState();
-    let gage = (myProjectObj?.curriculum / 20 * 100).toFixed(1);
+    let gage = parseInt(myProjectObj?.curriculum / 20 * 100);
 
     const [curriculum, setCurriculum] = useState();
     useEffect(() => {
