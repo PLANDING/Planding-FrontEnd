@@ -1,13 +1,12 @@
-import React,{useEffect, useState} from 'react';
+import axios from "axios";
+import React from 'react';
 import styled from "styled-components";
 import { Devider, InfoWrapper } from "../../pages/Register";
 import GreenBtn from "../common/Button";
 import InterestForm from "../common/InterestForm";
 import SkillForm from "../common/SkillForm";
-import axios from "axios";
 
 const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, skillArr, setSkillArr }) => {
-    const [repoName, setRepoName] = useState('');
     const langArr=[];
     const handleClick = async () => {
         const id = registerInfo.github.split('/')[3];
