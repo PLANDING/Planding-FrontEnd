@@ -1,13 +1,14 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import arrowImg from "../../assets/imgs/arrow.png"
-const Select = ({ label, optionArr, setValue }) => {
+const Select = ({ label, value, optionArr, setValue }) => {
     const onChange = (e) => {
         const { target: { value } } = e;
         setValue(value);
     }
     return (
         <Wrapper className="row-container">
-            <SelectBox onChange={onChange}>
+            <SelectBox value={value} onChange={onChange}>
                 <option value="defalut" selected hidden>{label}</option>
                 {optionArr.map(opt => <option value={opt}>{opt}</option>)}
             </SelectBox>
