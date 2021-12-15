@@ -60,7 +60,7 @@ export const BtnBox = styled.div`
         color: #5F5F5F;
     }
 `
-const Dday = styled.span`
+const Dday = styled.div`
     color: #37C56E;
     margin-left: 5px;
 `
