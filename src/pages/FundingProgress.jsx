@@ -11,15 +11,20 @@ import { useHistory } from "react-router";
 const FundingProgress = () => {
     const {userObj}=useSelector(state=>({userObj:state.user.userObj}));
     const [progressArr, setProgressArr] = useState();
+    const [isProgress, setIsProgress] = useState(false);
     useEffect(() => {
         axios.get('/project/progress').then(res => {
             setProgressArr(res.data.project);
         });
+        axios.get(`/user/${userObj.id}`).then(res => {
+            const userProgress = res.data.user.Progress;
+            (typeof userProgress === 'undefined')? setIsProgress(false) : setIsProgress(true);      
+        });
     }, []);
-
     const history = useHistory();
     const onClickCreation = () => {
-        history.push("/creation");
+        isProgress? alert("진행중인 펀딩이나 프로젝트가 존재합니다.") : history.push("/creation");
+        
     }
     return (<>
         <Header />
