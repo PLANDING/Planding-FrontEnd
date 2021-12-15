@@ -27,7 +27,7 @@ const FundingProgress = () => {
             <TopDIv pageLabel={"펀딩 진행"} subLabel={"프로젝트에 펀딩하세요!"} isGreen><GreenBtn onClick={onClickCreation}>펀딩 생성</GreenBtn></TopDIv>
             <CardWrapper className="col-container">
                 {progressArr === undefined ? <Wrapper>잠시만 기다려주세요.</Wrapper> :
-                    progressArr.map((progress, idx) => <ProgressCard projectObj={progress} idx={idx} usage={userObj.id === progress.User.id && "isNone"}  />)}
+                    progressArr.map((progress, idx) => <ProgressCard projectObj={progress} idx={idx} usage={userObj?.id === progress.User.id && "isNone"}  />)}
             </CardWrapper>
         </div>
     </>);
