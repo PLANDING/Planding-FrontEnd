@@ -2,17 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import CompleteProjectCard from './CompleteProjectCard';
 
-const CompleteProject = ({projectObj}) => {
+const CompleteProject = ({ projectArr }) => {
     return (
-        <>
         <Wrapper>
-             <p>완료한 프로젝트</p>
-             <Card className="row-container">
-                <CompleteProjectCard projectObj={projectObj}/>
-                <CompleteProjectCard projectObj={projectObj}/>
-             </Card>
-        </Wrapper>   
-        </>
+            <p>완료한 프로젝트</p>
+            {projectArr.length === 0 ?
+                <Notice>완료한 프로젝트가 없습니다.</Notice>
+                :
+                <Card className="row-container">
+                    {projectArr.map(project => <CompleteProjectCard projectObj={project.MyProject.Project} />)}
+                </Card>
+            }
+        </Wrapper>
     );
 };
 
@@ -28,5 +29,12 @@ const Wrapper = styled.div`
 `
 
 const Card = styled.div`
-    gap:20px;
+    justify-content: space-between;
+`
+const Notice = styled.div`
+    width:100%;
+    background-color : white;
+    padding:80px 20px;
+    text-align: center;
+    color: #bdbdbd;
 `

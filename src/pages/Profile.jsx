@@ -20,14 +20,6 @@ const Profile = () => {
     const cookie=new Cookies;
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
 
-    const projectObj = {
-        idea: "이미지 인식을 활용한 앱 서비스",
-        isCompletion: false,
-        User: { nickName: "닉네임" },
-        Interests: [{ name: "안드로이드" }, { name: "데이터 분석" }, { name: "앱 서버" }],
-        Category: { name: "인공지능" }
-        //+ funding count
-    }
     const { profileObj } = useSelector(state => ({ profileObj: state.profile.profileObj })); //prifile user 정보
     useEffect(() => {
         axios.get(`/user/${profileObj.id}`)
@@ -62,8 +54,8 @@ const Profile = () => {
                             <RedBorderBtn onClick={onClickLogout}>로그아웃</RedBorderBtn>
                         </BtnWrapper>}
                     <ProfileCard profileObj={profileObj} /> 
-                    {/* 
-                    <CompleteProject profileObj={profileObj}></CompleteProject> */}
+                    
+                    <CompleteProject projectArr={profileObj.MyProjects}/> 
                 </CardWrapper>
             </div>
         </>);
