@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import styled from "styled-components";
 import { GreenBorderBtn } from "./Button";
 import { GreenBorderLabel } from "./Label";
@@ -16,8 +17,7 @@ const InterestForm = ({ interestArr, setInterestArr }) => {
     const [second, setSecond] = useState(""); //소분야
     /* 추가 btn */
     const onClickAdd = () => {
-        second && (!interestArr.includes(first+':'+second) && setInterestArr(prev => ([...prev, `${first}:` + second])));
-        setFirst("");
+        second && (!interestArr.includes(first + ':' + second) && setInterestArr(prev => ([...prev, `${first}:` + second])));
     }
     /*interest block 삭제 */
     const onClickDel = (e) => {
@@ -26,17 +26,18 @@ const InterestForm = ({ interestArr, setInterestArr }) => {
     }
     return (<>
         <div className="row-container">
-            <Select label={"분야"} optionArr={["기획", "프론트엔드", "백엔드"]} setValue={setFirst} />
-            <Select label={"소분야"} optionArr={first ? interestObj[first] : []} setValue={setSecond} />
+            <Select label={"분야"} optionArr={["기획", "프론트엔드", "백엔드"]} value={first} setValue={setFirst} />
+            <Select label={"소분야"} optionArr={first ? interestObj[first] : []} value={second} setValue={setSecond} />
             <GreenBorderBtn type="button" onClick={onClickAdd}>추가</GreenBorderBtn>
         </div>
 
-        {interestArr.length > 0 && <TagWrapper>{
-            interestArr.map((interest, idx) =>
-                <GreenBorderLabel>{interest.split(":")[1]}
-                    <button type="button" name={idx} id="del-btn" onClick={onClickDel}>X</button>
-                </GreenBorderLabel>)}
-        </TagWrapper>}
+        {interestArr.length > 0 &&
+            <TagWrapper>
+                {interestArr.map((interest, idx) =>
+                    <GreenBorderLabel>{interest.split(":")[1]}
+                        <button type="button" name={idx} id="del-btn" onClick={onClickDel}>X</button>
+                    </GreenBorderLabel>)}
+            </TagWrapper>}
     </>)
 }
 const TagWrapper = styled.div`

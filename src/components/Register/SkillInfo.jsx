@@ -8,32 +8,31 @@ import axios from "axios";
 
 const SkillInfo = ({ registerInfo, onChangeInfo, interestArr, setInterestArr, skillArr, setSkillArr }) => {
     const [repoName, setRepoName] = useState('');
-
+    const langArr=[];
     const handleClick = async () => {
         const id = registerInfo.github.split('/')[3];
         try{
             const { data } = await axios.get(`https://api.github.com/users/${id}/repos`)
-            data.map((data) =>{
-                setRepoName(data.languages_url);
+            await data.map(async(data) =>{
+                await getLanguage(data.languages_url);
+                setSkillArr([...langArr]);
             });
         } catch(error){
             alert(error.message);
         }
     }
-
     const getLanguage = async (repoName) => {
         try{
             const { data } = await axios.get(repoName);
-            setSkillArr(lang => [...lang, ...Object.keys(data)]);
+            Object.keys(data).forEach(it=>{
+                if(langArr.indexOf(it)==-1){
+                    langArr.push(it);
+                }
+            });
         } catch(error){
             alert(error.message);
         }
     }
-
-    useEffect(() => {
-        repoName && getLanguage(repoName);
-    }, [repoName]);
-
     return (
         <>
             <Devider>
