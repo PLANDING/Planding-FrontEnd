@@ -17,7 +17,7 @@ const ProjectCard = ({ projectObj }) => {
                         <GreenLabel>프로젝트 진행 중</GreenLabel>
                         <div className="col-container" style={{ gap: "10px" }}>
                             <span>진행 단계</span>
-                            <Gage gage={40} width={'180px'}></Gage>
+                            <Gage gage={parseInt(projectObj.curriculum / 20 * 100)} width={'180px'}></Gage>
                         </div>
                     </Footer>
                 </Wrapper>
