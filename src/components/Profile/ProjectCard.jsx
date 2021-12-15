@@ -11,8 +11,8 @@ const ProjectCard = ({ projectObj }) => {
                 <Notice>진행중인 프로젝트가 없습니다.</Notice>
                 :
                 <Wrapper className="col-container">
-                    <Title>{projectObj.idea}</Title>
-                    <InterestBox interestArr={projectObj.Interests} />
+                    <Title>{projectObj.Project.idea}</Title>
+                    <InterestBox interestArr={projectObj.Project.Interests} />
                     <Footer className="row-container">
                         <GreenLabel>프로젝트 진행 중</GreenLabel>
                         <div className="col-container" style={{ gap: "10px" }}>
