@@ -3,11 +3,11 @@ import styled from "styled-components";
 import DateBox from '../common/DateBox';
 import ProfileBox from "../common/ProfileBox";
 
-const ProjectInfo = ({myProjectObj}) => {
+const ProjectInfo = ({ myProjectObj }) => {
     return (
         <Wrapper className="row-container">
             <InfoBox className="col-container">
-                <DateBox dateString={myProjectObj.Project.createdAt} />
+                <DateBox dateString={myProjectObj.createdAt} />
                 <span id="funding">펀딩 이력 <span>{myProjectObj.Project.Fundings.length * 500}</span></span>
             </InfoBox>
             <MemberBox className="row-container">
@@ -15,7 +15,7 @@ const ProjectInfo = ({myProjectObj}) => {
                 {myProjectObj.UserProjects.map(Member => <ProfileBox userId={Member.User.id} profileUrl={Member.User.ProfileImg?.url} />)}
             </MemberBox>
         </Wrapper>
-        );
+    );
 }
 export default ProjectInfo;
 const InfoBox = styled.div`

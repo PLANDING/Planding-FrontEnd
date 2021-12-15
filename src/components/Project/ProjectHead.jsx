@@ -5,7 +5,7 @@ const ProjectHead = ({ myProjectObj }) => {
     return (
         <Container className="col-container">
             <span id="idea">{myProjectObj.Project.idea}</span>
-            <span>프로젝트 {Math.ceil((new Date().getTime() - new Date(myProjectObj.Project.createdAt).getTime()) / (1000 * 3600 * 24)) - 7}일 째</span>
+            <span>프로젝트 {Math.ceil((new Date().getTime() - new Date(myProjectObj.createdAt).getTime()) / (1000 * 3600 * 24))}일 째</span>
         </Container>
     );
 }
