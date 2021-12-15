@@ -1,18 +1,16 @@
+import axios from "axios";
 import React, { useEffect } from "react";
-import Header from '../components/common/Header';
-import ProfileInfo from '../components/Profile/ProfileInfo';
+import { Cookies } from "react-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import styled from 'styled-components';
 import { GreenBorderBtn } from '../components/common/Button';
-import ProfileCard from '../components/Profile/ProfileCard'
+import Header from '../components/common/Header';
 import CompleteProject from '../components/Profile/CompleteProject';
-import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import axios from "axios";
-import { setLoggedInfo, setUserInfo } from "../modules/user";
+import ProfileCard from '../components/Profile/ProfileCard';
+import ProfileInfo from '../components/Profile/ProfileInfo';
 import { setProfileInfo } from "../modules/profile";
-import { Cookies } from "react-cookie";
+import { setLoggedInfo, setUserInfo } from "../modules/user";
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const Profile = () => {
     useEffect(() => {
         axios.get(`/user/${profileObj.id}`)
             .then(res => dispatch(setProfileInfo(res.data.user)));
-    }, [])
+    }, []);
 
     /*계정 user 정보 Get -> 프로픨 수정*/
     const onClickEdit = () => {
