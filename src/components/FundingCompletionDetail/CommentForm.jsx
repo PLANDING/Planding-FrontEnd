@@ -32,7 +32,7 @@ const CommentForm = ({ commentArr, projectId }) => {
             <div id="label">댓글</div>
             <From className="row-container" onSubmit={onSubmit}>
                 <ProfileBox profileUrl={userObj?.ProfileImg?.url} borderNone />
-                <textarea type="text" placeholder="댓글을 입력해주세요. (최대 300자)" value={comment} onChange={onChange} maxLength={300} />
+                <textarea type="text" placeholder="댓글을 입력해주세요. (최대 300자)" value={comment} onChange={onChange} maxLength={300} style={{overflow:"auto"}}/>
                 <GreenBtn>작성</GreenBtn>
             </From>
             <div>{commentArr.map(comment => <Comment projectId={projectId} commentObj={comment} isUser={true} />)}</div>
