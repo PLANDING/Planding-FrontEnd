@@ -7,7 +7,7 @@ import GreenBtn from "../common/Button";
 import LevelImgs from "../../assets/objects/LevelImgs";
 import axios from "axios";
 import { useSelector } from "react-redux";
-const MatchingCard = ({ profile ,projectId}) => {
+const MatchingCard = ({ profile, projectId }) => {
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
     const alertObj = {
         from: userObj.id,
@@ -28,9 +28,9 @@ const MatchingCard = ({ profile ,projectId}) => {
         <LineBox></LineBox>
         <Card className="row-container">
             <Profile className="col-container">
-                <ProfileBox size={"120px"} userId={profile.id} profileUrl={profile.ProfileImg?.url}/>
+                <ProfileBox size={"120px"} userId={profile.id} profileUrl={profile.ProfileImg?.url} />
                 <div className="row-container">
-                    <img src={require("../../assets/imgs/" + LevelImgs[0].fill).default} width="24px" />
+                    <img src={require("../../assets/imgs/" + LevelImgs[profile.level / 4].fill).default} width="24px" />
                     {profile.nickName}
                 </div>
             </Profile>
@@ -110,7 +110,7 @@ const LabelWrapper = styled.div`
 `
 const Wrapper = styled.div`  
 `
-const LineBox=styled.div`
+const LineBox = styled.div`
     border-left: solid thin #37C56E;
     position: absolute;
     height: 300px;
