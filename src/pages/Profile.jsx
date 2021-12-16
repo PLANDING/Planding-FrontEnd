@@ -10,12 +10,12 @@ import CompleteProject from '../components/Profile/CompleteProject';
 import ProfileCard from '../components/Profile/ProfileCard';
 import ProfileInfo from '../components/Profile/ProfileInfo';
 import { setProfileInfo } from "../modules/profile";
-import { setLoggedInfo, setUserInfo } from "../modules/user";
+import { setGaInfo, setLoggedInfo, setUserInfo } from "../modules/user";
 
 const Profile = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const cookie=new Cookies;
+    const cookie = new Cookies;
     const { userObj } = useSelector(state => ({ userObj: state.user.userObj })); //계정 user 정보
 
     const { profileObj } = useSelector(state => ({ profileObj: state.profile.profileObj })); //prifile user 정보
@@ -35,6 +35,7 @@ const Profile = () => {
     /*계정 user 정보 Get -> 프로픨 수정*/
     const onClickLogout = () => {
         dispatch(setLoggedInfo(false, null));
+        dispatch(setGaInfo({ category: "", intresets: [] }));
         cookie.remove('token');
         history.push("/");
     }
@@ -51,9 +52,9 @@ const Profile = () => {
                             <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
                             <RedBorderBtn onClick={onClickLogout}>로그아웃</RedBorderBtn>
                         </BtnWrapper>}
-                    <ProfileCard profileObj={profileObj} /> 
-                    
-                    <CompleteProject projectArr={profileObj.MyProjects}/> 
+                    <ProfileCard profileObj={profileObj} />
+
+                    <CompleteProject projectArr={profileObj.MyProjects} />
                 </CardWrapper>
             </div>
         </>);
