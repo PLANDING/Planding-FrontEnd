@@ -10,7 +10,6 @@ const Gage = ({ gage, width }) => {
 }
 const Wrapper=styled.div`
 width:100%;
-justify-content: center;
 gap: 10px;
 color: #37C56E; 
 font-weight: bold;
