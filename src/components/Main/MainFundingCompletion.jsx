@@ -2,24 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import CompleteCard from './CompleteCard';
 
-const MainFundingCompletion = ({projectObj}) => {
+const MainFundingCompletion = ({ projectArr }) => {
     return (
         <>
-         <Wrapper className="col-container">
-             <span>펀딩 완료</span>
-             <ProCardWrapper className="row-container">
-                <CompleteCard projectObj={projectObj}/>
-                <CompleteCard projectObj={projectObj}/>
-                <CompleteCard projectObj={projectObj}/>
-             </ProCardWrapper>
-        </Wrapper>   
+            <Wrapper className="col-container">
+                <span>펀딩 완료</span>
+                <ProCardWrapper className="row-container">
+                    {projectArr.length === 0 ?
+                        <Notice className="row-container">로딩중..</Notice>
+                        :
+                        projectArr.map(project => <CompleteCard projectObj={project} />)}
+                </ProCardWrapper>
+            </Wrapper>
         </>
     );
 };
 
 export default MainFundingCompletion;
-
-const Wrapper=styled.div`
+const Notice = styled.div`
+    color:white;
+    height:230px;
+`
+const Wrapper = styled.div`
     background-color: #37C562;
     box-shadow: 5px 5px 20px 2px #00000015;
     width: 100%;

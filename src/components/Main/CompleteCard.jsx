@@ -1,27 +1,42 @@
+import axios from 'axios';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import { setProjectInfo } from '../../modules/project';
 import InterestBox from '../common/InterestBox';
 import GreenLabel from '../common/Label';
 import ProfileBox from '../common/ProfileBox';
 import RecruitmentBox from '../common/RecruitmentBox';
 
-const CompleteCard = ({projectObj}) => {
+const CompleteCard = ({ projectObj }) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
+    const date = Math.ceil(ms / (1000 * 3600 * 24));
+    const onClickCard = () => {
+        axios.get(`/project/completion/detail/${projectObj.id}`)
+            .then(res => {
+                dispatch(setProjectInfo(res.data.project));
+                history.push("/completion/detail");
+            })
+    }
     return (
         <>
-        <Wrapper>
-            <Header>
-                <Title>{projectObj.idea}</Title>
-                <ProfileBox nickName = {projectObj.User.nickName}/>
-            </Header>
-            <Body>
-                <RecruitmentBox member_plan={3} member_dev={3}/>
-                <InterestBox interestArr={projectObj.Interests} />
-            </Body>
-            <Footer className="row-container">
-                <GreenLabel>모집 중</GreenLabel>
-                <span>D-5</span>
-            </Footer>
-        </Wrapper>
+            <Wrapper onClick={onClickCard}>
+                <Header>
+                    <Title>{projectObj.idea}</Title>
+                    <ProfileBox nickName={projectObj.User.nickName} userId={projectObj.User.id} profileUrl={projectObj.User.ProfileImg?.url} />
+                </Header>
+                <Body>
+                    <RecruitmentBox member_plan={projectObj.member_plan} member_dev={projectObj.member_dev} />
+                    <InterestBox interestArr={projectObj.Interests} />
+                </Body>
+                <Footer className="row-container">
+                    <GreenLabel>모집 중</GreenLabel>
+                    <span>D-{14 - date}</span>
+                </Footer>
+            </Wrapper>
         </>
     );
 };
@@ -39,6 +54,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     box-sizing:border-box;
     height: 230px;
+    cursor:pointer;
 `
 
 const Header = styled.div`
