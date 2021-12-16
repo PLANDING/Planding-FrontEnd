@@ -1,27 +1,34 @@
+import axios from 'axios';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import Header from '../components/common/Header';
 import MainFundingCompletion from '../components/Main/MainFundingCompletion';
 import MainFundingIng from '../components/Main/MainFundingIng';
 
-const projectObj = {
-    idea: "이미지 인식을 활용한 앱 서비스",
-    isCompletion: false,
-    User: { nickName: "닉네임" },
-    Interests: [{ name: "안드로이드" }, { name: "데이터 분석" }, { name: "앱 서버" }],
-    Category: { name: "인공지능" }
-    //+ funding count
-}
-
 const Main = () => {
+    const { gaObj } = useSelector(state => ({ gaObj: state.user.gaObj }));
+    const [progressArr, setProgressArr] = useState([]);
+    const [completionArr, setCompletionArr] = useState([]);
+    useEffect(() => {
+        console.log(gaObj);
+        axios.post('/project', gaObj)
+            .then(res => {
+                if (res.status === 200) {
+                    setProgressArr(res.data.Progresses);
+                    setCompletionArr(res.data.Completions);
+                }
+            });
+    }, [])
     return (
         <>
-        <Header />
-        <Wrapper className="col-container">
-            <MainFundingCompletion projectObj={projectObj} />
-            <MainFundingIng projectObj={projectObj} />
-        </Wrapper>
-        
+            <Header />
+            <Wrapper className="col-container">
+                <MainFundingCompletion projectArr={completionArr} />
+                <MainFundingIng projectArr={progressArr} />
+            </Wrapper>
+
         </>
     );
 };

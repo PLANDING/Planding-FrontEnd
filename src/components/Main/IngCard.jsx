@@ -4,24 +4,40 @@ import InterestBox from '../common/InterestBox';
 import GreenLabel from '../common/Label';
 import ProfileBox from '../common/ProfileBox';
 import FundingGage from '../common/FundingGage';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { setProjectInfo } from '../../modules/project';
 
 const IngCard = ({ projectObj }) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
+    const date = Math.ceil(ms / (1000 * 3600 * 24));
+    const onClickCard = () => {
+        axios.get(`/project/progress/detail/${projectObj.id}`)
+            .then(res => {
+                dispatch(setProjectInfo(res.data.project));
+                history.push("/progress/detail");
+            })
+    }
+
     return (
         <>
-            <Wrapper className="col-container">
+            <Wrapper className="col-container" onClick={onClickCard}>
                 <Header>
                     <Title>{projectObj.idea}</Title>
-                    <ProfileBox nickName={projectObj.User.nickName} />
+                    <ProfileBox nickName={projectObj.User.nickName} userId={projectObj.User.id} profileUrl={projectObj.User.ProfileImg?.url} />
                 </Header>
                 <Body>
                     <InterestBox interestArr={projectObj.Interests} />
                     <LabelWrap className="row-container">
-                        <GreenLabel>모집 중</GreenLabel>
-                        <span>D-5</span>
+                        <GreenLabel>펀딩 진행 중</GreenLabel>
+                        <span>D-{7 - date}</span>
                     </LabelWrap>
                 </Body>
                 <Footer>
-                    <FundingGage gage={30} fundingCnt={1300} />
+                    <FundingGage gage={(projectObj.Fundings.length * 500 / 30).toFixed(1)} fundingCnt={projectObj.Fundings.length * 500} />
                 </Footer>
 
             </Wrapper>
@@ -40,6 +56,7 @@ const Wrapper = styled.div`
     border-radius: 15px;
     flex-wrap: wrap;
     height: 230px;
+    cursor:pointer;
 `
 
 const Header = styled.div`
