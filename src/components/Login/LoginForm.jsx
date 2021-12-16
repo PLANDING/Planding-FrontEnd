@@ -4,11 +4,11 @@ import GreenBtn from "../common/Button";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { setLoggedInfo } from "../../modules/user";
+import { setGaInfo, setLoggedInfo } from "../../modules/user";
 
 const LoginForm = () => {
-    const history=useHistory();
-    const dispatch=useDispatch();
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState({ id: "", pw: "" });
     const onChangeInput = (e) => {
@@ -16,22 +16,25 @@ const LoginForm = () => {
         setInput({ ...input, [name]: value });
     }
 
-    const [notice,setNotice]=useState("");
-    const onSubmit=(e)=>{
+    const [notice, setNotice] = useState("");
+    const onSubmit = (e) => {
         e.preventDefault();
-        try{
-            axios.post("/auth",{...input}).then(res=>{
-                if(res.status===204){
+        try {
+            axios.post("/auth", { ...input }).then(res => {
+                if (res.status === 204) {
                     /* 로그인 정보 없을 경우 */
                     setNotice("회원 정보가 없거나, 정보가 일치하지 않습니다.");
                 }
-                if(res.status==200){
+                if (res.status == 200) {
                     /*로그인 성공 */
                     dispatch(setLoggedInfo(true, res.data.user));
+                    axios.get('/ga').then(res => {
+                        res.status === 200 && dispatch(setGaInfo(res.data.Ga));
+                    })
                     history.push("/");
                 }
             })
-        }catch(err){
+        } catch (err) {
 
         }
     }
@@ -54,7 +57,7 @@ const Form = styled.form`
     width: 100%;
     gap: 30px;
 `
-const Wrapper=styled.div`
+const Wrapper = styled.div`
     span{
         width: 100px;
     }
@@ -62,7 +65,7 @@ const Wrapper=styled.div`
         width: 100%;
     }
 `
-const Notice=styled.div`
+const Notice = styled.div`
     color:#F55959;
     text-align: center;
     font-size: small;
