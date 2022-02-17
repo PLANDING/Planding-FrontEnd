@@ -19,9 +19,11 @@ const FundingGage = ({ gage, fundingCnt, width }) => {
 }
 export default FundingGage;
 const Container = styled.div`
-gap: 10px;
-.funding-cnt{
-color: #37C56E; 
-margin-left: 5px;
-}
+    gap: 10px;
+    .funding-cnt{
+        color: #37C56E; 
+        margin-left: 5px;
+    }
+    max-width:350px;
+    
 `

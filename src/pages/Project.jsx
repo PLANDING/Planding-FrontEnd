@@ -15,7 +15,7 @@ const Project = () => {
     const [myProjectObj, setMyProjectObj] = useState();
     let gage = parseInt(myProjectObj?.curriculum / 20 * 100);
 
-    const [curriculum, setCurriculum] = useState();
+    const [curriculum, setCurriculum] = useState(0);
     useEffect(() => {
         axios.get(`/myProject/${userObj.id}`)
             .then(res => {
