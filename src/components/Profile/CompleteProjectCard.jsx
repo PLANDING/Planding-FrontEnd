@@ -5,46 +5,48 @@ import styled from 'styled-components';
 import InterestBox from '../common/InterestBox';
 import GreenLabel from '../common/Label';
 
-const CompleteProjectCard = ({projectObj}) => {
-    return (
-        <>
-         <Wrapper className="col-container">
-            <Title>{projectObj.idea}</Title>
-            <InterestBox interestArr={projectObj.Interests} />
-            <Footer className="row-container">
-                <GreenLabel>프로젝트 수료</GreenLabel>
-                <span>펀딩 이력 <FontAwesomeIcon icon={faDollarSign}/> <span className="impact">{projectObj.Fundings.length*500}</span></span>
-                
-            </Footer>
-        </Wrapper>   
-        </>
-    );
+const CompleteProjectCard = ({ projectObj }) => {
+  return (
+    <>
+      <Wrapper className="col-container">
+        <Title>{projectObj.idea}</Title>
+        <InterestBox interestArr={projectObj.Interests} />
+        <Footer className="row-container">
+          <GreenLabel>프로젝트 수료</GreenLabel>
+          <span>
+            펀딩 이력 <FontAwesomeIcon icon={faDollarSign} />{' '}
+            <span className="impact">{projectObj.Fundings.length * 500}</span>
+          </span>
+        </Footer>
+      </Wrapper>
+    </>
+  );
 };
 
 export default CompleteProjectCard;
 
 const Wrapper = styled.div`
-    width:48%;
-    background-color : white;
-    border: 0.5px solid #EBEBEB;
-    box-shadow: 5px 5px 10px 5px #00000010;
-    border-radius: 15px;
-    box-sizing:border-box;
-    padding:20px;
-`
+  width: 48%;
+  background-color: white;
+  border: 0.5px solid #ebebeb;
+  box-shadow: 5px 5px 10px 5px #00000010;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 20px;
+`;
 const Title = styled.span`
-    font-size: 17px;
-    color : black;
-`
+  font-size: 17px;
+  color: black;
+`;
 
 const Footer = styled.div`
-    gap:20px;
-    font-weight : bold;
-    &>span{
-        font-size:small;
-    }
-    .impact{
-        color:#37C56E;
-        margin-left: 5px;
-    }
-`
+  gap: 20px;
+  font-weight: bold;
+  & > span {
+    font-size: small;
+  }
+  .impact {
+    color: #37c56e;
+    margin-left: 5px;
+  }
+`;

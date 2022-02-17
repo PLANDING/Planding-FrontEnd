@@ -3,43 +3,44 @@ import styled from 'styled-components';
 import CompleteCard from './CompleteCard';
 
 const MainFundingCompletion = ({ projectArr }) => {
-    return (
-        <>
-            <Wrapper className="col-container">
-                <span>펀딩 완료</span>
-                <ProCardWrapper className="row-container">
-                    {projectArr.length === 0 ?
-                        <Notice className="row-container">로딩중..</Notice>
-                        :
-                        projectArr.map(project => <CompleteCard projectObj={project} />)}
-                </ProCardWrapper>
-            </Wrapper>
-        </>
-    );
+  return (
+    <>
+      <Wrapper className="col-container">
+        <span>펀딩 완료</span>
+        <ProCardWrapper className="row-container">
+          {projectArr.length === 0 ? (
+            <Notice className="row-container">로딩중..</Notice>
+          ) : (
+            projectArr.map((project, index) => <CompleteCard key={index} projectObj={project} />)
+          )}
+        </ProCardWrapper>
+      </Wrapper>
+    </>
+  );
 };
 
 export default MainFundingCompletion;
 const Notice = styled.div`
-    color:white;
-    height:230px;
-`
+  color: white;
+  height: 230px;
+`;
 const Wrapper = styled.div`
-    background-color: #37C562;
-    box-shadow: 5px 5px 20px 2px #00000015;
-    width: 100%;
-    border-radius: 15px;
-    padding:30px;
-    box-sizing: border-box;
-    gap:10px;
-    &>span{
-        color:white;
-        font-size:20px;
-        font-weight : bold;
-    }
-`
+  background-color: #37c562;
+  box-shadow: 5px 5px 20px 2px #00000015;
+  width: 100%;
+  border-radius: 15px;
+  padding: 30px;
+  box-sizing: border-box;
+  gap: 10px;
+  & > span {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+`;
 
 const ProCardWrapper = styled.div`
-    display:flex;
-    justify-content: space-around;
-    margin-top: 10px;
-`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+`;
