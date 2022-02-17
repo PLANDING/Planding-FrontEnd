@@ -14,6 +14,7 @@ gap: 10px;
 color: #37C56E; 
 font-weight: bold;
 font-size: small;
+justify-content: center;
 `
 const GageContainer = styled.div`
 background-color: #EDF2F8;
