@@ -7,66 +7,30 @@ import SkillInfo from '../components/Register/SkillInfo';
 import TopDiv from '../components/common/TopDIv';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
+  const { registerInfo, checkInfo } = useSelector((state) => state.register);
   const history = useHistory();
-  const [registerInfo, setRegisterInfo] = useState({
-    email: '',
-    pw: '',
-    pwCheck: '',
-    nickName: '',
-    site: '',
-    github: '',
-  });
-  const [check, setCheck] = useState({
-    email: '',
-    pw: '',
-    pwCheck: '',
-    nickName: '',
-  });
 
   const [interestArr, setInterestArr] = useState([]);
   const [skillArr, setSkillArr] = useState([]);
 
   const onChangeInfo = (e) => {
+    /* 
     const {
       target: { name, value },
     } = e;
 
     setRegisterInfo((prev) => ({ ...prev, [name]: value }));
-    /* 중복확인 및 일치 여부 판별 */
-    name === 'email' && setCheck((p) => ({ ...p, email: '' }));
-    name === 'nickName' && setCheck((p) => ({ ...p, nickName: '' }));
-    name === 'pw' && checkedValidPW(value);
-    name === 'pwCheck' &&
-      setCheck((p) => ({
-        ...p,
-        pwCheck: registerInfo.pw == value ? '사용 가능' : '비밀번호가 일치하지 않습니다.',
-      }));
-  };
-
-  /* 비밀번호 조건 검사 */
-  const checkedValidPW = (value) => {
-    let valPw = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/g;
-
-    if (!valPw.test(value)) {
-      setCheck((p) => ({ ...p, pw: '8-16자, 숫자/영문/특수문자 각 1자리 이상' }));
-    } else {
-      value.search(/\s/) != -1
-        ? setCheck((p) => ({ ...p, pw: '8-16자, 숫자/영문/특수문자 각 1자리 이상' }))
-        : setCheck((p) => ({ ...p, pw: '사용 가능' }));
-    }
+    name === 'email' && setCheck((p) => ({ ...p, email: false }));
+    name === 'nickName' && setCheck((p) => ({ ...p, nickName: false })); */
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     try {
-      if (
-        check.email !== '사용 가능' ||
-        check.pw !== '사용 가능' ||
-        check.pwCheck !== '사용 가능' ||
-        check.nickName !== '사용 가능'
-      ) {
+      if (checkInfo.email && checkInfo.pw && checkInfo.pwCheck && checkInfo.nickName) {
         throw new Error('기재사항 조건들을 확인해주세요.');
       }
       if (registerInfo.email === '' || registerInfo.pw === '' || registerInfo.nickName === '') {
@@ -88,12 +52,7 @@ const Register = () => {
       <div className="main-container">
         <TopDiv pageLabel={'회원 가입'} />
         <Form className="col-container" onSubmit={onSubmit}>
-          <PersonalInfo
-            registerInfo={registerInfo}
-            onChangeInfo={onChangeInfo}
-            check={check}
-            setCheck={setCheck}
-          />
+          <PersonalInfo onChangeInfo={onChangeInfo} />
           <SkillInfo
             registerInfo={registerInfo}
             onChangeInfo={onChangeInfo}
@@ -122,13 +81,13 @@ const Form = styled.form`
     align-self: center;
     margin-top: 30px;
   }
-  #point {
-    color: #f55959;
-    margin-right: 5px;
-  }
-  #label {
-    width: 150px;
-  }
+`;
+export const Point = styled.span`
+  color: #f55959;
+  margin-right: 5px;
+`;
+export const Label = styled.span`
+  width: 150px;
 `;
 export const Devider = styled.div`
   span {
