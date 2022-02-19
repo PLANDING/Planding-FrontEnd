@@ -19,6 +19,23 @@ const EmailForm = () => {
     });
   };
 
+  const [code, setCode] = useState();
+  const [authCode, setAuthCode] = useState();
+  const onClickVerifyHandler = () => {
+    axios
+      .post(`/auth/verify`, { email: registerInfo.email })
+      .then((res) => setAuthCode(res.data.code));
+  };
+  const onClickConfirmHandler = () => {
+    authCode === code &&
+      dispatch(
+        setCheckInfo({
+          ...checkInfo,
+          email: true,
+        }),
+      );
+  };
+
   const onChangeInfo = (e) => {
     const {
       target: { name, value },
@@ -38,10 +55,31 @@ const EmailForm = () => {
           placeholder="이메일"
           onChange={onChangeInfo}
         />
-        <GreenBorderBtn type="button" onClick={onClickCheckHandler}>
-          중복 확인
-        </GreenBorderBtn>
+        {!checkExisted ? (
+          <GreenBorderBtn type="button" onClick={onClickCheckHandler}>
+            중복 확인
+          </GreenBorderBtn>
+        ) : (
+          <GreenBtn type="button" onClick={onClickVerifyHandler}>
+            메일 인증
+          </GreenBtn>
+        )}
       </Wrapper>
+      {checkExisted && (
+        <Wrapper className="row-container" checking={checkInfo.email && 'code'}>
+          <input
+            type="number"
+            maxLength="6"
+            name="code"
+            value={code}
+            placeholder="인증번호"
+            onChange={(e) => setCode(e.target.value)}
+          />
+          <GreenBorderBtn type="button" onClick={onClickConfirmHandler}>
+            확인
+          </GreenBorderBtn>
+        </Wrapper>
+      )}
       {notice && <Notice>{notice}</Notice>}
     </>
   );
