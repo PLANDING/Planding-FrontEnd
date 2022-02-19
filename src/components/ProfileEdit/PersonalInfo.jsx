@@ -35,16 +35,6 @@ const PersonalInfo = () => {
 
 export default PersonalInfo;
 
-const Wrapper = styled.div`
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  gap: 50px;
-  & > div {
-    font-size: medium;
-    font-weight: normal;
-  }
-`;
 const Container = styled.div`
   gap: 50px;
 `;

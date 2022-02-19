@@ -1,5 +1,6 @@
 const SET_INFO = 'register/SET_INFO';
 const SET_CHECK_INFO = 'register/SET_CHECK_INFO';
+const RESET_CHECK_INFO = 'register/RESET_CHECK_INFO';
 const SET_SKILL_INFO = 'register/SET_SKILL_INFO';
 const ADD_SKILL = 'register/ADD_SKILL';
 const DEL_SKILL = 'register/DEL_SKILL';
@@ -34,6 +35,11 @@ export const setCheckInfo = (checkInfo) => {
   return {
     type: SET_CHECK_INFO,
     checkInfo,
+  };
+};
+export const resetCheckInfo = () => {
+  return {
+    type: RESET_CHECK_INFO,
   };
 };
 export const setSkillArr = (skillArr) => {
@@ -72,6 +78,8 @@ export default function register(state = initialState, action) {
       return { ...state, registerInfo: action.registerInfo };
     case SET_CHECK_INFO:
       return { ...state, checkInfo: action.checkInfo };
+    case RESET_CHECK_INFO:
+      return { ...state, checkInfo: initialState.checkInfo };
     case SET_SKILL_INFO:
       return { ...state, skillArr: action.skillArr };
     case ADD_SKILL:

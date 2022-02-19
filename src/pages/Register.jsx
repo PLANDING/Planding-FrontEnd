@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -7,9 +8,11 @@ import Header from '../components/common/Header';
 import TopDiv from '../components/common/TopDIv';
 import PersonalInfo from '../components/Register/PersonalInfo';
 import SkillInfo from '../components/Register/SkillInfo';
+import { resetCheckInfo } from '../modules/register';
 
 const Register = () => {
   const { registerInfo, interestArr, skillArr, checkInfo } = useSelector((state) => state.register);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const onSubmit = (e) => {
@@ -25,6 +28,7 @@ const Register = () => {
       axios
         .post('/auth/register', { ...registerInfo, interestArr: interestArr, skillArr: skillArr })
         .then((res) => {
+          dispatch(resetCheckInfo());
           res.status === 201 && history.push('/login');
         });
     } catch (error) {
