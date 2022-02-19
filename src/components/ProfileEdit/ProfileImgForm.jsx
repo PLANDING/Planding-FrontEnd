@@ -43,7 +43,6 @@ const ProfileImgForm = () => {
 export default ProfileImgForm;
 
 const Container = styled.div`
-  flex-grow: 1;
   gap: 20px;
   width: 150px;
   align-items: center;
