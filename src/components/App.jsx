@@ -10,7 +10,6 @@ import AppRouter from './Router';
 function App() {
   const dispatch = useDispatch();
   const cookie = new Cookies();
-  console.log('dskjfdklf');
   useEffect(() => {
     cookie.get('token') ? sendJwtTokenToServer() : dispatch(setLoggedInfo(false, null));
   }, []);
