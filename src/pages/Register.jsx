@@ -1,36 +1,21 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import GreenBtn from '../components/common/Button';
 import Header from '../components/common/Header';
+import TopDiv from '../components/common/TopDIv';
 import PersonalInfo from '../components/Register/PersonalInfo';
 import SkillInfo from '../components/Register/SkillInfo';
-import TopDiv from '../components/common/TopDIv';
-import axios from 'axios';
-import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
 
 const Register = () => {
-  const { registerInfo, checkInfo } = useSelector((state) => state.register);
+  const { registerInfo, interestArr, skillArr, checkInfo } = useSelector((state) => state.register);
   const history = useHistory();
-
-  const [interestArr, setInterestArr] = useState([]);
-  const [skillArr, setSkillArr] = useState([]);
-
-  const onChangeInfo = (e) => {
-    /* 
-    const {
-      target: { name, value },
-    } = e;
-
-    setRegisterInfo((prev) => ({ ...prev, [name]: value }));
-    name === 'email' && setCheck((p) => ({ ...p, email: false }));
-    name === 'nickName' && setCheck((p) => ({ ...p, nickName: false })); */
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
     try {
-      if (checkInfo.email && checkInfo.pw && checkInfo.pwCheck && checkInfo.nickName) {
+      if (!(checkInfo.email && checkInfo.pw && checkInfo.pwCheck && checkInfo.nickName)) {
         throw new Error('기재사항 조건들을 확인해주세요.');
       }
       if (registerInfo.email === '' || registerInfo.pw === '' || registerInfo.nickName === '') {
@@ -52,15 +37,8 @@ const Register = () => {
       <div className="main-container">
         <TopDiv pageLabel={'회원 가입'} />
         <Form className="col-container" onSubmit={onSubmit}>
-          <PersonalInfo onChangeInfo={onChangeInfo} />
-          <SkillInfo
-            registerInfo={registerInfo}
-            onChangeInfo={onChangeInfo}
-            interestArr={interestArr}
-            setInterestArr={setInterestArr}
-            skillArr={skillArr}
-            setSkillArr={setSkillArr}
-          />
+          <PersonalInfo />
+          <SkillInfo />
           <GreenBtn>회원 가입</GreenBtn>
         </Form>
       </div>
@@ -90,6 +68,7 @@ export const Label = styled.span`
   width: 150px;
 `;
 export const Devider = styled.div`
+  width: 100%;
   span {
     color: #37c56e;
     padding: 10px;
@@ -105,7 +84,7 @@ export const InfoWrapper = styled.div`
   & > div {
     width: 65%;
   }
-  & > .col-container #label {
+  & > .col-container > span {
     margin-bottom: 30px;
   }
 `;

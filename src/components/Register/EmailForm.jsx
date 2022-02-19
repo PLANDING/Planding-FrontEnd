@@ -38,7 +38,7 @@ const EmailForm = () => {
         <input
           type="email"
           name="email"
-          value={registerInfo.id}
+          value={registerInfo.email}
           placeholder="이메일"
           onChange={onChangeInfo}
         />
