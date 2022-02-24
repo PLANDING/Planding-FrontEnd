@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -8,12 +9,20 @@ import Header from '../components/common/Header';
 import TopDiv from '../components/common/TopDIv';
 import PersonalInfo from '../components/ProfileEdit/PersonalInfo';
 import SkillInfo from '../components/Register/SkillInfo';
+import { setPrevInfo } from '../modules/register';
 
 const ProfileEdit = () => {
   const { registerInfo, interestArr, skillArr, checkInfo } = useSelector((state) => state.register);
   const { userObj } = useSelector((state) => state.user);
-
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    axios.get(`/user/${userObj.id}`).then((res) => {
+      dispatch(setPrevInfo(res.data.user));
+    });
+  }, []);
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();

@@ -1,4 +1,5 @@
 const SET_INFO = 'register/SET_INFO';
+const SET_PREV_INFO = 'register/SET_PREV_INFO';
 const SET_CHECK_INFO = 'register/SET_CHECK_INFO';
 const RESET_CHECK_INFO = 'register/RESET_CHECK_INFO';
 const SET_SKILL_INFO = 'register/SET_SKILL_INFO';
@@ -14,6 +15,7 @@ const initialState = {
     nickName: '',
     site: '',
     github: '',
+    profileImg: '',
   },
   checkInfo: {
     email: false,
@@ -29,6 +31,12 @@ export const setRegsiterInfo = (registerInfo) => {
   return {
     type: SET_INFO,
     registerInfo,
+  };
+};
+export const setPrevInfo = (prevInfo) => {
+  return {
+    type: SET_PREV_INFO,
+    prevInfo,
   };
 };
 export const setCheckInfo = (checkInfo) => {
@@ -76,6 +84,13 @@ export default function register(state = initialState, action) {
   switch (action.type) {
     case SET_INFO:
       return { ...state, registerInfo: action.registerInfo };
+    case SET_PREV_INFO:
+      return {
+        ...state,
+        registerInfo: { ...action.prevInfo, profileImg: action.prevInfo.ProfileImg.url },
+        skillArr: action.prevInfo.Skills,
+        interestArr: action.prevInfo.Interests.map((it) => `${it.category}:${it.name}`),
+      };
     case SET_CHECK_INFO:
       return { ...state, checkInfo: action.checkInfo };
     case RESET_CHECK_INFO:
