@@ -35,7 +35,7 @@ export const setRegsiterInfo = (registerInfo) => {
 };
 export const setPrevInfo = (prevInfo) => {
   return {
-    type: SET_PREV_INFO,
+    type: SET_INFO,
     prevInfo,
   };
 };

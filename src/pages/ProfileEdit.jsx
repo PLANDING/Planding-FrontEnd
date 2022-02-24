@@ -17,12 +17,15 @@ const ProfileEdit = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+<<<<<<< Updated upstream
+=======
   useEffect(() => {
     axios.get(`/user/${userObj.id}`).then((res) => {
       dispatch(setPrevInfo(res.data.user));
     });
   }, []);
 
+>>>>>>> Stashed changes
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
