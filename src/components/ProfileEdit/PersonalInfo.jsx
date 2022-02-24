@@ -25,7 +25,7 @@ const PersonalInfo = () => {
       </Devider>
       <Container className="row-container">
         <ProfileImgForm />
-        <NickName className="col-container" style={{ gap: '10px' }}>
+        <NickName className="col-container">
           <NickNameForm onChangeInfo={onChangeInfoHandler} isEdit />
         </NickName>
       </Container>
@@ -36,7 +36,14 @@ const PersonalInfo = () => {
 export default PersonalInfo;
 
 const Container = styled.div`
-  gap: 50px;
+  width: 100%;
+  gap: 30px;
+  padding: 0 15%;
 `;
 
-const NickName = styled.div``;
+const NickName = styled.div`
+  gap: 10px;
+  & span {
+    width: 100px;
+  }
+`;

@@ -48,7 +48,7 @@ const ProfileEdit = () => {
       <Header />
       <div className="main-container">
         <TopDiv pageLabel={'프로필 수정'} />
-        <Form className="main-container" onSubmit={onSubmit}>
+        <Form className="col-container" onSubmit={onSubmit}>
           <PersonalInfo />
           <SkillInfo />
           <GreenBtn>수정 완료</GreenBtn>
@@ -70,5 +70,15 @@ const Form = styled.form`
   & > button {
     width: 30%;
     margin-top: 50px;
+  }
+  input[type='text'],
+  input[type='password'],
+  input[type='url'] {
+    flex: 1;
+  }
+  & > button {
+    width: 50%;
+    align-self: center;
+    margin-top: 30px;
   }
 `;

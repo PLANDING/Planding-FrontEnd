@@ -1,6 +1,7 @@
 const SET_LOGGED_INFO = 'user/SET_LOGGED_INFO'; // 로그인 정보 설정
 const SET_USER_INFO = 'user/SET_USER_INFO';
 const SET_GA_INFO = 'user/SET_GA_INFO';
+const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
   userObj: {
@@ -34,6 +35,11 @@ export const setGaInfo = (gaObj) => {
     gaObj,
   };
 };
+export const logout = () => {
+  return {
+    type: LOGOUT,
+  };
+};
 export default function user(state = initialState, action) {
   switch (action.type) {
     case SET_LOGGED_INFO:
@@ -46,6 +52,8 @@ export default function user(state = initialState, action) {
       return { ...state, userObj: action.userObj };
     case SET_GA_INFO:
       return { ...state, gaObj: action.gaObj };
+    case LOGOUT:
+      return { ...initialState };
     default:
       return state;
   }

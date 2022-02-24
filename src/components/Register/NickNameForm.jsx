@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { setCheckInfo } from '../../modules/register';
 import { Label, Point } from '../../pages/Register';
 import { GreenBorderBtn } from '../common/Button';
-import { Notice, Wrapper } from './PersonalInfo';
+import { Wrapper } from './PersonalInfo';
 
 const NickNameForm = ({ onChangeInfo, isEdit }) => {
   const { registerInfo, checkInfo } = useSelector((state) => state.register);
@@ -54,3 +55,9 @@ const NickNameForm = ({ onChangeInfo, isEdit }) => {
   );
 };
 export default NickNameForm;
+
+const Notice = styled.div`
+  font-size: x-small;
+  padding-left: 100px;
+  color: #f55959;
+`;
