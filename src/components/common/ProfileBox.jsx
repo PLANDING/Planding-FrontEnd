@@ -27,12 +27,12 @@ const ProfileBox = ({ profileUrl, nickName, size, userId, borderNone }) => {
 };
 export default ProfileBox;
 
-const ProfileWrapper = styled.div`
+export const ProfileWrapper = styled.div`
   font-size: small;
   gap: 10px;
   cursor: pointer;
 `;
-const ImgWrapper = styled.div`
+export const ImgWrapper = styled.div`
   background-color: white;
   overflow: hidden;
   ${(props) =>
