@@ -1,43 +1,21 @@
-import axios from 'axios';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Devider, InfoWrapper } from '../../pages/Register';
-import GreenBtn from '../common/Button';
+import { setRegsiterInfo } from '../../modules/register';
+import { Devider, InfoWrapper, Label } from '../../pages/Register';
 import InterestForm from '../common/InterestForm';
 import SkillForm from '../common/SkillForm';
+import GithubForm from './GithubForm';
 
-const SkillInfo = ({
-  registerInfo,
-  onChangeInfo,
-  interestArr,
-  setInterestArr,
-  skillArr,
-  setSkillArr,
-}) => {
-  const langArr = [];
-  const handleClick = async () => {
-    const id = registerInfo.github.split('/')[3];
-    try {
-      const { data } = await axios.get(`https://api.github.com/users/${id}/repos`);
-      await data.map(async (data) => {
-        await getLanguage(data.languages_url);
-        setSkillArr([...langArr]);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-  const getLanguage = async (repoName) => {
-    try {
-      const { data } = await axios.get(repoName);
-      Object.keys(data).forEach((it) => {
-        if (langArr.indexOf(it) == -1) {
-          langArr.push(it);
-        }
-      });
-    } catch (error) {
-      alert(error.message);
-    }
+const SkillInfo = () => {
+  const { registerInfo } = useSelector((state) => state.register);
+  const dispatch = useDispatch();
+
+  const onChangeInfoHandler = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    dispatch(setRegsiterInfo({ ...registerInfo, [name]: value }));
   };
   return (
     <>
@@ -47,39 +25,18 @@ const SkillInfo = ({
       </Devider>
       <InfoWrapper className="col-container">
         <FieldWrapper className="row-container">
-          <span id="label">개인 사이트</span>
+          <Label>개인 사이트</Label>
           <input
             type="url"
             name="site"
             value={registerInfo.site}
             placeholder="ex. 블로그, 노션 주소"
-            onChange={onChangeInfo}
+            onChange={onChangeInfoHandler}
           />
         </FieldWrapper>
-
-        <FieldWrapper className="row-container">
-          <span id="label">Github</span>
-          <input
-            type="url"
-            name="github"
-            value={registerInfo.github}
-            placeholder=""
-            onChange={onChangeInfo}
-          />
-          <GreenBtn type="button" onClick={handleClick}>
-            기술 스택 분석
-          </GreenBtn>
-        </FieldWrapper>
-
-        <FieldWrapper skill>
-          <span id="label">기술 스택</span>
-          <SkillForm skillArr={skillArr} setSkillArr={setSkillArr} />
-        </FieldWrapper>
-
-        <FieldWrapper className="col-container">
-          <span id="label">관심 분야</span>
-          <InterestForm interestArr={interestArr} setInterestArr={setInterestArr} />
-        </FieldWrapper>
+        <GithubForm onChange={onChangeInfoHandler} />
+        <SkillForm />
+        <InterestForm />
       </InfoWrapper>
     </>
   );

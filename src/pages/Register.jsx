@@ -1,72 +1,24 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import GreenBtn from '../components/common/Button';
 import Header from '../components/common/Header';
+import TopDiv from '../components/common/TopDIv';
 import PersonalInfo from '../components/Register/PersonalInfo';
 import SkillInfo from '../components/Register/SkillInfo';
-import TopDiv from '../components/common/TopDIv';
-import axios from 'axios';
-import { useHistory } from 'react-router';
+import { resetCheckInfo } from '../modules/register';
 
 const Register = () => {
+  const { registerInfo, interestArr, skillArr, checkInfo } = useSelector((state) => state.register);
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [registerInfo, setRegisterInfo] = useState({
-    email: '',
-    pw: '',
-    pwCheck: '',
-    nickName: '',
-    site: '',
-    github: '',
-  });
-  const [check, setCheck] = useState({
-    email: '',
-    pw: '',
-    pwCheck: '',
-    nickName: '',
-  });
-
-  const [interestArr, setInterestArr] = useState([]);
-  const [skillArr, setSkillArr] = useState([]);
-
-  const onChangeInfo = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-
-    setRegisterInfo((prev) => ({ ...prev, [name]: value }));
-    /* 중복확인 및 일치 여부 판별 */
-    name === 'email' && setCheck((p) => ({ ...p, email: '' }));
-    name === 'nickName' && setCheck((p) => ({ ...p, nickName: '' }));
-    name === 'pw' && checkedValidPW(value);
-    name === 'pwCheck' &&
-      setCheck((p) => ({
-        ...p,
-        pwCheck: registerInfo.pw == value ? '사용 가능' : '비밀번호가 일치하지 않습니다.',
-      }));
-  };
-
-  /* 비밀번호 조건 검사 */
-  const checkedValidPW = (value) => {
-    let valPw = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/g;
-
-    if (!valPw.test(value)) {
-      setCheck((p) => ({ ...p, pw: '8-16자, 숫자/영문/특수문자 각 1자리 이상' }));
-    } else {
-      value.search(/\s/) != -1
-        ? setCheck((p) => ({ ...p, pw: '8-16자, 숫자/영문/특수문자 각 1자리 이상' }))
-        : setCheck((p) => ({ ...p, pw: '사용 가능' }));
-    }
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
     try {
-      if (
-        check.email !== '사용 가능' ||
-        check.pw !== '사용 가능' ||
-        check.pwCheck !== '사용 가능' ||
-        check.nickName !== '사용 가능'
-      ) {
+      if (!(checkInfo.email && checkInfo.pw && checkInfo.pwCheck && checkInfo.nickName)) {
         throw new Error('기재사항 조건들을 확인해주세요.');
       }
       if (registerInfo.email === '' || registerInfo.pw === '' || registerInfo.nickName === '') {
@@ -76,6 +28,7 @@ const Register = () => {
       axios
         .post('/auth/register', { ...registerInfo, interestArr: interestArr, skillArr: skillArr })
         .then((res) => {
+          dispatch(resetCheckInfo());
           res.status === 201 && history.push('/login');
         });
     } catch (error) {
@@ -88,20 +41,8 @@ const Register = () => {
       <div className="main-container">
         <TopDiv pageLabel={'회원 가입'} />
         <Form className="col-container" onSubmit={onSubmit}>
-          <PersonalInfo
-            registerInfo={registerInfo}
-            onChangeInfo={onChangeInfo}
-            check={check}
-            setCheck={setCheck}
-          />
-          <SkillInfo
-            registerInfo={registerInfo}
-            onChangeInfo={onChangeInfo}
-            interestArr={interestArr}
-            setInterestArr={setInterestArr}
-            skillArr={skillArr}
-            setSkillArr={setSkillArr}
-          />
+          <PersonalInfo />
+          <SkillInfo />
           <GreenBtn>회원 가입</GreenBtn>
         </Form>
       </div>
@@ -122,15 +63,16 @@ const Form = styled.form`
     align-self: center;
     margin-top: 30px;
   }
-  #point {
-    color: #f55959;
-    margin-right: 5px;
-  }
-  #label {
-    width: 150px;
-  }
+`;
+export const Point = styled.span`
+  color: #f55959;
+  margin-right: 5px;
+`;
+export const Label = styled.span`
+  width: 150px;
 `;
 export const Devider = styled.div`
+  width: 100%;
   span {
     color: #37c56e;
     padding: 10px;
@@ -146,7 +88,7 @@ export const InfoWrapper = styled.div`
   & > div {
     width: 65%;
   }
-  & > .col-container #label {
+  & > .col-container > span {
     margin-bottom: 30px;
   }
 `;
