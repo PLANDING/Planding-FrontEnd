@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import DateBox from '../common/DateBox';
-import ProfileBox from '../common/ProfileBox';
+import ProfileBox from './ProfileBox';
 
 const ProjectInfo = ({ myProjectObj }) => {
   return (
