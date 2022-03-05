@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const ProjectHead = ({ myProjectObj }) => {
+const ProjectHead = () => {
+  const { myProjectObj } = useSelector((state) => state.project);
   return (
     <Container className="col-container">
       <span id="idea">{myProjectObj.Project.idea}</span>
