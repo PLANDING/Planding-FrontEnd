@@ -8,6 +8,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import GreenBtn from '../components/common/Button';
 import { useHistory } from 'react-router';
+import FilterTool from '../components/common/FilterTool';
 const FundingProgress = () => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
   const [progressArr, setProgressArr] = useState();
@@ -33,6 +34,7 @@ const FundingProgress = () => {
         <TopDIv pageLabel={'펀딩 진행'} subLabel={'프로젝트에 펀딩하세요!'} isGreen>
           <GreenBtn onClick={onClickCreation}>펀딩 생성</GreenBtn>
         </TopDIv>
+        <FilterTool />
         <CardWrapper className="col-container">
           {progressArr === undefined ? (
             <Wrapper>잠시만 기다려주세요.</Wrapper>

@@ -37,6 +37,7 @@ const Div = styled.div`
   }
 `;
 const GreenHr = styled.hr`
+  margin-bottom: 0;
   border: none;
   border-top: solid thin #37c56e;
 `;
