@@ -22,7 +22,7 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
   const onClickCard = () => {
     axios.get(`/project/progress/detail/${projectObj.id}`).then((res) => {
       dispatch(setProjectInfo(res.data.project));
-      history.push('/completion/detail');
+      history.push(`/completion/detail/${projectObj.id}`);
     });
   };
   useEffect(() => {

@@ -17,7 +17,7 @@ const CompleteCard = ({ projectObj }) => {
   const onClickCard = () => {
     axios.get(`/project/completion/detail/${projectObj.id}`).then((res) => {
       dispatch(setProjectInfo(res.data.project));
-      history.push('/completion/detail');
+      history.push(`/completion/detail/${projectObj.id}`);
     });
   };
   return (

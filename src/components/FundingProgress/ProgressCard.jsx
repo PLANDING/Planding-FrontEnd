@@ -45,7 +45,7 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
   const onClickCard = () => {
     axios.get(`/project/progress/detail/${projectObj.id}`).then((res) => {
       dispatch(setProjectInfo(res.data.project));
-      history.push('/progress/detail');
+      history.push(`/progress/detail/${projectObj.id}`);
     });
   };
 
