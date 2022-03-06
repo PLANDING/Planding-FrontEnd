@@ -6,7 +6,6 @@ import Header from '../components/common/Header';
 import TopDIv from '../components/common/TopDIv';
 import CompletionCard from '../components/FundingCompletion/CompletionCard';
 const FundingCompletion = () => {
-  console.log('희선이 귀여워');
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
   const [completionArr, setCompletionArr] = useState();
   useEffect(() => {
