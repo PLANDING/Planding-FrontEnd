@@ -84,14 +84,15 @@ const Label = styled.span`
   color: ${(props) => props.isDone && '#37C56E'};
 `;
 const Container = styled.div`
-  border: solid thin #37c56e;
+  border: solid thin #37c56e80;
   border-radius: 0 0 10px 10px;
   button {
     margin-right: 20px;
   }
+  background-color: white;
 `;
 const CurriBox = styled.div`
-  border-top: solid thin #37c56e;
+  border-top: solid thin #37c56e80;
   padding: 20px 25px;
   img {
     cursor: pointer;
