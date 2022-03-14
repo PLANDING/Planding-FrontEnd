@@ -21,9 +21,18 @@ export const Wrapper = styled.div`
     color: #37c56e;
   }
 `;
-export const ProjectHead = ({ label, idea, headilne, children, width, isDetail, onClickCard }) => {
+export const ProjectHead = ({
+  label,
+  idea,
+  headilne,
+  children,
+  width,
+  isDetail,
+  onClickCard,
+  marginTop,
+}) => {
   return (
-    <Container width={width} isDetail={isDetail}>
+    <Container width={width} isDetail={isDetail} marginTop={marginTop}>
       <div className="col-container" onClick={onClickCard}>
         <div className="row-container">
           {label == '펀딩 마감' || label == '모집 완료' ? (
@@ -52,6 +61,7 @@ const Container = styled.div`
     margin: 0;
     margin-left: 10px;
   }
+  margin-top: ${(props) => props.marginTop};
 `;
 const Side = styled.div`
   display: flex;

@@ -35,7 +35,7 @@ export const setRegsiterInfo = (registerInfo) => {
 };
 export const setPrevInfo = (prevInfo) => {
   return {
-    type: SET_INFO,
+    type: SET_PREV_INFO,
     prevInfo,
   };
 };
@@ -87,7 +87,7 @@ export default function register(state = initialState, action) {
     case SET_PREV_INFO:
       return {
         ...state,
-        registerInfo: { ...action.prevInfo, profileImg: action.prevInfo.ProfileImg.url },
+        registerInfo: { ...action.prevInfo, profileImg: action.prevInfo.ProfileImg?.url },
         skillArr: action.prevInfo.Skills,
         interestArr: action.prevInfo.Interests.map((it) => `${it.category}:${it.name}`),
       };
