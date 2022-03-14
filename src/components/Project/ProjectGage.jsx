@@ -6,7 +6,10 @@ import Gage from '../common/Gage';
 
 const ProjectGage = () => {
   const { myProjectObj } = useSelector((state) => state.project);
-  let gage = parseInt((myProjectObj?.curriculum / 20) * 100);
+  const totalCurriCnt = 20;
+  let gage = parseInt(
+    ((myProjectObj.devCurriculum + myProjectObj.planCurriculum) / totalCurriCnt) * 100,
+  );
   return (
     <Container className="col-container">
       <ImgBox>

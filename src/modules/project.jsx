@@ -7,7 +7,8 @@ const initialState = {
     id: 0,
   },
   myProjectObj: {
-    curriculum: 0,
+    devCurriculum: 0,
+    planCurriculum: 0,
     createdAt: '',
     Project: {
       Fundings: [],
@@ -28,10 +29,11 @@ export const setMyProjectInfo = (myProjectObj) => {
     myProjectObj,
   };
 };
-export const setCurriculum = (curr) => {
+export const setCurriculum = (curr, currType) => {
   return {
     type: SET_CURRICULUM,
     curr,
+    currType,
   };
 };
 
@@ -47,7 +49,10 @@ export default function project(state = initialState, action) {
     case SET_CURRICULUM:
       return {
         ...state,
-        myProjectObj: { ...state.myProjectObj, curriculum: action.curr },
+        myProjectObj: {
+          ...state.myProjectObj,
+          [action.currType === 'plan' ? 'planCurriculum' : 'devCurriculum']: action.curr,
+        },
       };
     default:
       return state;
