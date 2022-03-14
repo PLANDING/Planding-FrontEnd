@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { currArr } from '../../assets/objects/Curriculum';
+import { Flex } from '../common/Flex';
+import DropMenu from './DropMenu';
+import StepLabel from './StepLabel';
 import arrowImg from '../../assets/imgs/arrow.png';
 import arrowUpImg from '../../assets/imgs/arrowUp.png';
-import { currArr } from '../../assets/objects/Curriculum';
-import DropMenu from './DropMenu';
-import { Container, Label, StepBox, StepWrapper, Wrapper } from './PlanStepContainer';
-import StepLabel from './StepLabel';
 
-const DevStepContainer = () => {
+const StepContent = ({ type }) => {
   const { myProjectObj } = useSelector((state) => state.project);
-  const curriculum = myProjectObj.curriculum;
+  const curriculum = type === 'plan' ? myProjectObj.planCurriculum : myProjectObj.devCurriculum;
 
   const curStep =
     curriculum <= 4 ? 1 : curriculum <= 8 ? 2 : curriculum <= 12 ? 3 : curriculum <= 17 ? 4 : 5;
@@ -20,9 +20,9 @@ const DevStepContainer = () => {
     setIsDrop((p) => !p);
   };
   return (
-    <DevContainer alignCenter dir="col" gap="20px">
+    <Container alignCenter dir="col" gap="20px" type={type}>
       <Wrapper dir="row" alignCenter spaceBetween>
-        <Label>개발 커리큘럼</Label>
+        <Label>{type === 'plan' ? '기획' : '개발'} 커리큘럼</Label>
         {isDrop ? (
           <img src={arrowUpImg} width="18px" onClick={onClickDropHandler} />
         ) : (
@@ -39,16 +39,40 @@ const DevStepContainer = () => {
                 dropMenu={dropMenu}
                 setDropMenu={setDropMenu}
               />
-              {dropMenu == idx + 1 && <DropMenu currObj={curr} />}
+              {dropMenu == idx + 1 && <DropMenu currObj={curr} type={type} />}
             </StepBox>
           ))}
         </StepWrapper>
       )}
-    </DevContainer>
+    </Container>
   );
 };
-export default DevStepContainer;
-const DevContainer = styled(Container)`
-  background-color: #37c56e40;
-  border: none;
+export default StepContent;
+export const Container = styled(Flex)`
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  box-shadow: 5px 5px 10px 5px #00000010;
+  ${(props) =>
+    props.type === 'dev' &&
+    `background-color: #37c56e40;
+    border: none;`}
+`;
+export const StepBox = styled.div`
+  width: 100%;
+`;
+export const Label = styled.h4`
+  margin: 0;
+  padding: 10px;
+  color: #37c56e;
+`;
+export const StepWrapper = styled(Flex)`
+  width: 100%;
+`;
+export const Wrapper = styled(Flex)`
+  width: 100%;
+  img {
+    margin: 10px;
+    cursor: pointer;
+  }
 `;
