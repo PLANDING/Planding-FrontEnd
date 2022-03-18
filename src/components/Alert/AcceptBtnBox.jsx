@@ -6,12 +6,16 @@ import GreenBtn, { GrayBtn } from '../common/Button';
 const AcceptBtnBox = ({ dDay, projectId, alertId }) => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
   const onClickAccept = () => {
-    axios.get(`/myProject/join/${projectId}/${userObj.id}`).then((res) => {
-      if (res.status === 200) {
-        alert('팀원으로 합류 되었습니다.\n 나의 프로젝트에서 확인해보세요.');
-        axios.delete(`/alert/${alertId}`);
-      }
-    });
+    if (userObj.slackId) {
+      axios.get(`/myProject/join/${projectId}/${userObj.id}`).then((res) => {
+        if (res.status === 200) {
+          alert('팀원으로 합류 되었습니다.\n 나의 프로젝트에서 확인해보세요.');
+          axios.delete(`/alert/${alertId}`);
+        }
+      });
+    } else {
+      alert('참여전, 팀원 소통을 위한 슬랙 아이디를 설정해주세요.');
+    }
   };
   const onClickRefuse = () => {
     axios
