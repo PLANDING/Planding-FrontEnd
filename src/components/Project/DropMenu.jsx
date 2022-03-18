@@ -9,9 +9,9 @@ import doneFillImg from '../../assets/imgs/doneFill.png';
 import { setCurriculum } from '../../modules/project';
 import GreenBtn from '../common/Button';
 
-const DropMenu = ({ currObj }) => {
+const DropMenu = ({ currObj, totalCurriCnt, type }) => {
   const { myProjectObj } = useSelector((state) => state.project);
-  const curriculum = myProjectObj.curriculum;
+  const curriculum = type === 'plan' ? myProjectObj.planCurriculum : myProjectObj.devCurriculum;
   const projectId = myProjectObj.id;
   const memberCnt = myProjectObj.UserProjects.length;
   const dispatch = useDispatch();
@@ -23,8 +23,8 @@ const DropMenu = ({ currObj }) => {
     id == 1 && axios.patch(`/project/end/del/${projectId}`);
 
     axios
-      .patch(`/myProject/curriculum/${projectId}/${curriculum - 1}`)
-      .then(() => dispatch(setCurriculum(curriculum - 1)));
+      .patch(`/myProject/curriculum/${type}/${projectId}/${curriculum - 1}`)
+      .then(() => dispatch(setCurriculum(curriculum - 1, type)));
   };
 
   const history = useHistory();
@@ -34,14 +34,14 @@ const DropMenu = ({ currObj }) => {
     } = event;
 
     if (id > curriculum + 1) return;
-    if (id == 1) {
+    if (type === 'plan' && id == 1) {
       if (memberCnt < 2) {
         alert('팀원은 최소 2인 이상 모집되어야 합니다.');
         return;
       }
       axios.patch(`/project/end/${projectId}`);
     }
-    if (id == 21) {
+    if (id == totalCurriCnt + 1) {
       if (
         window.confirm(
           '프로젝트가 마감됩니다. \n프로젝트 마감후, 취소가 불가합니다. \n프로젝트 완료하시겠습니까?',
@@ -52,8 +52,8 @@ const DropMenu = ({ currObj }) => {
     }
 
     axios
-      .patch(`/myProject/curriculum/${projectId}/${curriculum + 1}`)
-      .then(() => dispatch(setCurriculum(curriculum + 1)));
+      .patch(`/myProject/curriculum/${type}/${projectId}/${curriculum + 1}`)
+      .then(() => dispatch(setCurriculum(curriculum + 1, type)));
   };
 
   return (
@@ -62,7 +62,7 @@ const DropMenu = ({ currObj }) => {
         <CurriBox key={idx} className="row-container">
           <Label isDone={curriculum >= el.curr}>{el.content}</Label>
           {/* 커리큘럼 0일 경우 */}
-          {el.curr === 1 && curriculum === 0 && (
+          {type === 'plan' && el.curr === 1 && curriculum === 0 && (
             <Link to={`project/matching/${projectId}`}>
               <GreenBtn>개발자 매칭 추천</GreenBtn>
             </Link>
@@ -84,14 +84,15 @@ const Label = styled.span`
   color: ${(props) => props.isDone && '#37C56E'};
 `;
 const Container = styled.div`
-  border: solid thin #37c56e;
+  border: solid thin #37c56e80;
   border-radius: 0 0 10px 10px;
   button {
     margin-right: 20px;
   }
+  background-color: white;
 `;
 const CurriBox = styled.div`
-  border-top: solid thin #37c56e;
+  border-top: solid thin #37c56e80;
   padding: 20px 25px;
   img {
     cursor: pointer;

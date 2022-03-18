@@ -14,16 +14,16 @@ const StepLabel = ({ curStep, idx, dropMenu, setDropMenu }) => {
         {idx + 1} step
       </Label>
       {isDropStep ? (
-        <img src={arrowUpImg} width="18px" id={idx + 1} onClick={onClickDropHandler} />
+        <img src={arrowUpImg} width="15px" id={idx + 1} onClick={onClickDropHandler} />
       ) : (
-        <img src={arrowImg} width="18px" id={idx + 1} onClick={onClickDropHandler} />
+        <img src={arrowImg} width="15px" id={idx + 1} onClick={onClickDropHandler} />
       )}
     </Container>
   );
 };
 export default StepLabel;
 const Container = styled.div`
-  border: solid thin #37c56e;
+  border: solid thin #37c56e80;
   border-radius: 10px;
   ${(props) =>
     props.active &&
@@ -35,6 +35,7 @@ const Container = styled.div`
   img {
     cursor: pointer;
   }
+  background-color: white;
 `;
 const Label = styled.div`
   flex: 1;

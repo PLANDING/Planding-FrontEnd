@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import NoticeBox from '../components/Project/NoticeBox';
 import ProjectGage from '../components/Project/ProjectGage';
 import ProjectHead from '../components/Project/ProjectHead';
 import ProjectInfo from '../components/Project/ProjectInfo';
-import StepContainer from '../components/Project/StepContainer';
+import StepContent from '../components/Project/StepContent';
 import { setMyProjectInfo } from '../modules/project';
 
 const Project = () => {
@@ -19,7 +20,7 @@ const Project = () => {
     axios.get(`/myProject/${userObj.id}`).then((res) => {
       dispatch(setMyProjectInfo(res.data.MyProject));
     });
-  }, [myProjectObj.curriculum]);
+  }, [myProjectObj.devCurriculum, myProjectObj.planCurriculum]);
 
   return (
     <>
@@ -29,7 +30,10 @@ const Project = () => {
           <ProjectInfo />
           <ProjectHead />
           <ProjectGage />
-          <StepContainer />
+          <Flex dir="column" center gap="20px">
+            <StepContent type="plan" />
+            <StepContent type="dev" />
+          </Flex>
         </Container>
       ) : (
         <NoticeBox />
