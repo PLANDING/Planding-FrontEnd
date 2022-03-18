@@ -21,7 +21,6 @@ const Project = () => {
       dispatch(setMyProjectInfo(res.data.MyProject));
     });
   }, [myProjectObj.devCurriculum, myProjectObj.planCurriculum]);
-
   return (
     <>
       <Header />

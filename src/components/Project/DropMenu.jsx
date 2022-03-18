@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -8,6 +9,7 @@ import doneImg from '../../assets/imgs/done.png';
 import doneFillImg from '../../assets/imgs/doneFill.png';
 import { setCurriculum } from '../../modules/project';
 import GreenBtn from '../common/Button';
+import CurriculumDetail from './CurriculumDetail';
 
 const DropMenu = ({ currObj, totalCurriCnt, type }) => {
   const { myProjectObj } = useSelector((state) => state.project);
@@ -15,6 +17,7 @@ const DropMenu = ({ currObj, totalCurriCnt, type }) => {
   const projectId = myProjectObj.id;
   const memberCnt = myProjectObj.UserProjects.length;
   const dispatch = useDispatch();
+  const [currNum, setCurrNum] = useState(0);
 
   const onClickDel = (event) => {
     const {
@@ -60,29 +63,35 @@ const DropMenu = ({ currObj, totalCurriCnt, type }) => {
     <Container>
       {currObj.map((el, idx) => (
         <CurriBox key={idx} className="row-container">
-          <Label isDone={curriculum >= el.curr}>{el.content}</Label>
+          <CurriculumDetail
+            isDone={curriculum >= el.curr}
+            content={el.content}
+            detail={el.detail}
+          ></CurriculumDetail>
           {/* 커리큘럼 0일 경우 */}
-          {type === 'plan' && el.curr === 1 && curriculum === 0 && (
-            <Link to={`project/matching/${projectId}`}>
-              <GreenBtn>개발자 매칭 추천</GreenBtn>
-            </Link>
-          )}
-          <img
-            id={el.curr}
-            src={curriculum >= el.curr ? doneFillImg : doneImg}
-            onClick={curriculum >= el.curr ? onClickDel : onClickDone}
-            width="24px"
-          />
+          <StyledCheck className="row-container">
+            {type === 'plan' && el.curr === 1 && curriculum === 0 && (
+              <Link to={`project/matching/${projectId}`}>
+                <GreenBtn>개발자 매칭 추천</GreenBtn>
+              </Link>
+            )}
+            <img
+              id={el.curr}
+              src={curriculum >= el.curr ? doneFillImg : doneImg}
+              onClick={curriculum >= el.curr ? onClickDel : onClickDone}
+              width="24px"
+            />
+          </StyledCheck>
         </CurriBox>
       ))}
     </Container>
   );
 };
 export default DropMenu;
-const Label = styled.span`
-  flex: 1;
-  color: ${(props) => props.isDone && '#37C56E'};
-`;
+// const Label = styled.span`
+//   flex: 1;
+//   color: ${(props) => props.isDone && '#37C56E'};
+// `;
 const Container = styled.div`
   border: solid thin #37c56e80;
   border-radius: 0 0 10px 10px;
@@ -91,6 +100,12 @@ const Container = styled.div`
   }
   background-color: white;
 `;
+
+const StyledCheck = styled.div`
+  align-self: flex-start;
+  height: 45px;
+`;
+
 const CurriBox = styled.div`
   border-top: solid thin #37c56e80;
   padding: 20px 25px;
