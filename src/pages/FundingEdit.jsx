@@ -13,7 +13,6 @@ const FundingEdit = () => {
     projectObj.Interests.map((interest) => interest.category + ':' + interest.name),
   );
   const [category, setCategory] = useState(projectObj.Category.name);
-  console.log(projectObj);
   const onSubmit = (e) => {
     e.preventDefault();
     try {

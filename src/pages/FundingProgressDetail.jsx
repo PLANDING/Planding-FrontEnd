@@ -42,6 +42,7 @@ const FundingProgressDetail = () => {
           headilne={projectObj.headline}
           width="80%"
           isDetail
+          marginTop="30px"
         >
           <SideBtnBox className="col-container">
             {!isWriter && (

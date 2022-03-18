@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setRegsiterInfo } from '../../modules/register';
 import { Devider, InfoWrapper, Label } from '../../pages/Register';
+import { Flex } from '../common/Flex';
 import InterestForm from '../common/InterestForm';
 import SkillForm from '../common/SkillForm';
 import GithubForm from './GithubForm';
@@ -24,7 +25,7 @@ const SkillInfo = () => {
         <hr />
       </Devider>
       <InfoWrapper className="col-container">
-        <FieldWrapper className="row-container">
+        <FieldWrapper dir="row">
           <Label>개인 사이트</Label>
           <input
             type="url"
@@ -36,14 +37,14 @@ const SkillInfo = () => {
         </FieldWrapper>
         <GithubForm onChange={onChangeInfoHandler} />
         <SkillForm />
-        <InterestForm />
+        <InterestForm type="register" />
       </InfoWrapper>
     </>
   );
 };
 export default SkillInfo;
 
-export const FieldWrapper = styled.div`
+export const FieldWrapper = styled(Flex)`
   & > button {
     margin-left: 5px;
     font-size: small;
