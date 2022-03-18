@@ -36,7 +36,7 @@ const GithubForm = ({ onChange }) => {
   };
 
   return (
-    <FieldWrapper className="row-container">
+    <FieldWrapper dir="row">
       <Label>Github</Label>
       <input
         type="url"

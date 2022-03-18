@@ -54,6 +54,7 @@ const Form = styled.form`
   margin-top: 50px;
   gap: 30px;
   input[type='text'],
+  input[type='email'],
   input[type='password'],
   input[type='url'] {
     flex: 1;
@@ -84,7 +85,7 @@ export const Devider = styled.div`
 `;
 export const InfoWrapper = styled.div`
   align-items: center;
-  gap: 30px;
+  gap: 50px;
   & > div {
     width: 65%;
   }
