@@ -20,7 +20,7 @@ const Project = () => {
     axios.get(`/myProject/${userObj.id}`).then((res) => {
       dispatch(setMyProjectInfo(res.data.MyProject));
     });
-  }, [myProjectObj.devCurriculum, myProjectObj.planCurriculum]);
+  }, [userObj, myProjectObj?.devCurriculum, myProjectObj?.planCurriculum]);
 
   return (
     <>

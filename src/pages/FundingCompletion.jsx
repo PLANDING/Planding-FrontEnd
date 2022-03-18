@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import FilterTool from '../components/common/FilterTool';
 import Header from '../components/common/Header';
 import TopDIv from '../components/common/TopDIv';
 import CompletionCard from '../components/FundingCompletion/CompletionCard';
@@ -18,7 +19,7 @@ const FundingCompletion = () => {
       <Header />
       <div className="completion main-container">
         <TopDIv pageLabel={'펀딩완료'} subLabel={'프로젝트에 참여하세요!'} />
-
+        <FilterTool />
         <CardWrapper className="col-container">
           {completionArr === undefined ? (
             <Wrapper>잠시만 기다려주세요.</Wrapper>
