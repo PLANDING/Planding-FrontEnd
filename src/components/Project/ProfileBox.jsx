@@ -3,7 +3,7 @@ import userImg from '../../assets/imgs/user.png';
 import { ImgWrapper, ProfileWrapper } from '../common/ProfileBox';
 import ProfileModal from './ProfileModal';
 
-const ProfileBox = ({ profileUrl, userId, slack }) => {
+const ProfileBox = ({ profileUrl, userId, slackId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClickProfileHandler = () => {
     setIsOpen(true);
@@ -14,7 +14,7 @@ const ProfileBox = ({ profileUrl, userId, slack }) => {
       <ImgWrapper>
         <img src={profileUrl ? profileUrl : userImg} width="100%" />
       </ImgWrapper>
-      {isOpen && <ProfileModal setIsOpen={setIsOpen} userId={userId} slack={slack} />}
+      {isOpen && <ProfileModal setIsOpen={setIsOpen} userId={userId} slackId={slackId} />}
     </ProfileWrapper>
   );
 };
