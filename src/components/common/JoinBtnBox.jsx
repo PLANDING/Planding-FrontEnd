@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import GreenBtn from './Button';
 
 const JoinBtnBox = ({ dDay, content, width, project }) => {
-  const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
+  const { userObj } = useSelector((state) => state.user); //계정 user 정보
   const [isProject, setIsProject] = useState(false);
   const history = useHistory();
   const alertObj = {
