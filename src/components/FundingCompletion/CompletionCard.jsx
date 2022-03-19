@@ -1,13 +1,13 @@
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useState } from 'react/cjs/react.development';
+import coin from '../../assets/imgs/coin.png';
 import { setProjectInfo } from '../../modules/project';
 import AcceptBtnBox from '../Alert/AcceptBtnBox';
 import Card, { ProjectHead, Wrapper } from '../common/Card';
+import { Flex } from '../common/Flex';
 import InterestBox from '../common/InterestBox';
 import JoinBtnBox from '../common/JoinBtnBox';
 import ProfileBox from '../common/ProfileBox';
@@ -51,9 +51,10 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
           <InterestBox interestArr={projectObj.Interests} />
 
           <div className="row-container">
-            <span>
-              펀딩 이력 <FontAwesomeIcon icon={faDollarSign} />
-            </span>
+            <Flex dir="row" alignCenter gap="5px">
+              <span>펀딩 이력</span>
+              <img src={coin} width="16px" />
+            </Flex>
             <span id="funding-cnt">{projectObj.Fundings.length * 500}</span>
           </div>
         </Wrapper>

@@ -1,15 +1,16 @@
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
+import { Flex } from './Flex';
 import Gage from './Gage';
+import coin from '../../assets/imgs/coin.png';
 
 const FundingGage = ({ gage, fundingCnt, width }) => {
   return (
     <Container className="col-container">
       <div className="row-container">
-        <span>
-          펀딩 <FontAwesomeIcon icon={faDollarSign} />
-        </span>
+        <Flex dir="row" alignCenter gap="5px">
+          <span>펀딩</span>
+          <img src={coin} width="16px" />
+        </Flex>
 
         <span className="funding-cnt">{fundingCnt}</span>
       </div>
