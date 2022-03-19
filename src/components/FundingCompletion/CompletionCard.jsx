@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useState } from 'react/cjs/react.development';
@@ -33,12 +33,8 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
         .then((res) => res.status === 200 && setIsEnd(true));
   }, []);
   return (
-    <Card id={idx}>
-      <ProjectHead
-        onClickCard={onClickCard}
-        label={projectObj.isEnd ? '모집 완료' : '모집 중'}
-        idea={projectObj.idea}
-      >
+    <Card id={idx} onClick={onClickCard}>
+      <ProjectHead label={projectObj.isEnd ? '모집 완료' : '모집 중'} idea={projectObj.idea}>
         <ProfileBox
           nickName={projectObj.User.nickName}
           profileUrl={projectObj.User.ProfileImg?.url}

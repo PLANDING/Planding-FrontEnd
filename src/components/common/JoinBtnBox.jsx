@@ -16,7 +16,8 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
     projectId: project.id,
   };
   /* 참여하기 요청 */
-  const onClickJoin = (type) => {
+  const onClickJoin = (type, event) => {
+    event.stopPropagation();
     if (isProject) {
       alert('참여중인 프로젝트가 있습니다.');
       history.push('/completion');
@@ -54,10 +55,10 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
           {content}
           <Dday>D-{dDay}</Dday>
         </span>
-        <GreenBtn onClick={() => onClickJoin('plan')} animation>
+        <GreenBtn onClick={(e) => onClickJoin('plan', e)} animation>
           기획 참여하기
         </GreenBtn>
-        <GreenBtn onClick={() => onClickJoin('dev')} animation>
+        <GreenBtn onClick={(e) => onClickJoin('dev', e)} animation>
           개발 참여하기
         </GreenBtn>
       </div>

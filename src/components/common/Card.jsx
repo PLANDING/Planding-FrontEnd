@@ -8,6 +8,7 @@ const Card = styled.div`
   border-radius: 15px;
   padding: 30px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 export const Wrapper = styled.div`
   font-size: small;
