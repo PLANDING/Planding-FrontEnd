@@ -35,6 +35,7 @@ export const ProfileWrapper = styled.div`
 export const ImgWrapper = styled.div`
   background-color: white;
   overflow: hidden;
+  transition: 0.3s;
   ${(props) =>
     props.size
       ? `width:${props.size};

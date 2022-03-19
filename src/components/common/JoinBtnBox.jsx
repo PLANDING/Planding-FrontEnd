@@ -54,8 +54,12 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
           {content}
           <Dday>D-{dDay}</Dday>
         </span>
-        <GreenBtn onClick={() => onClickJoin('plan')}>기획 참여하기</GreenBtn>
-        <GreenBtn onClick={() => onClickJoin('dev')}>개발 참여하기</GreenBtn>
+        <GreenBtn onClick={() => onClickJoin('plan')} animation>
+          기획 참여하기
+        </GreenBtn>
+        <GreenBtn onClick={() => onClickJoin('dev')} animation>
+          개발 참여하기
+        </GreenBtn>
       </div>
     </BtnBox>
   );

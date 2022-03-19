@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const Modal = ({ children, setIsOpen }) => {
+const Modal = ({ children, setIsOpen, abs }) => {
   const wrapperRef = useRef(null);
   /* 외부영역 클릭 감지 */
   const handleClickOutside = (event) => {
@@ -18,10 +18,14 @@ const Modal = ({ children, setIsOpen }) => {
     };
   });
 
-  return <Container ref={wrapperRef}>{children}</Container>;
+  return (
+    <Container ref={wrapperRef} abs={abs}>
+      {children}
+    </Container>
+  );
 };
 export default Modal;
 
 const Container = styled.div`
-  position: absolute;
+  ${(props) => props.abs && `position:absolute;`}
 `;
