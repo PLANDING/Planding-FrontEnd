@@ -43,7 +43,12 @@ const FundingCompletionDetail = () => {
         </ProjectHead>
         <Wrapper>
           <Container className="col-container">
-            <ContentBox writer={projectObj.User} isWriter={isWriter} content={projectObj.content} />
+            <ContentBox
+              writer={projectObj.User}
+              isWriter={isWriter}
+              content={projectObj.content}
+              type="completion"
+            />
             <CommentForm projectId={projectObj.id} commentArr={projectObj.Comments} />
           </Container>
           <SideContainer className="col-container">
