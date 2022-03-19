@@ -45,7 +45,7 @@ const GithubForm = ({ onChange }) => {
         placeholder=""
         onChange={onChange}
       />
-      <GreenBtn type="button" onClick={handleClick}>
+      <GreenBtn type="button" onClick={handleClick} animation>
         기술 스택 분석
       </GreenBtn>
     </FieldWrapper>

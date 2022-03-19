@@ -64,7 +64,7 @@ const DropMenu = ({ currObj, totalCurriCnt, type }) => {
           {/* 커리큘럼 0일 경우 */}
           {type === 'plan' && el.curr === 1 && curriculum === 0 && (
             <Link to={`project/matching/${projectId}`}>
-              <GreenBtn>개발자 매칭 추천</GreenBtn>
+              <GreenBtn animation>개발자 매칭 추천</GreenBtn>
             </Link>
           )}
           <img

@@ -43,7 +43,7 @@ const Register = () => {
         <Form className="col-container" onSubmit={onSubmit}>
           <PersonalInfo />
           <SkillInfo />
-          <GreenBtn>회원 가입</GreenBtn>
+          <GreenBtn animation>회원 가입</GreenBtn>
         </Form>
       </div>
     </>

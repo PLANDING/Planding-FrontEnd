@@ -31,7 +31,9 @@ const MatchingCard = ({ profile, projectId }) => {
   };
   return (
     <Container className="row-container">
-      <GreenBtn onClick={onClickCollabo}>협업요청</GreenBtn>
+      <GreenBtn onClick={onClickCollabo} animation>
+        협업요청
+      </GreenBtn>
       <hr />
       <LineBox></LineBox>
       <Card className="row-container">

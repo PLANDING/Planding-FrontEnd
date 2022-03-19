@@ -88,7 +88,7 @@ const FundingForm = ({
       </Wrapper>
       <BtnGroup>
         <GrayBtn onClick={onClickBack}>취소</GrayBtn>
-        <GreenBtn>확인</GreenBtn>
+        <GreenBtn animation>확인</GreenBtn>
       </BtnGroup>
     </Form>
   );

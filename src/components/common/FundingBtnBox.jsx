@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useState } from 'react';
 import styled from 'styled-components';
 import GreenBtn, { GrayBtn } from './Button';
 const FundingBtnBox = ({ dDay, projectId, userId, isFunding, setIsFunding, content, isRow }) => {
-  const onClickFunding = () => {
+  const onClickFunding = (event) => {
+    event.stopPropagation();
     isFunding
       ? axios
           .delete(`/funding/${projectId}/${userId}`)
@@ -22,7 +22,9 @@ const FundingBtnBox = ({ dDay, projectId, userId, isFunding, setIsFunding, conte
         {isFunding ? (
           <GrayBtn onClick={onClickFunding}>펀딩 취소</GrayBtn>
         ) : (
-          <GreenBtn onClick={onClickFunding}>펀딩 하기</GreenBtn>
+          <GreenBtn onClick={onClickFunding} animation>
+            펀딩 하기
+          </GreenBtn>
         )}
       </Wrapper>
     </BtnBox>
