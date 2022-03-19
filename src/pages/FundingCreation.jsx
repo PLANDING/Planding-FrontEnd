@@ -23,6 +23,11 @@ const FundingCreation = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     try {
+      if (interestArr.length === 0 || category === undefined)
+        throw new Error('카테고리 정보를 설정해주세요.');
+      if (fundingObj.member_plan === 0 && fundingObj.member_dev === 0)
+        throw new Error('모집인원 정보를 설정해주세요.');
+
       axios
         .post(`/project/creation/${userObj.id}`, { ...fundingObj, interestArr, category })
         .then((res) => {
