@@ -1,10 +1,11 @@
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import { categoryArr } from '../../assets/objects/Category';
+import MemberForm from '../FundingCreation/MemberForm';
 import GreenBtn, { GrayBtn } from './Button';
 import InterestForm from './InterestForm';
+import QuillEditor from './QuillEditor';
 import Select from './Select';
-import MemberForm from '../FundingCreation/MemberForm';
-import { categoryArr } from '../../assets/objects/Category';
 
 const FundingForm = ({
   interestArr,
@@ -22,6 +23,9 @@ const FundingForm = ({
     } = e;
     setFundingObj((prev) => ({ ...prev, [name]: value }));
   };
+  const onChangeContent = (html) => {
+    setFundingObj((prev) => ({ ...prev, content: html }));
+  };
   const onClickBack = () => {
     if (window.confirm('내용이 저장되지 않습니다. 정말 작성을 취소하시겠습니까?')) {
       history.goBack();
@@ -35,6 +39,7 @@ const FundingForm = ({
         placeholder="프로젝트명"
         name="idea"
         onChange={onChangeFunding}
+        required
       />
 
       <Wrapper>
@@ -47,6 +52,7 @@ const FundingForm = ({
           placeholder="예) 이미지 인식을 활용한 앱 서비스"
           name="headline"
           onChange={onChangeFunding}
+          required
         />
       </Wrapper>
 
@@ -56,14 +62,14 @@ const FundingForm = ({
           label={category ? category : '카테고리'}
           optionArr={categoryArr}
           setValue={setCategory}
+          required={true}
         />
       </Wrapper>
 
       <Wrapper>
         <Label>기획 내용</Label>
-        <TextArea name="content" value={fundingObj.content} onChange={onChangeFunding} />
+        <QuillEditor htmlContent={fundingObj.content} setHtmlContent={onChangeContent} />
       </Wrapper>
-
       <Wrapper>
         <Label>기술 카테고리</Label>
         <InterestForm
@@ -108,13 +114,6 @@ const Form = styled.form`
   .member-wrapper {
     gap: 10px;
   }
-`;
-const TextArea = styled.textarea`
-  all: unset;
-  border: solid thin #37c56e;
-  min-height: 300px;
-  border-radius: 10px;
-  padding: 20px;
 `;
 
 const Wrapper = styled.div`
