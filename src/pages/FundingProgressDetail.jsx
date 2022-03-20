@@ -72,7 +72,7 @@ const FundingProgressDetail = () => {
               writer={projectObj.User}
               isWriter={isWriter}
               content={projectObj.content}
-              isGreen
+              type="progress"
             />
             <CommentForm commentArr={projectObj.Comments} projectId={projectObj.id} />
           </Container>

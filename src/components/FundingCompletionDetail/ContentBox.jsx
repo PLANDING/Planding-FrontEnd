@@ -3,24 +3,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import Modal from '../common/Modal';
 import ProfileBox from '../common/ProfileBox';
+import 'react-quill/dist/quill.snow.css';
+import QuillContent from '../common/QuillContent';
 
-const ContentBox = ({ writer, isWriter, content, isGreen }) => {
+const ContentBox = ({ writer, isWriter, content, type }) => {
   const history = useHistory();
   const { projectObj } = useSelector((state) => ({ projectObj: state.project.projectObj }));
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const onClickMenu = () => {
     setIsOpenMenu((prev) => !prev);
   };
+  const { projectId } = useParams();
   const onClickEditDel = (e) => {
     const {
       target: { id },
     } = e;
-    id === 'edit' ? history.push('/modification') : deleteProject();
+    id === 'edit' ? history.push(`/modification/${type}/${projectId}`) : deleteProject();
   };
 
   const deleteProject = async () => {
@@ -34,9 +37,8 @@ const ContentBox = ({ writer, isWriter, content, isGreen }) => {
       }
     }
   };
-
   return (
-    <Wrapper isGreen={isGreen}>
+    <Wrapper isGreen={type === 'progress'}>
       <div className="row-container">
         <Headline>기획 내용</Headline>
         <ProfileBox
@@ -58,15 +60,7 @@ const ContentBox = ({ writer, isWriter, content, isGreen }) => {
           </Modal>
         )}
       </div>
-
-      <Content>
-        {content.split('\n').map((line) => (
-          <>
-            {line}
-            <br />
-          </>
-        ))}
-      </Content>
+      <QuillContent content={content} />
     </Wrapper>
   );
 };
@@ -87,16 +81,12 @@ const Wrapper = styled.div`
       `
         background-color: #37C56E;
         border-radius: 8px 8px 0 0;
-        color:white;
+        color: white;
     `}
   }
 `;
 const Headline = styled.h4`
   flex: 1;
-`;
-const Content = styled.div`
-  padding: 20px;
-  min-height: 300px;
 `;
 const Menu = styled.div`
   width: 100px;

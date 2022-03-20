@@ -5,7 +5,8 @@ import GreenBtn, { GrayBtn } from '../common/Button';
 
 const AcceptBtnBox = ({ dDay, projectId, alertId }) => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
-  const onClickAccept = () => {
+  const onClickAccept = (event) => {
+    event.stopPropagation();
     if (userObj.slackId) {
       axios.get(`/myProject/join/${projectId}/${userObj.id}`).then((res) => {
         if (res.status === 200) {
@@ -17,7 +18,8 @@ const AcceptBtnBox = ({ dDay, projectId, alertId }) => {
       alert('참여전, 팀원 소통을 위한 슬랙 아이디를 설정해주세요.');
     }
   };
-  const onClickRefuse = () => {
+  const onClickRefuse = (event) => {
+    event.stopPropagation();
     axios
       .delete(`/alert/${alertId}`)
       .then((res) => res.status === 200 && alert('요청을 거절하였습니다.'));
@@ -26,8 +28,12 @@ const AcceptBtnBox = ({ dDay, projectId, alertId }) => {
     <Wrppaer className="col-container">
       <div className="col-container">
         <span id="d-day">D-{dDay}</span>
-        <GreenBtn onClick={onClickAccept}>수락</GreenBtn>
-        <GrayBtn onClick={onClickRefuse}>거절</GrayBtn>
+        <GreenBtn onClick={onClickAccept} animation>
+          수락
+        </GreenBtn>
+        <GrayBtn onClick={onClickRefuse} animation>
+          거절
+        </GrayBtn>
       </div>
     </Wrppaer>
   );
