@@ -56,13 +56,17 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
         <GrayBorderBtn>
           기획<span>{member_plan}명</span>
         </GrayBorderBtn>
-        <GreenBtn onClick={() => onClickJoin('plan')}>기획 참여하기</GreenBtn>
+        <GreenBtn onClick={() => onClickJoin('plan')} animation>
+          기획 참여하기
+        </GreenBtn>
       </div>
       <div className="row-container">
         <GrayBorderBtn>
           개발<span>{member_dev}명</span>
         </GrayBorderBtn>
-        <GreenBtn onClick={() => onClickJoin('dev')}>개발 참여하기</GreenBtn>
+        <GreenBtn onClick={() => onClickJoin('dev')} animation>
+          개발 참여하기
+        </GreenBtn>
       </div>
     </Container>
   );

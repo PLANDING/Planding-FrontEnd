@@ -18,7 +18,7 @@ const ProfileModal = ({ setIsOpen, userId, slackId }) => {
     });
   };
   return (
-    <Modal setIsOpen={setIsOpen}>
+    <Modal setIsOpen={setIsOpen} abs>
       <Container>
         <Wrapper>
           <img src={slackImg} />
