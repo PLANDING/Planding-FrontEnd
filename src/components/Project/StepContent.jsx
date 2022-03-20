@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { currArr } from '../../assets/objects/Curriculum';
+import { currArrDev, currArrPlan } from '../../assets/objects/Curriculum';
 import { Flex } from '../common/Flex';
 import DropMenu from './DropMenu';
 import StepLabel from './StepLabel';
@@ -16,6 +16,7 @@ const StepContent = ({ type }) => {
     curriculum <= 4 ? 1 : curriculum <= 8 ? 2 : curriculum <= 12 ? 3 : curriculum <= 17 ? 4 : 5;
   const [dropMenu, setDropMenu] = useState(curStep);
   const [isDrop, setIsDrop] = useState(false);
+  const currArr = type === 'plan' ? currArrPlan : currArrDev;
   const onClickDropHandler = () => {
     setIsDrop((p) => !p);
   };
