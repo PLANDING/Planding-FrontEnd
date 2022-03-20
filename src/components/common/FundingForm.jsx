@@ -4,6 +4,7 @@ import GreenBtn, { GrayBtn } from './Button';
 import InterestForm from './InterestForm';
 import Select from './Select';
 import MemberForm from '../FundingCreation/MemberForm';
+import { categoryArr } from '../../assets/objects/Category';
 
 const FundingForm = ({
   interestArr,
@@ -26,20 +27,6 @@ const FundingForm = ({
       history.goBack();
     }
   };
-  const categoryArr = [
-    '공유서비스',
-    '여행',
-    '소셜네트워크',
-    '뷰티/패션',
-    '이커머스',
-    '엔터테인먼트/게임',
-    '헬스/스포츠',
-    '뉴스/정보',
-    '금융',
-    '부동산/인테리어',
-    '교육',
-    '라이프',
-  ];
   return (
     <Form onSubmit={onSubmit}>
       <input
@@ -79,7 +66,11 @@ const FundingForm = ({
 
       <Wrapper>
         <Label>기술 카테고리</Label>
-        <InterestForm interestArr={interestArr} setInterestArr={setInterestArr} />
+        <InterestForm
+          fundingInterestArr={interestArr}
+          setFundingInterestArr={setInterestArr}
+          type="funding"
+        />
       </Wrapper>
 
       <Wrapper>

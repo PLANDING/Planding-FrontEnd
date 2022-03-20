@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import styled from 'styled-components';
 
 const Modal = ({ children, setIsOpen }) => {
   const wrapperRef = useRef(null);
@@ -17,6 +18,10 @@ const Modal = ({ children, setIsOpen }) => {
     };
   });
 
-  return <div ref={wrapperRef}>{children}</div>;
+  return <Container ref={wrapperRef}>{children}</Container>;
 };
 export default Modal;
+
+const Container = styled.div`
+  position: absolute;
+`;

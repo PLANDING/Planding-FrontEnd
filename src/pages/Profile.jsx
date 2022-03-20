@@ -10,7 +10,8 @@ import CompleteProject from '../components/Profile/CompleteProject';
 import ProfileCard from '../components/Profile/ProfileCard';
 import ProfileInfo from '../components/Profile/ProfileInfo';
 import { setProfileInfo } from '../modules/profile';
-import { setGaInfo, setLoggedInfo, setUserInfo } from '../modules/user';
+import { setRegsiterInfo } from '../modules/register';
+import { logout } from '../modules/user';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -26,15 +27,13 @@ const Profile = () => {
   /*계정 user 정보 Get -> 프로픨 수정*/
   const onClickEdit = () => {
     axios.get(`/user/${userObj.id}`).then((res) => {
-      dispatch(setUserInfo(res.data.user));
+      dispatch(setRegsiterInfo(res.data.user));
       history.push('/profile/edit');
     });
   };
 
-  /*계정 user 정보 Get -> 프로픨 수정*/
   const onClickLogout = () => {
-    dispatch(setLoggedInfo(false, null));
-    dispatch(setGaInfo({ category: '', intresets: [] }));
+    dispatch(logout());
     cookie.remove('token');
     history.push('/');
   };

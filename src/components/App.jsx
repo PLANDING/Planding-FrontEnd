@@ -10,7 +10,6 @@ import AppRouter from './Router';
 function App() {
   const dispatch = useDispatch();
   const cookie = new Cookies();
-  console.log('dskjfdklf');
   useEffect(() => {
     cookie.get('token') ? sendJwtTokenToServer() : dispatch(setLoggedInfo(false, null));
   }, []);
@@ -19,9 +18,9 @@ function App() {
     axios.post('/auth').then((res) => {
       if (res.status == 200) {
         dispatch(setLoggedInfo(true, res.data.user));
-        axios.get('/ga').then((res) => {
+        /* axios.get('/ga').then((res) => {
           res.status === 200 && dispatch(setGaInfo(res.data.Ga));
-        });
+        }); */
       } else {
         //자동 로그인 실패
         dispatch(setLoggedInfo(false, null));

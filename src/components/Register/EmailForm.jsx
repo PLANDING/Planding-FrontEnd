@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCheckInfo, setRegsiterInfo } from '../../modules/register';
 import { Label, Point } from '../../pages/Register';
-import GreenBtn, { GreenBorderBtn } from '../common/Button';
+import { GreenBorderBtn } from '../common/Button';
 import { Notice, Wrapper } from './PersonalInfo';
 
 const EmailForm = () => {
@@ -11,11 +11,15 @@ const EmailForm = () => {
   const dispatch = useDispatch();
 
   const [notice, setNotice] = useState();
-  const [checkExisted, setCheckExisted] = useState(false);
   const onClickCheckHandler = () => {
     axios.get(`/auth/check/email/${registerInfo.email}`).then((res) => {
       setNotice(res.data.isExisted ? '이미 가입된 이메일입니다.' : '');
-      setCheckExisted(!res.data.isExisted);
+      dispatch(
+        setCheckInfo({
+          ...checkInfo,
+          email: !res.data.isExisted,
+        }),
+      );
     });
   };
 
@@ -51,7 +55,7 @@ const EmailForm = () => {
         <input
           type="email"
           name="email"
-          value={registerInfo.id}
+          value={registerInfo.email}
           placeholder="이메일"
           onChange={onChangeInfo}
         />

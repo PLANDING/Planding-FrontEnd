@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import DateBox from '../common/DateBox';
-import ProfileBox from '../common/ProfileBox';
+import ProfileBox from './ProfileBox';
 
-const ProjectInfo = ({ myProjectObj }) => {
+const ProjectInfo = () => {
+  const { myProjectObj } = useSelector((state) => state.project);
   return (
     <Wrapper className="row-container">
       <InfoBox className="col-container">

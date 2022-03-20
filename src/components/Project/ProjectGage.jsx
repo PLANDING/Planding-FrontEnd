@@ -1,9 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import LevelImgs from '../../assets/objects/LevelImgs';
 import Gage from '../common/Gage';
 
-const ProjectGage = ({ gage }) => {
+const ProjectGage = () => {
+  const { myProjectObj } = useSelector((state) => state.project);
+  const totalCurriCnt = 20;
+  let gage = parseInt(
+    ((myProjectObj.devCurriculum + myProjectObj.planCurriculum) / totalCurriCnt) * 100,
+  );
   return (
     <Container className="col-container">
       <ImgBox>
