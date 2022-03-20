@@ -1,25 +1,26 @@
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import styled from 'styled-components';
 import { ProjectHead } from '../components/common/Card';
-import JoinBtnBox from '../components/common/JoinBtnBox';
 import Header from '../components/common/Header';
+import JoinBtnBox from '../components/common/JoinBtnBox';
 import TopDiv from '../components/common/TopDIv';
-import ContentBox from '../components/FundingCompletionDetail/ContentBox';
-import CommentForm from '../components/FundingCompletionDetail/CommentForm';
 import CategoryBox from '../components/FundingCompletionDetail/CategoryBox';
+import CommentForm from '../components/FundingCompletionDetail/CommentForm';
+import ContentBox from '../components/FundingCompletionDetail/ContentBox';
 import MemberBox from '../components/FundingCompletionDetail/MemberBox';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { setProjectInfo } from '../modules/project';
 const FundingCompletionDetail = () => {
   const dispatch = useDispatch();
 
-  const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
-  const { projectObj } = useSelector((state) => ({ projectObj: state.project.projectObj }));
-  const [isWriter, setIsWriter] = useState(userObj?.id === projectObj.User.id);
-
+  const { userObj } = useSelector((state) => state.user);
+  const { projectObj } = useSelector((state) => state.project);
+  const isWriter = userObj?.id === projectObj.User.id;
+  const { projectId } = useParams();
   useEffect(() => {
-    axios.get(`/project/completion/detail/${projectObj.id}`).then((res) => {
+    axios.get(`/project/completion/detail/${projectId}`).then((res) => {
       dispatch(setProjectInfo(res.data.project));
     });
   }, []);
@@ -34,6 +35,7 @@ const FundingCompletionDetail = () => {
           headilne={projectObj.headline}
           width="80%"
           isDetail
+          marginTop="30px"
         >
           {!isWriter && (
             <JoinBtnBox project={projectObj} dDay={3} width="240px" content={'모집 종료까지'} />
@@ -45,7 +47,7 @@ const FundingCompletionDetail = () => {
             <CommentForm projectId={projectObj.id} commentArr={projectObj.Comments} />
           </Container>
           <SideContainer className="col-container">
-            <CategoryBox category={projectObj.Category.name} interestArr={projectObj.Interests} />
+            <CategoryBox category={projectObj.Category?.name} interestArr={projectObj.Interests} />
             <MemberBox
               user={projectObj.User}
               projectId={projectObj.id}

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import GreenBtn from './Button';
 
 const JoinBtnBox = ({ dDay, content, width, project }) => {
-  const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
+  const { userObj } = useSelector((state) => state.user); //계정 user 정보
   const [isProject, setIsProject] = useState(false);
   const history = useHistory();
   const alertObj = {
@@ -21,7 +21,10 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
       alert('참여중인 프로젝트가 있습니다.');
       history.push('/completion');
     } else {
-      if (
+      if (!userObj.slackId) {
+        alert('참여전, 팀원 소통을 위한 슬랙 아이디를 설정해주세요.');
+      } else if (
+        userObj.slackId &&
         window.confirm(
           '해당 프로젝트에 참여요청 하시겠습니까?\n(작성자가 수락 시, 프로젝트에 참여가능 합니다.)',
         )

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import { useEffect } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import { ProjectHead } from '../components/common/Card';
@@ -15,9 +16,10 @@ import { setProjectInfo } from '../modules/project';
 const FundingProgressDetail = () => {
   const dispatch = useDispatch();
 
-  const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
-  const { projectObj } = useSelector((state) => ({ projectObj: state.project.projectObj }));
-  const [isWriter, setIsWriter] = useState(userObj?.id === projectObj.User.id);
+  const { userObj } = useSelector((state) => state.user);
+  const { projectObj } = useSelector((state) => state.project);
+  const isWriter = userObj?.id === projectObj.User.id;
+  const { projectId } = useParams();
 
   const ms = new Date().getTime() - new Date(projectObj.createdAt).getTime();
   const date = Math.ceil(ms / (1000 * 3600 * 24));
@@ -26,7 +28,7 @@ const FundingProgressDetail = () => {
     projectObj.Fundings.findIndex((i) => i.User.id == userObj?.id) != -1,
   );
   useEffect(() => {
-    axios.get(`/project/progress/detail/${projectObj.id}`).then((res) => {
+    axios.get(`/project/progress/detail/${projectId}`).then((res) => {
       dispatch(setProjectInfo(res.data.project));
     });
   }, [isFunding]);
@@ -45,7 +47,7 @@ const FundingProgressDetail = () => {
           marginTop="30px"
         >
           <SideBtnBox className="col-container">
-            {!isWriter && (
+            {!isWriter && !projectObj.isEnd && (
               <FundingBtnBox
                 dDay={7 - date}
                 projectId={projectObj.id}

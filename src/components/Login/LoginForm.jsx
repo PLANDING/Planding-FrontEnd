@@ -29,10 +29,10 @@ const LoginForm = () => {
         }
         if (res.status == 200) {
           /*로그인 성공 */
-          dispatch(setLoggedInfo(true, res.data.user));
+          dispatch(setLoggedInfo(true, res.data.user)); /* 
           axios.get('/ga').then((res) => {
             res.status === 200 && dispatch(setGaInfo(res.data.Ga));
-          });
+          }); */
           history.push('/');
         }
       });
