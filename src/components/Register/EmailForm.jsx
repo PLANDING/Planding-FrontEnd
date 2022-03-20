@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCheckInfo, setRegsiterInfo } from '../../modules/register';
 import { Label, Point } from '../../pages/Register';
-import { GreenBorderBtn } from '../common/Button';
+import GreenBtn, { GreenBorderBtn } from '../common/Button';
+import { Flex } from '../common/Flex';
 import { Notice, Wrapper } from './PersonalInfo';
 
 const EmailForm = () => {
@@ -11,15 +12,11 @@ const EmailForm = () => {
   const dispatch = useDispatch();
 
   const [notice, setNotice] = useState();
+  const [isUnique, setIsUnique] = useState(false);
   const onClickCheckHandler = () => {
     axios.get(`/auth/check/email/${registerInfo.email}`).then((res) => {
       setNotice(res.data.isExisted ? '이미 가입된 이메일입니다.' : '');
-      dispatch(
-        setCheckInfo({
-          ...checkInfo,
-          email: !res.data.isExisted,
-        }),
-      );
+      setIsUnique(!res.data.isExisted);
     });
   };
 
@@ -49,41 +46,45 @@ const EmailForm = () => {
   };
   return (
     <>
-      <Wrapper className="row-container">
+      <Wrapper dir="row">
         <Point>*</Point>
         <Label>아이디</Label>
-        <input
-          type="email"
-          name="email"
-          value={registerInfo.email}
-          placeholder="이메일"
-          onChange={onChangeInfo}
-        />
-        {!checkExisted ? (
-          <GreenBorderBtn type="button" onClick={onClickCheckHandler}>
-            중복 확인
-          </GreenBorderBtn>
-        ) : (
-          <GreenBtn type="button" onClick={onClickVerifyHandler}>
-            메일 인증
-          </GreenBtn>
-        )}
+        <Flex gap="20px" width="70%">
+          <Wrapper dir="row">
+            <input
+              type="email"
+              name="email"
+              value={registerInfo.email}
+              placeholder="이메일"
+              onChange={onChangeInfo}
+            />
+            {!isUnique ? (
+              <GreenBorderBtn type="button" onClick={onClickCheckHandler}>
+                중복 확인
+              </GreenBorderBtn>
+            ) : (
+              <GreenBtn type="button" onClick={onClickVerifyHandler}>
+                메일 인증
+              </GreenBtn>
+            )}
+          </Wrapper>
+          {isUnique && (
+            <Wrapper dir="row" checking={checkInfo.email && 'code'}>
+              <input
+                type="number"
+                maxLength="6"
+                name="code"
+                value={code}
+                placeholder="인증번호"
+                onChange={(e) => setCode(e.target.value)}
+              />
+              <GreenBorderBtn type="button" onClick={onClickConfirmHandler}>
+                확인
+              </GreenBorderBtn>
+            </Wrapper>
+          )}
+        </Flex>
       </Wrapper>
-      {checkExisted && (
-        <Wrapper className="row-container" checking={checkInfo.email && 'code'}>
-          <input
-            type="number"
-            maxLength="6"
-            name="code"
-            value={code}
-            placeholder="인증번호"
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <GreenBorderBtn type="button" onClick={onClickConfirmHandler}>
-            확인
-          </GreenBorderBtn>
-        </Wrapper>
-      )}
       {notice && <Notice>{notice}</Notice>}
     </>
   );

@@ -55,6 +55,7 @@ const Form = styled.form`
   gap: 30px;
   input[type='text'],
   input[type='email'],
+  input[type='number'],
   input[type='password'],
   input[type='url'] {
     flex: 1;
