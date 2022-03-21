@@ -14,10 +14,7 @@ import ProfileBox from './ProfileBox';
 const Header = () => {
   const { pathname } = useLocation();
 
-  const { isLoggedin, userObj } = useSelector((state) => ({
-    isLoggedin: state.user.isLoggedin,
-    userObj: state.user.userObj,
-  }));
+  const { isLoggedin, userObj } = useSelector((state) => state.user);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertArr, setAlertArr] = useState([]);
