@@ -45,8 +45,8 @@ const EmailForm = () => {
     dispatch(setCheckInfo({ ...checkInfo, [name]: false }));
   };
   return (
-    <>
-      <Wrapper dir="row">
+    <Flex gap="20px" height="30px">
+      <Wrapper className="row-container">
         <Point>*</Point>
         <Label>아이디</Label>
         <Flex gap="20px" width="70%">
@@ -86,7 +86,7 @@ const EmailForm = () => {
         </Flex>
       </Wrapper>
       {notice && <Notice>{notice}</Notice>}
-    </>
+    </Flex>
   );
 };
 export default EmailForm;

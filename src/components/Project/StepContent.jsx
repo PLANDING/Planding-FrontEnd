@@ -69,6 +69,16 @@ export const Label = styled.h4`
 `;
 export const StepWrapper = styled(Flex)`
   width: 100%;
+  animation: fadein 1s;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 export const Wrapper = styled(Flex)`
   width: 100%;
