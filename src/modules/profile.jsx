@@ -4,6 +4,34 @@ const initialState = {
   profileObj: {
     id: 0,
     nickName: '',
+    github: '',
+    site: '',
+    level: 0,
+    slackId: '',
+    Skills: [],
+    Interests: [],
+    ProfileImg: null,
+    Progress: {
+      id: 0,
+      idea: '',
+      isEnd: false,
+      createdAt: '',
+      Fundings: [],
+      Interests: [],
+    },
+    Completion: {
+      id: 0,
+      devCurriculum: 0,
+      planCurriculum: 0,
+      Project: {
+        idea: '',
+        isEnd: false,
+        createdAt: '',
+        Fundings: [],
+        Interests: [],
+      },
+    },
+    MyProjects: [],
   },
 };
 
