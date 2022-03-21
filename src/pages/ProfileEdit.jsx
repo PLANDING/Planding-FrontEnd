@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import Cookies from 'universal-cookie';
 import GreenBtn from '../components/common/Button';
 import Header from '../components/common/Header';
 import TopDiv from '../components/common/TopDIv';
@@ -16,9 +17,11 @@ const ProfileEdit = () => {
   const { userObj } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const cookie = new Cookies();
+  const userId = cookie.get('userId');
 
   useEffect(() => {
-    axios.get(`/user/${userObj.id}`).then((res) => {
+    axios.get(`/user/${userId}`).then((res) => {
       dispatch(setPrevInfo(res.data.user));
     });
   }, []);
