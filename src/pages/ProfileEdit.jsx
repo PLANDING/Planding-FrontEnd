@@ -51,7 +51,7 @@ const ProfileEdit = () => {
         <Form className="col-container" onSubmit={onSubmit}>
           <PersonalInfo />
           <SkillInfo />
-          <GreenBtn>수정 완료</GreenBtn>
+          <GreenBtn animation>수정 완료</GreenBtn>
         </Form>
       </div>
     </>

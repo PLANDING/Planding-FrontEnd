@@ -5,6 +5,18 @@ const SET_CURRICULUM = 'project/SET_CURRICULUM';
 const initialState = {
   projectObj: {
     id: 0,
+    content: '',
+    createdAt: '',
+    headline: '',
+    idea: '',
+    isEnd: false,
+    member_dev: -1,
+    member_plan: -1,
+    Category: { name: '' },
+    Comments: [],
+    Interests: [],
+    Fundings: [],
+    User: { id: -1, nickName: '', ProfileImg: null },
   },
   myProjectObj: {
     devCurriculum: 0,

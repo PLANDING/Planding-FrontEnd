@@ -6,6 +6,15 @@ const GreenBtn = styled.button`
   color: white;
   padding: 10px 20px;
   text-align: center;
+  ${(props) =>
+    props.animation &&
+    `
+  &:hover {
+    background-color: #37c56e50;
+    color: #37c56e;
+  }
+  transition: 0.3s;
+  `}
 `;
 export const GreenBorderBtn = styled.button`
   border: solid thin #37c56e;

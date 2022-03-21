@@ -1,7 +1,7 @@
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
+import coin from '../../assets/imgs/coin.png';
+import { Flex } from '../common/Flex';
 import InterestBox from '../common/InterestBox';
 import GreenLabel from '../common/Label';
 
@@ -14,7 +14,10 @@ const CompleteProjectCard = ({ projectObj }) => {
         <Footer className="row-container">
           <GreenLabel>프로젝트 수료</GreenLabel>
           <span>
-            펀딩 이력 <FontAwesomeIcon icon={faDollarSign} />{' '}
+            <Flex dir="row" alignCenter gap="5px">
+              <span>펀딩 이력</span>
+              <img src={coin} width="16px" />
+            </Flex>
             <span className="impact">{projectObj.Fundings.length * 500}</span>
           </span>
         </Footer>

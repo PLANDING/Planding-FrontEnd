@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import GreenBtn, { GrayBorderBtn } from '../common/Button';
@@ -11,23 +12,38 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
     to: user.id,
     projectId: projectId,
   };
+  const [isProject, setIsProject] = useState(false);
   /* 참여하기 요청 */
   const onClickJoin = (type) => {
-    if (
-      window.confirm(
-        '해당 프로젝트에 참여요청 하시겠습니까?\n(작성자가 수락 시, 프로젝트에 참여가능 합니다.)',
-      )
-    ) {
-      axios
-        .post('/alert/request', {
-          ...alertObj,
-          content: `님이 당신의 프로젝트의 ${
-            type == 'plan' ? '기획자' : '개발자'
-          }로 참여를 요청했습니다.`,
-        })
-        .then((res) => res.status == 200 && alert('참여요청이 완료되었습니다.'));
+    if (isProject) {
+      alert('참여중인 프로젝트가 있습니다.');
+      history.push('/completion');
+    } else {
+      if (
+        userObj.slackId &&
+        window.confirm(
+          '해당 프로젝트에 참여요청 하시겠습니까?\n(작성자가 수락 시, 프로젝트에 참여가능 합니다.)',
+        )
+      ) {
+        axios
+          .post('/alert/request', {
+            ...alertObj,
+            content: `님이 당신의 프로젝트의 ${
+              type == 'plan' ? '기획자' : '개발자'
+            }로 참여를 요청했습니다.`,
+          })
+          .then((res) => res.status == 200 && alert('참여요청이 완료되었습니다.'));
+      }
+      if (!userObj.slackId) {
+        alert('참여전, 팀원 소통을 위한 슬랙 아이디를 설정해주세요.');
+      }
     }
   };
+  useEffect(() => {
+    axios.get(`/myProject/${userObj.id}`).then((res) => {
+      res.status === 204 ? setIsProject(false) : setIsProject(true);
+    });
+  }, []);
   return (
     <Container>
       <HeadLine>팀원 모집</HeadLine>
@@ -40,13 +56,17 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
         <GrayBorderBtn>
           기획<span>{member_plan}명</span>
         </GrayBorderBtn>
-        <GreenBtn onClick={() => onClickJoin('plan')}>기획 참여하기</GreenBtn>
+        <GreenBtn onClick={() => onClickJoin('plan')} animation>
+          기획 참여하기
+        </GreenBtn>
       </div>
       <div className="row-container">
         <GrayBorderBtn>
           개발<span>{member_dev}명</span>
         </GrayBorderBtn>
-        <GreenBtn onClick={() => onClickJoin('dev')}>개발 참여하기</GreenBtn>
+        <GreenBtn onClick={() => onClickJoin('dev')} animation>
+          개발 참여하기
+        </GreenBtn>
       </div>
     </Container>
   );
