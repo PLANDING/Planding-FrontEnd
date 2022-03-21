@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCheckInfo, setRegsiterInfo } from '../../modules/register';
 import { Label, Point } from '../../pages/Register';
+import { Flex } from '../common/Flex';
 import { Notice, Wrapper } from './PersonalInfo';
 
 const PwForm = () => {
@@ -15,6 +16,7 @@ const PwForm = () => {
       target: { name, value },
     } = e;
     dispatch(setRegsiterInfo({ ...registerInfo, [name]: value }));
+    dispatch(setCheckInfo({ ...checkInfo, [name]: false }));
 
     name === 'pw' && checkedValidPW(value);
     name === 'pwCheck' && pwCompareHandler(value);
@@ -40,30 +42,34 @@ const PwForm = () => {
   };
   return (
     <>
-      <Wrapper className="row-container">
-        <Point>*</Point>
-        <Label>비밀번호</Label>
-        <input
-          type="password"
-          name="pw"
-          value={registerInfo.pw}
-          placeholder=""
-          onChange={onChangeInfo}
-        />
-      </Wrapper>
-      {!checkInfo.pw && pwNotice && <Notice>{pwNotice}</Notice>}
-      <Wrapper className="row-container" checking={checkInfo.pwCheck && 'pwCheck'}>
-        <Point>*</Point>
-        <Label>비밀번호 확인</Label>
-        <input
-          type="password"
-          name="pwCheck"
-          value={registerInfo.pwCheck}
-          placeholder=""
-          onChange={onChangeInfo}
-        />
-      </Wrapper>
-      {!checkInfo.pwCheck && pwChecknotice && <Notice>{pwChecknotice}</Notice>}
+      <Flex gap="20px" height="30px">
+        <Wrapper className="row-container">
+          <Point>*</Point>
+          <Label>비밀번호</Label>
+          <input
+            type="password"
+            name="pw"
+            value={registerInfo.pw}
+            placeholder=""
+            onChange={onChangeInfo}
+          />
+        </Wrapper>
+        {!checkInfo.pw && pwNotice && <Notice>{pwNotice}</Notice>}
+      </Flex>
+      <Flex gap="20px" height="30px">
+        <Wrapper className="row-container" checking={checkInfo.pwCheck && 'pwCheck'}>
+          <Point>*</Point>
+          <Label>비밀번호 확인</Label>
+          <input
+            type="password"
+            name="pwCheck"
+            value={registerInfo.pwCheck}
+            placeholder=""
+            onChange={onChangeInfo}
+          />
+        </Wrapper>
+        {!checkInfo.pwCheck && pwChecknotice && <Notice>{pwChecknotice}</Notice>}
+      </Flex>
     </>
   );
 };
