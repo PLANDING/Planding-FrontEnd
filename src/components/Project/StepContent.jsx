@@ -13,7 +13,23 @@ const StepContent = ({ type }) => {
   const curriculum = type === 'plan' ? myProjectObj.planCurriculum : myProjectObj.devCurriculum;
 
   const curStep =
-    curriculum <= 4 ? 1 : curriculum <= 8 ? 2 : curriculum <= 12 ? 3 : curriculum <= 17 ? 4 : 5;
+    type === 'plan'
+      ? curriculum <= 4
+        ? 1
+        : curriculum <= 6
+        ? 2
+        : curriculum <= 9
+        ? 3
+        : curriculum <= 11
+        ? 4
+        : 5
+      : curriculum <= 3
+      ? 1
+      : curriculum <= 5
+      ? 2
+      : curriculum <= 7
+      ? 3
+      : 4;
   const [dropMenu, setDropMenu] = useState(curStep);
   const [isDrop, setIsDrop] = useState(false);
   const currArr = type === 'plan' ? currArrPlan : currArrDev;
