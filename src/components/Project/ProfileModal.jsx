@@ -6,7 +6,7 @@ import slackImg from '../../assets/imgs/slack_logo.png';
 import { setProfileInfo } from '../../modules/profile';
 import Modal from '../common/Modal';
 
-const ProfileModal = ({ setIsOpen, userId, slack }) => {
+const ProfileModal = ({ setIsOpen, userId, slackId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -18,11 +18,11 @@ const ProfileModal = ({ setIsOpen, userId, slack }) => {
     });
   };
   return (
-    <Modal setIsOpen={setIsOpen}>
+    <Modal setIsOpen={setIsOpen} abs>
       <Container>
         <Wrapper>
           <img src={slackImg} />
-          <IdSpan>{slack}</IdSpan>
+          <IdSpan>{slackId}</IdSpan>
         </Wrapper>
         <Hr />
         <NavBtn onClick={onClickNavHandler}>프로필 이동</NavBtn>

@@ -1,25 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import GlobalStyle from './assets/styles/global-style';
-
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { persistStore } from 'redux-persist';
+import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import persistedReducer from './modules';
-import { PersistGate } from 'redux-persist/integration/react';
+import GlobalStyle from './assets/styles/global-style';
+import App from './components/App';
+import './index.css';
+import rootReducer from './modules';
 
-const store = createStore(persistedReducer, composeWithDevTools());
-const persistor = persistStore(store);
+const store = createStore(rootReducer, composeWithDevTools());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <GlobalStyle />
-        <App />
-      </PersistGate>
+      <GlobalStyle />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

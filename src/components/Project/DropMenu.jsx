@@ -9,6 +9,7 @@ import doneImg from '../../assets/imgs/done.png';
 import doneFillImg from '../../assets/imgs/doneFill.png';
 import { setCurriculum } from '../../modules/project';
 import GreenBtn from '../common/Button';
+import { Flex } from '../common/Flex';
 import CurriculumDetail from './CurriculumDetail';
 
 const DropMenu = ({ currObj, totalCurriCnt, type }) => {
@@ -62,12 +63,12 @@ const DropMenu = ({ currObj, totalCurriCnt, type }) => {
   return (
     <Container>
       {currObj.map((el, idx) => (
-        <CurriBox key={idx} className="row-container">
+        <CurriBox key={idx} dir="row" alignCenter>
           <CurriculumDetail
             isDone={curriculum >= el.curr}
             content={el.content}
             detail={el.detail}
-          ></CurriculumDetail>
+          />
           {/* 커리큘럼 0일 경우 */}
           <StyledCheck className="row-container">
             {type === 'plan' && el.curr === 1 && curriculum === 0 && (
@@ -103,10 +104,9 @@ const Container = styled.div`
 
 const StyledCheck = styled.div`
   align-self: flex-start;
-  height: 45px;
 `;
 
-const CurriBox = styled.div`
+const CurriBox = styled(Flex)`
   border-top: solid thin #37c56e80;
   padding: 20px 25px;
   img {

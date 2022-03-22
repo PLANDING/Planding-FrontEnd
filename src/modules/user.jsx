@@ -5,7 +5,7 @@ const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
   userObj: {
-    id: 0,
+    id: -1,
     nickName: '',
   },
   gaObj: {

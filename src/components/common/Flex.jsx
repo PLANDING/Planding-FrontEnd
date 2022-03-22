@@ -23,4 +23,6 @@ export const Flex = styled.div`
     `
   justify-content: space-between;`};
   gap: ${(props) => props.gap};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 `;

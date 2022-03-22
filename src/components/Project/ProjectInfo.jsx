@@ -20,6 +20,7 @@ const ProjectInfo = () => {
           <ProfileBox
             key={index}
             userId={Member.User.id}
+            slackId={Member.User.slackId}
             profileUrl={Member.User.ProfileImg?.url}
           />
         ))}

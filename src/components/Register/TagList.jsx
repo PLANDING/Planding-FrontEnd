@@ -30,7 +30,6 @@ const TagList = ({ arr, onClickDel, isInterest }) => {
 };
 export default TagList;
 const TagWrapper = styled.div`
-  margin-top: 30px;
   gap: 10px;
   #del-btn {
     padding: 0;

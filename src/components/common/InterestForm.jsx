@@ -41,7 +41,7 @@ const InterestForm = ({ fundingInterestArr, setFundingInterestArr, type }) => {
     }
   };
   return (
-    <FieldWrapper dir="column" gap="10px">
+    <FieldWrapper dir="column" gap="30px">
       <Label>관심 분야</Label>
       <div className="row-container">
         <Select

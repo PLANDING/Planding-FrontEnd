@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setCheckInfo, setRegsiterInfo } from '../../modules/register';
 import { Devider, InfoWrapper } from '../../pages/Register';
+import { Flex } from '../common/Flex';
 import EmailForm from './EmailForm';
 import NickNameForm from './NickNameForm';
 import PwForm from './PwForm';
@@ -32,7 +33,7 @@ const PersonalInfo = () => {
   );
 };
 export default PersonalInfo;
-export const Wrapper = styled.div`
+export const Wrapper = styled(Flex)`
   input[name=${(props) => props.checking}] {
     border: solid 2px #37c56e;
   }

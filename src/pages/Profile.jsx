@@ -17,16 +17,17 @@ const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const cookie = new Cookies();
+  const userId = cookie.get('userId');
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
 
   const { profileObj } = useSelector((state) => ({ profileObj: state.profile.profileObj })); //prifile user 정보
   useEffect(() => {
-    axios.get(`/user/${profileObj.id}`).then((res) => dispatch(setProfileInfo(res.data.user)));
+    axios.get(`/user/${userId}`).then((res) => dispatch(setProfileInfo(res.data.user)));
   }, []);
 
   /*계정 user 정보 Get -> 프로픨 수정*/
   const onClickEdit = () => {
-    axios.get(`/user/${userObj.id}`).then((res) => {
+    axios.get(`/user/${userId}`).then((res) => {
       dispatch(setRegsiterInfo(res.data.user));
       history.push('/profile/edit');
     });

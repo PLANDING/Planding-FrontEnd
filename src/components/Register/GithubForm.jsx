@@ -36,7 +36,7 @@ const GithubForm = ({ onChange }) => {
   };
 
   return (
-    <FieldWrapper className="row-container">
+    <FieldWrapper dir="row">
       <Label>Github</Label>
       <input
         type="url"
@@ -45,7 +45,7 @@ const GithubForm = ({ onChange }) => {
         placeholder=""
         onChange={onChange}
       />
-      <GreenBtn type="button" onClick={handleClick}>
+      <GreenBtn type="button" onClick={handleClick} animation>
         기술 스택 분석
       </GreenBtn>
     </FieldWrapper>

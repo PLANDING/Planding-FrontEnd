@@ -26,7 +26,7 @@ const CommentForm = ({ commentArr, projectId }) => {
         });
       setComment('');
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (
@@ -42,7 +42,7 @@ const CommentForm = ({ commentArr, projectId }) => {
           maxLength={300}
           style={{ overflow: 'auto' }}
         />
-        <GreenBtn>작성</GreenBtn>
+        <GreenBtn animation>작성</GreenBtn>
       </From>
       <div>
         {commentArr.map((comment, index) => (

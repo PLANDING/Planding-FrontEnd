@@ -5,6 +5,10 @@ import styled from 'styled-components';
 import Gage from '../common/Gage';
 
 const ProjectCard = ({ projectObj }) => {
+  const totalCurriCnt = 20;
+  let gage = parseInt(
+    ((projectObj.devCurriculum + projectObj.planCurriculum) / totalCurriCnt) * 100,
+  );
   return (
     <>
       {projectObj === undefined ? (
@@ -17,7 +21,7 @@ const ProjectCard = ({ projectObj }) => {
             <GreenLabel>프로젝트 진행 중</GreenLabel>
             <div className="col-container" style={{ gap: '10px' }}>
               <span>진행 단계</span>
-              <Gage gage={parseInt((projectObj.curriculum / 20) * 100)} width={'180px'}></Gage>
+              <Gage gage={gage} width={'180px'}></Gage>
             </div>
           </Footer>
         </Wrapper>

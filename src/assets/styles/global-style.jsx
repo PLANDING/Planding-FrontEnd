@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: row;
     align-items: center;
     }
-    form :is(input[type=text],input[type=password],input[type=url],input[type=email]){
+    form :is(input[type=text],input[type=password],input[type=url],input[type=email],input[type=number]){
     padding: 5px 10px;
     border: solid thin #BCBCBC;
     border-radius: 5px;

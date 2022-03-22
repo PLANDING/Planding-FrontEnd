@@ -50,12 +50,8 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
   };
 
   return (
-    <Card border id={idx}>
-      <ProjectHead
-        label={progress.isEnd ? '펀딩 마감' : '펀딩진행 중'}
-        idea={progress.idea}
-        onClickCard={onClickCard}
-      >
+    <Card border id={idx} onClick={onClickCard}>
+      <ProjectHead label={progress.isEnd ? '펀딩 마감' : '펀딩진행 중'} idea={progress.idea}>
         <ProfileBox
           nickName={progress.User.nickName}
           userId={progress.User.id}

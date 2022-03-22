@@ -10,7 +10,7 @@ import GreenBtn from '../components/common/Button';
 import { useHistory } from 'react-router';
 import FilterTool from '../components/common/FilterTool';
 const FundingProgress = () => {
-  const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
+  const { userObj, isLoggedin } = useSelector((state) => state.user);
   const [progressArr, setProgressArr] = useState();
   const [isProgress, setIsProgress] = useState(false);
   useEffect(() => {
@@ -25,14 +25,20 @@ const FundingProgress = () => {
   }, []);
   const history = useHistory();
   const onClickCreation = () => {
-    isProgress ? alert('진행중인 펀딩이나 프로젝트가 존재합니다.') : history.push('/creation');
+    if (!isLoggedin && window.confirm('로그인 후, 이용 가능합니다.')) {
+      history.push('/creation');
+    } else if (isLoggedin) {
+      isProgress ? alert('진행중인 펀딩이나 프로젝트가 존재합니다.') : history.push('/creation');
+    }
   };
   return (
     <>
       <Header />
       <div className="main-container">
         <TopDIv pageLabel={'펀딩 진행'} subLabel={'프로젝트에 펀딩하세요!'} isGreen>
-          <GreenBtn onClick={onClickCreation}>펀딩 생성</GreenBtn>
+          <GreenBtn onClick={onClickCreation} animation>
+            펀딩 생성
+          </GreenBtn>
         </TopDIv>
         <FilterTool />
         <CardWrapper className="col-container">
