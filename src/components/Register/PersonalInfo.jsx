@@ -34,7 +34,8 @@ const PersonalInfo = () => {
 };
 export default PersonalInfo;
 export const Wrapper = styled(Flex)`
-  input[name=${(props) => props.checking}] {
+  align-items: flex-start;
+  input[name= ${(props) => props.checking}] {
     border: solid 2px #37c56e;
   }
   & > button {
