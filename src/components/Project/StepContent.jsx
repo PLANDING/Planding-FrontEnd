@@ -12,9 +12,9 @@ const StepContent = ({ type }) => {
   const { myProjectObj } = useSelector((state) => state.project);
   const curriculum = type === 'plan' ? myProjectObj.planCurriculum : myProjectObj.devCurriculum;
 
-  const curStep =
-    type === 'plan'
-      ? curriculum <= 4
+  const getCurStep = () => {
+    if (type === 'plan') {
+      return curriculum <= 4
         ? 1
         : curriculum <= 6
         ? 2
@@ -22,14 +22,12 @@ const StepContent = ({ type }) => {
         ? 3
         : curriculum <= 11
         ? 4
-        : 5
-      : curriculum <= 3
-      ? 1
-      : curriculum <= 5
-      ? 2
-      : curriculum <= 7
-      ? 3
-      : 4;
+        : 5;
+    } else {
+      return curriculum <= 3 ? 1 : curriculum <= 5 ? 2 : curriculum <= 7 ? 3 : 4;
+    }
+  };
+  const curStep = getCurStep();
   const [dropMenu, setDropMenu] = useState(curStep);
   const [isDrop, setIsDrop] = useState(false);
   const currArr = type === 'plan' ? currArrPlan : currArrDev;
