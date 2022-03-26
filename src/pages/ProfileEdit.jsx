@@ -39,7 +39,7 @@ const ProfileEdit = () => {
       formData.append('skillArr', skillArr);
       formData.append('interestArr', interestArr);
       formData.append('profileImg', registerInfo.profileImg);
-      axios.patch(`/user/${userObj.id}`, formData).then((res) => {
+      axios.patch(`/user/${userObj?.id}`, formData).then((res) => {
         res.status == 200 && history.push('/profile');
       });
     } catch (err) {

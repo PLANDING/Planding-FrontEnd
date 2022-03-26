@@ -20,7 +20,7 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
       history.push('/completion');
     } else {
       if (
-        userObj.slackId &&
+        userObj?.slackId &&
         window.confirm(
           '해당 프로젝트에 참여요청 하시겠습니까?\n(작성자가 수락 시, 프로젝트에 참여가능 합니다.)',
         )
@@ -40,7 +40,7 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
     }
   };
   useEffect(() => {
-    axios.get(`/myProject/${userObj.id}`).then((res) => {
+    axios.get(`/myProject/${userObj?.id}`).then((res) => {
       res.status === 204 ? setIsProject(false) : setIsProject(true);
     });
   }, []);

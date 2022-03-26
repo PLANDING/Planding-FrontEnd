@@ -43,7 +43,7 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
   };
 
   useEffect(() => {
-    axios.get(`/myProject/${userObj.id}`).then((res) => {
+    axios.get(`/myProject/${userObj?.id}`).then((res) => {
       res.status === 204 ? setIsProject(false) : setIsProject(true);
     });
   }, []);

@@ -20,7 +20,7 @@ const Header = () => {
   const [alertArr, setAlertArr] = useState([]);
 
   const onClickAlert = () => {
-    axios.get(`/alert/limit/${userObj.id}`).then((res) => {
+    axios.get(`/alert/limit/${userObj?.id}`).then((res) => {
       setAlertArr(res.data.Alerts);
     });
     setIsOpenModal((prev) => !prev);

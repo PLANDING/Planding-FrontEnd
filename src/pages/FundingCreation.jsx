@@ -29,7 +29,7 @@ const FundingCreation = () => {
         throw new Error('모집인원 정보를 설정해주세요.');
 
       axios
-        .post(`/project/creation/${userObj.id}`, { ...fundingObj, interestArr, category })
+        .post(`/project/creation/${userObj?.id}`, { ...fundingObj, interestArr, category })
         .then((res) => {
           res.status == 200 && history.push('/progress');
         });

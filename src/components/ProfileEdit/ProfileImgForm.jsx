@@ -11,7 +11,7 @@ const ProfileImgForm = () => {
   const { userObj } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [imgFile, setImgFile] = useState({
-    fileURL: userObj.ProfileImg?.url,
+    fileURL: userObj?.ProfileImg?.url,
   });
   const handlerChange = (e) => {
     e.preventDefault();

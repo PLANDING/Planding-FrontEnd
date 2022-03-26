@@ -15,7 +15,7 @@ const Alert = () => {
   const [alertArr, setAlertArr] = useState([]);
   /* 모든 alert get  */
   useEffect(() => {
-    axios.get(`/alert/${userObj.id}`).then((res) => {
+    axios.get(`/alert/${userObj?.id}`).then((res) => {
       setAlertArr(res.data.Alerts);
     });
   });
