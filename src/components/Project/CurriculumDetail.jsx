@@ -56,6 +56,13 @@ const StyledDetail = styled.div`
   color: #9b9b9b;
   padding-top: 20px;
   animation: fadein 0.3s;
+  white-space: pre-line;
+  & > div > a {
+    color: #37c56e;
+    &:hover {
+      font-weight: bold;
+    }
+  }
 
   @keyframes fadein {
     from {

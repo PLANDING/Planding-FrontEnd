@@ -6,7 +6,7 @@ import Gage from '../common/Gage';
 
 const ProjectGage = () => {
   const { myProjectObj } = useSelector((state) => state.project);
-  const totalCurriCnt = 20;
+  const totalCurriCnt = 18;
   let gage = parseInt(
     ((myProjectObj.devCurriculum + myProjectObj.planCurriculum) / totalCurriCnt) * 100,
   );
