@@ -8,7 +8,7 @@ import axios from 'axios';
 import { setProjectInfo } from '../../modules/project';
 const CommentForm = ({ commentArr, projectId }) => {
   const dispatch = useDispatch();
-  const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
+  const { userObj, isLoggedin } = useSelector((state) => state.user);
   const [comment, setComment] = useState('');
   const onChange = (e) => {
     setComment(e.target.value);
@@ -32,18 +32,20 @@ const CommentForm = ({ commentArr, projectId }) => {
   return (
     <Container>
       <div id="label">댓글</div>
-      <From className="row-container" onSubmit={onSubmit}>
-        <ProfileBox profileUrl={userObj?.ProfileImg?.url} borderNone />
-        <textarea
-          type="text"
-          placeholder="댓글을 입력해주세요. (최대 300자)"
-          value={comment}
-          onChange={onChange}
-          maxLength={300}
-          style={{ overflow: 'auto' }}
-        />
-        <GreenBtn animation>작성</GreenBtn>
-      </From>
+      {isLoggedin && (
+        <From className="row-container" onSubmit={onSubmit}>
+          <ProfileBox profileUrl={userObj?.ProfileImg?.url} borderNone />
+          <textarea
+            type="text"
+            placeholder="댓글을 입력해주세요. (최대 300자)"
+            value={comment}
+            onChange={onChange}
+            maxLength={300}
+            style={{ overflow: 'auto' }}
+          />
+          <GreenBtn animation>작성</GreenBtn>
+        </From>
+      )}
       <div>
         {commentArr.map((comment, index) => (
           <Comment key={index} projectId={projectId} commentObj={comment} isUser={true} />

@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import GreenBtn from './Button';
 
 const JoinBtnBox = ({ dDay, content, width, project }) => {
-  const { userObj } = useSelector((state) => state.user); //계정 user 정보
+  const { userObj, isLoggedin } = useSelector((state) => state.user); //계정 user 정보
   const [isProject, setIsProject] = useState(false);
   const history = useHistory();
   const alertObj = {
@@ -15,9 +16,12 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
     to: project.user,
     projectId: project.id,
   };
-  /* 참여하기 요청 */
   const onClickJoin = (type, event) => {
     event.stopPropagation();
+    if (!isLoggedin) {
+      if (window.confirm('로그인이 필요합니다.')) history.push('/login');
+      return;
+    }
     if (isProject) {
       alert('참여중인 프로젝트가 있습니다.');
       history.push('/completion');
@@ -43,7 +47,7 @@ const JoinBtnBox = ({ dDay, content, width, project }) => {
   };
 
   useEffect(() => {
-    axios.get(`/myProject/${userObj.id}`).then((res) => {
+    axios.get(`/myProject/${userObj?.id}`).then((res) => {
       res.status === 204 ? setIsProject(false) : setIsProject(true);
     });
   }, []);
