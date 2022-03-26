@@ -9,19 +9,26 @@ import styled from 'styled-components';
 import GreenBtn from '../components/common/Button';
 import { useHistory } from 'react-router';
 import FilterTool from '../components/common/FilterTool';
+import { useDispatch } from 'react-redux';
+import { initFilterArr, setEntireProjectArr } from '../modules/fundingProject';
 const FundingProgress = () => {
   const { userObj, isLoggedin } = useSelector((state) => state.user);
-  const [progressArr, setProgressArr] = useState();
+  const { projectArr } = useSelector((state) => state.fundingProject);
+  const dispatch = useDispatch();
+
   const [isProgress, setIsProgress] = useState(false);
   useEffect(() => {
     axios.get('/project/progress').then((res) => {
-      setProgressArr(res.data.project);
+      dispatch(setEntireProjectArr(res.data.project));
     });
     userObj &&
       axios.get(`/user/${userObj.id}`).then((res) => {
         const userProgress = res.data.user.Progress;
         typeof userProgress === 'undefined' ? setIsProgress(false) : setIsProgress(true);
       });
+    return () => {
+      dispatch(initFilterArr());
+    };
   }, []);
   const history = useHistory();
   const onClickCreation = () => {
@@ -42,12 +49,12 @@ const FundingProgress = () => {
         </TopDIv>
         <FilterTool />
         <CardWrapper className="col-container">
-          {progressArr === undefined ? (
-            <Wrapper>잠시만 기다려주세요.</Wrapper>
+          {projectArr.length === 0 ? (
+            <Wrapper>해당 조건의 펀딩이 없습니다.</Wrapper>
           ) : (
-            progressArr.map((progress, idx) => (
+            projectArr.map((progress, idx) => (
               <ProgressCard
-                key={idx}
+                key={progress.id}
                 projectObj={progress}
                 idx={idx}
                 usage={userObj?.id === progress.User.id && 'isNone'}

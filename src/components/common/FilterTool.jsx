@@ -17,8 +17,8 @@ const FilterTool = () => {
         </GrayBorderBtn>
       </Container>
       {isOpen && (
-        <Modal setIsOpen={setIsOpen} abs>
-          <FilterBox />
+        <Modal {...{ setIsOpen }} abs>
+          <FilterBox {...{ setIsOpen }} />
         </Modal>
       )}
     </>
