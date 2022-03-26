@@ -12,12 +12,14 @@ const Main = () => {
   const [progressArr, setProgressArr] = useState([]);
   const [completionArr, setCompletionArr] = useState([]);
   useEffect(() => {
-    axios.post('/project', gaObj).then((res) => {
-      if (res.status === 200) {
+    try {
+      axios.post('/project', gaObj).then((res) => {
         setProgressArr(res.data.Progresses);
         setCompletionArr(res.data.Completions);
-      }
-    });
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
   return (
     <>

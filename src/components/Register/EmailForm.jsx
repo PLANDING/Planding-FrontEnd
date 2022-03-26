@@ -45,11 +45,16 @@ const EmailForm = () => {
     dispatch(setCheckInfo({ ...checkInfo, [name]: false }));
   };
   return (
+<<<<<<< Updated upstream
     <Flex gap="20px" height="30px">
       <Wrapper className="row-container">
+=======
+    <FlexContainer gap="10px">
+      <Wrapper dir="row">
+>>>>>>> Stashed changes
         <Point>*</Point>
         <Label>아이디</Label>
-        <Flex gap="20px" width="70%">
+        <Flex gap="20px" style={{ flex: 1 }}>
           <Wrapper dir="row">
             <input
               type="email"

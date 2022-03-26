@@ -2,7 +2,7 @@
   "name": "planding-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://ec2-3-37-117-139.ap-northeast-2.compute.amazonaws.com:3001",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
