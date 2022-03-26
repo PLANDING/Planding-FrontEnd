@@ -40,7 +40,7 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
     }
   };
   useEffect(() => {
-    axios.get(`/myProject/${userObj.id}`).then((res) => {
+    axios.get(`/myProject/${userObj?.id}`).then((res) => {
       res.status === 204 ? setIsProject(false) : setIsProject(true);
     });
   }, []);

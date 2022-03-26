@@ -1,18 +1,24 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import FilterTool from '../components/common/FilterTool';
 import Header from '../components/common/Header';
 import TopDIv from '../components/common/TopDIv';
 import CompletionCard from '../components/FundingCompletion/CompletionCard';
+import { initFilterArr, setEntireProjectArr } from '../modules/fundingProject';
 const FundingCompletion = () => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj }));
-  const [completionArr, setCompletionArr] = useState();
+  const { projectArr } = useSelector((state) => state.fundingProject);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     axios.get('/project/completion').then((res) => {
-      setCompletionArr(res.data.project);
+      dispatch(setEntireProjectArr(res.data.project));
     });
+    return () => {
+      dispatch(initFilterArr());
+    };
   }, []);
   return (
     <>
@@ -21,10 +27,10 @@ const FundingCompletion = () => {
         <TopDIv pageLabel={'펀딩완료'} subLabel={'프로젝트에 참여하세요!'} />
         <FilterTool />
         <CardWrapper className="col-container">
-          {completionArr === undefined ? (
-            <Wrapper>잠시만 기다려주세요.</Wrapper>
+          {projectArr.length === 0 ? (
+            <Wrapper>해당 조건의 펀딩이 없습니다.</Wrapper>
           ) : (
-            completionArr.map((completion, idx) => (
+            projectArr.map((completion, idx) => (
               <CompletionCard
                 key={idx}
                 idx={idx}
