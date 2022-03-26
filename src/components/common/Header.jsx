@@ -34,13 +34,13 @@ const Header = () => {
       </LogoWrapper>
 
       <Nav className="row-container">
-        <Button to={'/completion'} cur={pathname == '/completion'}>
+        <Button to={'/completion'} cur={pathname === '/completion'}>
           펀딩 완료
         </Button>
-        <Button to={'/progress'} cur={pathname == '/progress'}>
+        <Button to={'/progress'} cur={pathname === '/progress'}>
           펀딩 진행
         </Button>
-        <Button to={'/project'} cur={pathname == '/project'}>
+        <Button to={'/project'} cur={pathname === '/project'}>
           나의 프로젝트
         </Button>
         {isLoggedin ? (

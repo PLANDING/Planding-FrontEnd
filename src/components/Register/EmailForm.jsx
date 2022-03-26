@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { setCheckInfo, setRegsiterInfo } from '../../modules/register';
 import { Label, Point } from '../../pages/Register';
 import GreenBtn, { GreenBorderBtn } from '../common/Button';
@@ -45,11 +46,11 @@ const EmailForm = () => {
     dispatch(setCheckInfo({ ...checkInfo, [name]: false }));
   };
   return (
-    <Flex gap="20px" height="30px">
-      <Wrapper className="row-container">
+    <FlexContainer gap="20px">
+      <Wrapper dir="row">
         <Point>*</Point>
         <Label>아이디</Label>
-        <Flex gap="20px" width="70%">
+        <Flex gap="20px" style={{ flex: 1 }}>
           <Wrapper dir="row">
             <input
               type="email"
@@ -86,7 +87,10 @@ const EmailForm = () => {
         </Flex>
       </Wrapper>
       {notice && <Notice>{notice}</Notice>}
-    </Flex>
+    </FlexContainer>
   );
 };
 export default EmailForm;
+const FlexContainer = styled(Flex)`
+  min-height: 30px;
+`;
