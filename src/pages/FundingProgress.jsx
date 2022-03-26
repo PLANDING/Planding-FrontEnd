@@ -22,7 +22,7 @@ const FundingProgress = () => {
       dispatch(setEntireProjectArr(res.data.project));
     });
     userObj &&
-      axios.get(`/user/${userObj.id}`).then((res) => {
+      axios.get(`/user/${userObj?.id}`).then((res) => {
         const userProgress = res.data.user.Progress;
         typeof userProgress === 'undefined' ? setIsProgress(false) : setIsProgress(true);
       });

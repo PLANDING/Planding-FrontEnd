@@ -15,7 +15,7 @@ const NickNameForm = ({ onChangeInfo, isEdit }) => {
   const [notice, setNotice] = useState();
   /*닉네임 형식검사&중복검사*/
   const onClickValidHandler = () => {
-    if (isEdit && userObj.nickName === registerInfo.nickName) return;
+    if (isEdit && userObj?.nickName === registerInfo.nickName) return;
     let valNick = /^[가-힣a-z0-9]{2,20}$/g;
     !valNick.test(registerInfo.nickName)
       ? setNotice('2-20자 영소문자/한글/숫자 [공백 및 특수문자 불가]')

@@ -46,7 +46,7 @@ const Profile = () => {
           <ProfileInfo profile={profileObj} />
         </ProfileWrapper>
         <CardWrapper className="col-container">
-          {userObj.id == profileObj.id && (
+          {userObj?.id == profileObj.id && (
             <BtnWrapper>
               <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
               <RedBorderBtn onClick={onClickLogout}>로그아웃</RedBorderBtn>

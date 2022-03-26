@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 const MatchingCard = ({ profile, projectId }) => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
   const alertObj = {
-    from: userObj.id,
+    from: userObj?.id,
     to: profile.id,
     projectId: projectId,
   };

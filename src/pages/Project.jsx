@@ -16,11 +16,13 @@ const Project = () => {
   const { myProjectObj } = useSelector((state) => state.project);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios.get(`/myProject/${userObj.id}`).then((res) => {
-      dispatch(setMyProjectInfo(res.data.MyProject));
-    });
-  }, [userObj, myProjectObj?.devCurriculum, myProjectObj?.planCurriculum]);
+  useEffect(
+    () =>
+      axios.get(`/myProject/${userObj?.id}`).then((res) => {
+        dispatch(setMyProjectInfo(res.data.MyProject));
+      }),
+    [userObj, myProjectObj?.devCurriculum, myProjectObj?.planCurriculum],
+  );
 
   return (
     <>
