@@ -48,7 +48,12 @@ const CommentForm = ({ commentArr, projectId }) => {
       )}
       <div>
         {commentArr.map((comment, index) => (
-          <Comment key={index} projectId={projectId} commentObj={comment} isUser={true} />
+          <Comment
+            key={index}
+            projectId={projectId}
+            commentObj={comment}
+            isUser={comment.User.id === userObj?.id}
+          />
         ))}
       </div>
     </Container>

@@ -33,7 +33,7 @@ const FundingProgress = () => {
   const history = useHistory();
   const onClickCreation = () => {
     if (!isLoggedin && window.confirm('로그인 후, 이용 가능합니다.')) {
-      history.push('/creation');
+      history.push('/login');
     } else if (isLoggedin) {
       isProgress ? alert('진행중인 펀딩이나 프로젝트가 존재합니다.') : history.push('/creation');
     }
