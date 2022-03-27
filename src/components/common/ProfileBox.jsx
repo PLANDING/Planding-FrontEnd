@@ -13,7 +13,7 @@ const ProfileBox = ({ profileUrl, nickName, size, userId, borderNone }) => {
   const onClickProfile = () => {
     axios.get(`/user/${userId}`).then((res) => {
       dispatch(setProfileInfo(res.data.user));
-      history.push('/profile');
+      history.push(`/profile`);
     });
   };
   return (

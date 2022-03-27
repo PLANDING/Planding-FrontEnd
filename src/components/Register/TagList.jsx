@@ -16,7 +16,7 @@ const TagList = ({ arr, onClickDel, isInterest }) => {
               </GreenBorderLabel>
             ) : (
               <GreenLabel key={idx}>
-                {ele}
+                {ele.name}
                 <button type="button" name={idx} id="del-btn" onClick={onClickDel}>
                   X
                 </button>

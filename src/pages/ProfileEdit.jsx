@@ -36,7 +36,7 @@ const ProfileEdit = () => {
       formData.append('nickName', registerInfo.nickName);
       formData.append('site', registerInfo.site);
       formData.append('github', registerInfo.github);
-      formData.append('skillArr', skillArr);
+      formData.append('skillArr', JSON.stringify(skillArr));
       formData.append('interestArr', interestArr);
       formData.append('profileImg', registerInfo.profileImg);
       axios.patch(`/user/${userObj?.id}`, formData).then((res) => {

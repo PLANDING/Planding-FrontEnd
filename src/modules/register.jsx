@@ -98,7 +98,7 @@ export default function register(state = initialState, action) {
     case SET_SKILL_INFO:
       return { ...state, skillArr: action.skillArr };
     case ADD_SKILL:
-      return { ...state, skillArr: [...state.skillArr, action.skill] };
+      return { ...state, skillArr: [...state.skillArr, { name: action.skill }] };
     case DEL_SKILL:
       return {
         ...state,

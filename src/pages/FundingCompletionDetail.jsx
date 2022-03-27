@@ -37,7 +37,7 @@ const FundingCompletionDetail = () => {
           isDetail
           marginTop="30px"
         >
-          {!isWriter && (
+          {!isWriter && !projectObj.isEnd && (
             <JoinBtnBox project={projectObj} dDay={3} width="240px" content={'모집 종료까지'} />
           )}
         </ProjectHead>

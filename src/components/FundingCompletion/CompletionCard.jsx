@@ -29,7 +29,7 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
     !isEnd &&
       date > 14 &&
       axios
-        .get(`/project/end/${projectObj.id}`)
+        .patch(`/project/end/${projectObj.id}`)
         .then((res) => res.status === 200 && setIsEnd(true));
   }, []);
   return (

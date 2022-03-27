@@ -22,7 +22,10 @@ const Profile = () => {
 
   const { profileObj } = useSelector((state) => ({ profileObj: state.profile.profileObj })); //prifile user 정보
   useEffect(() => {
-    axios.get(`/user/${userId}`).then((res) => dispatch(setProfileInfo(res.data.user)));
+    axios.get(`/user/${userId}`).then((res) => {
+      console.log(res.data);
+      dispatch(setProfileInfo(res.data.user));
+    });
   }, []);
 
   /*계정 user 정보 Get -> 프로픨 수정*/
