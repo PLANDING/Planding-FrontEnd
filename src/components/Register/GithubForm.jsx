@@ -16,7 +16,7 @@ const GithubForm = ({ onChange }) => {
       const { data } = await axios.get(`https://api.github.com/users/${id}/repos`);
       await data.map(async (data) => {
         await getLanguage(data.languages_url);
-        dispatch(setSkillArr([...langArr]));
+        dispatch(setSkillArr([...langArr.map((skill) => ({ name: skill }))]));
       });
     } catch (error) {
       alert(error.message);

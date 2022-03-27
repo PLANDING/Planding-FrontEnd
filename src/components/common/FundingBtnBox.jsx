@@ -1,19 +1,24 @@
 import axios from 'axios';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import styled, { css } from 'styled-components';
 import GreenBtn, { GrayBtn } from './Button';
+import { Flex } from './Flex';
 const FundingBtnBox = ({ dDay, projectId, userId, isFunding, setIsFunding, content, isRow }) => {
+  const { isLoggedin } = useSelector((state) => state.user);
+  const history = useHistory();
   const onClickFunding = (event) => {
     event.stopPropagation();
-    isFunding
-      ? axios
-          .delete(`/funding/${projectId}/${userId}`)
-          .then((res) => res.status == 200 && setIsFunding((p) => !p))
-      : axios
-          .get(`/funding/${projectId}/${userId}`)
-          .then((res) => res.status == 200 && setIsFunding((p) => !p));
+    if (!isLoggedin && window.confirm('로그인 후, 이용 가능합니다.')) {
+      history.push('/login');
+    } else if (isLoggedin) {
+      isFunding
+        ? axios.delete(`/funding/${projectId}/${userId}`).then(() => setIsFunding((p) => !p))
+        : axios.get(`/funding/${projectId}/${userId}`).then(() => setIsFunding((p) => !p));
+    }
   };
   return (
-    <BtnBox className="col-container">
+    <BtnBox dir="column">
       <Wrapper isRow={isRow}>
         <span>
           {content}
@@ -42,23 +47,24 @@ const Wrapper = styled.div`
   flex-direction: column;
   ${(props) =>
     props.isRow &&
-    `
-    flex-direction: row;
-    button{
+    css`
+      flex-direction: row;
+      button {
         padding: 5px 20px;
-    }
-    gap:15px;
-    margin-bottom: 20px;
-    &>span{
+      }
+      gap: 15px;
+      margin-bottom: 20px;
+      & > span {
         font-weight: bold;
-        color: #5F5F5F;
-    }`}
+        color: #5f5f5f;
+      }
+    `}
 `;
-export const BtnBox = styled.div`
+export const BtnBox = styled(Flex)`
   z-index: 99;
   align-items: flex-end;
-  flex: 1;
   align-self: flex-end;
+  flex: 1;
   span {
     text-align: center;
     font-weight: bold;

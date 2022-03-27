@@ -35,8 +35,8 @@ const Profile = () => {
   };
 
   const onClickLogout = () => {
+    cookie.remove('token', { path: '/' });
     dispatch(logout());
-    cookie.remove('token');
     history.push('/');
   };
   return (
