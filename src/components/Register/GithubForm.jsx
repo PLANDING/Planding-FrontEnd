@@ -42,7 +42,7 @@ const GithubForm = ({ onChange }) => {
         type="url"
         name="github"
         value={registerInfo.github}
-        placeholder=""
+        placeholder="https://github.com/아이디 주소"
         onChange={onChange}
       />
       <GreenBtn type="button" onClick={handleClick} animation>

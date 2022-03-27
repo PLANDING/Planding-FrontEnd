@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import GreenBtn from '../common/Button';
+import { faAt, faLock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setGaInfo, setLoggedInfo } from '../../modules/user';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
+import { setLoggedInfo } from '../../modules/user';
+import GreenBtn from '../common/Button';
+import { Flex } from '../common/Flex';
 
 const LoginForm = () => {
   const history = useHistory();
@@ -37,13 +40,15 @@ const LoginForm = () => {
         }
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (
     <Form className="col-container" onSubmit={onSubmit}>
-      <Wrapper className="row-container">
-        <span>아이디</span>
+      <Wrapper dir="row">
+        {/* 
+        <span>아이디</span> */}
+        <FontAwesomeIcon icon={faAt} />
         <input
           type="text"
           name="id"
@@ -52,9 +57,17 @@ const LoginForm = () => {
           placeholder="이메일"
         />
       </Wrapper>
-      <Wrapper className="row-container">
-        <span>비밀번호</span>
-        <input type="password" name="pw" value={input.pw} onChange={onChangeInput} />
+      <Wrapper dir="row">
+        {/* 
+        <span>비밀번호</span> */}
+        <FontAwesomeIcon icon={faLock} />
+        <input
+          type="password"
+          name="pw"
+          value={input.pw}
+          onChange={onChangeInput}
+          placeholder="비밀번호"
+        />
       </Wrapper>
       <GreenBtn>로그인</GreenBtn>
       <Notice>{notice}</Notice>
@@ -65,18 +78,27 @@ const Form = styled.form`
   width: 100%;
   gap: 30px;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled(Flex)`
   span {
     width: 100px;
   }
   input[type='text'],
   input[type='password'] {
     width: 100%;
+    padding: 10px 20px 10px 35px;
+  }
+  position: relative;
+  svg {
+    color: lightgray;
+    position: absolute;
+    top: 50%;
+    transform: translate(80%, -50%);
   }
 `;
 const Notice = styled.div`
   color: #f55959;
   text-align: center;
   font-size: small;
+  height: 5px;
 `;
 export default LoginForm;

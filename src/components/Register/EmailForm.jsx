@@ -29,13 +29,17 @@ const EmailForm = () => {
       .then((res) => setAuthCode(res.data.code));
   };
   const onClickConfirmHandler = () => {
-    authCode === code &&
+    if (authCode === code) {
       dispatch(
         setCheckInfo({
           ...checkInfo,
           email: true,
         }),
       );
+      setNotice('');
+    } else {
+      setNotice('일치하지 않습니다.');
+    }
   };
 
   const onChangeInfo = (e) => {
@@ -70,11 +74,11 @@ const EmailForm = () => {
             )}
           </Wrapper>
           {isUnique && (
-            <Wrapper dir="row" checking={checkInfo.email && 'code'}>
+            <Wrapper dir="row" checking={checkInfo.email && 'email'}>
               <input
                 type="number"
                 maxLength="6"
-                name="code"
+                name="email"
                 value={code}
                 placeholder="인증번호"
                 onChange={(e) => setCode(e.target.value)}

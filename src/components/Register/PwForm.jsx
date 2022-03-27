@@ -50,7 +50,7 @@ const PwForm = () => {
             type="password"
             name="pw"
             value={registerInfo.pw}
-            placeholder=""
+            placeholder="8-16자, 숫자/영문/특수문자 각 1자리 이상"
             onChange={onChangeInfo}
           />
         </Wrapper>
@@ -64,7 +64,7 @@ const PwForm = () => {
             type="password"
             name="pwCheck"
             value={registerInfo.pwCheck}
-            placeholder=""
+            placeholder="8-16자, 숫자/영문/특수문자 각 1자리 이상"
             onChange={onChangeInfo}
           />
         </Wrapper>

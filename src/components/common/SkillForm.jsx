@@ -6,6 +6,7 @@ import { Label } from '../../pages/Register';
 import { FieldWrapper } from '../Register/SkillInfo';
 import TagList from '../Register/TagList';
 import { GreenBorderBtn } from './Button';
+import { Flex } from './Flex';
 
 const SkillForm = () => {
   const { skillArr } = useSelector((state) => state.register);
@@ -26,8 +27,8 @@ const SkillForm = () => {
   return (
     <FieldWrapper skill>
       <Label>기술 스택</Label>
-      <div className="col-container">
-        <Wrapper className="row-container">
+      <Flex className="col" gap="10px">
+        <Wrapper dir="row">
           <input
             type="text"
             placeholder="언어|프레임워크|라이브러리"
@@ -39,12 +40,12 @@ const SkillForm = () => {
           </GreenBorderBtn>
         </Wrapper>
         <TagList arr={skillArr} onClickDel={onClickDel} />
-      </div>
+      </Flex>
     </FieldWrapper>
   );
 };
 export default SkillForm;
-const Wrapper = styled.div`
+const Wrapper = styled(Flex)`
   & > button {
     margin-left: 5px;
     font-size: small;
