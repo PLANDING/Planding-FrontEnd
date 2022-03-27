@@ -6,15 +6,15 @@ import slackImg from '../../assets/imgs/slack_logo.png';
 import { setProfileInfo } from '../../modules/profile';
 import Modal from '../common/Modal';
 
-const ProfileModal = ({ setIsOpen, userId, slackId }) => {
+const ProfileModal = ({ setIsOpen, slackId, nickName }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   /*prifile user 정보 Get */
   const onClickNavHandler = () => {
-    axios.get(`/user/${userId}`).then((res) => {
+    axios.get(`/user/${nickName}`).then((res) => {
       dispatch(setProfileInfo(res.data.user));
-      history.push('/profile');
+      history.push(`/profile/${nickName}`);
     });
   };
   return (

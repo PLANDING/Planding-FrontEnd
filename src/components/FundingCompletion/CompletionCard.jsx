@@ -29,15 +29,17 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
     !isEnd &&
       date > 14 &&
       axios
-        .get(`/project/end/${projectObj.id}`)
+        .patch(`/project/end/${projectObj.id}`)
         .then((res) => res.status === 200 && setIsEnd(true));
   }, []);
   return (
     <Card id={idx} onClick={onClickCard}>
       <ProjectHead label={projectObj.isEnd ? '모집 완료' : '모집 중'} idea={projectObj.idea}>
         <ProfileBox
+          userId={projectObj.User.id}
           nickName={projectObj.User.nickName}
           profileUrl={projectObj.User.ProfileImg?.url}
+          isNickName
         />
       </ProjectHead>
 

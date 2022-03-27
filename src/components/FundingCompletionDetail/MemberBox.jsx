@@ -7,6 +7,7 @@ import ProfileBox from '../common/ProfileBox';
 
 const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
+  const { projectObj } = useSelector((state) => state.project);
   const alertObj = {
     from: userObj?.id,
     to: user.id,
@@ -49,24 +50,28 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
       <HeadLine>팀원 모집</HeadLine>
 
       <h5>리더</h5>
-      <ProfileBox nickName={user.nickName} />
+      <ProfileBox nickName={user.nickName} isNickName />
 
       <h5>모집 인원</h5>
       <div className="row-container">
         <GrayBorderBtn>
           기획<span>{member_plan}명</span>
         </GrayBorderBtn>
-        <GreenBtn onClick={() => onClickJoin('plan')} animation>
-          기획 참여하기
-        </GreenBtn>
+        {!projectObj.isEnd && (
+          <GreenBtn onClick={() => onClickJoin('plan')} animation>
+            기획 참여하기
+          </GreenBtn>
+        )}
       </div>
       <div className="row-container">
         <GrayBorderBtn>
           개발<span>{member_dev}명</span>
         </GrayBorderBtn>
-        <GreenBtn onClick={() => onClickJoin('dev')} animation>
-          개발 참여하기
-        </GreenBtn>
+        {!projectObj.isEnd && (
+          <GreenBtn onClick={() => onClickJoin('dev')} animation>
+            개발 참여하기
+          </GreenBtn>
+        )}
       </div>
     </Container>
   );

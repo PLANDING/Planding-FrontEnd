@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import userImg from '../../assets/imgs/user.png';
 import { setProfileInfo } from '../../modules/profile';
 
-const ProfileBox = ({ profileUrl, nickName, size, userId, borderNone }) => {
+const ProfileBox = ({ profileUrl, nickName, size, borderNone, isNickName }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   /*prifile user 정보 Get */
-  const onClickProfile = () => {
-    axios.get(`/user/${userId}`).then((res) => {
+  const onClickProfile = (event) => {
+    event.stopPropagation();
+    axios.get(`/user/${nickName}`).then((res) => {
       dispatch(setProfileInfo(res.data.user));
-      history.push('/profile');
+      history.push(`/profile/${nickName}`);
     });
   };
   return (
@@ -21,7 +21,7 @@ const ProfileBox = ({ profileUrl, nickName, size, userId, borderNone }) => {
       <ImgWrapper size={size} borderNone={borderNone}>
         <img src={profileUrl ? profileUrl : userImg} width="100%" />
       </ImgWrapper>
-      <span>{nickName}</span>
+      {isNickName && <span>{nickName}</span>}
     </ProfileWrapper>
   );
 };

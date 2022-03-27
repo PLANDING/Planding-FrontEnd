@@ -27,8 +27,8 @@ const AppRouter = () => {
         <Route exact path="/completion/detail/:projectId" component={FundingCompletionDetail} />
         <Route path="/modification/:type/:projectId" component={FundingEdit} />
         <Route path="/creation" component={FundingCreation} />
-        <Route exact path="/profile" component={Profile} />
         <Route exact path="/profile/edit" component={ProfileEdit} />
+        <Route exact path="/profile/:userNickName" component={Profile} />
         <Route exact path="/project" component={Project} />
         <Route exact path="/project/matching/:projectId" component={Matching} />
         <Route path="/alert" component={Alert} />

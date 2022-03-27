@@ -17,14 +17,13 @@ const ProfileEdit = () => {
   const { userObj } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const cookie = new Cookies();
-  const userId = cookie.get('userId');
-
+  // const cookie = new Cookies();
+  // const userId = cookie.get('userId');
   useEffect(() => {
-    axios.get(`/user/${userId}`).then((res) => {
+    axios.get(`/user/${userObj?.nickName}`).then((res) => {
       dispatch(setPrevInfo(res.data.user));
     });
-  }, []);
+  }, [userObj]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +35,7 @@ const ProfileEdit = () => {
       formData.append('nickName', registerInfo.nickName);
       formData.append('site', registerInfo.site);
       formData.append('github', registerInfo.github);
-      formData.append('skillArr', skillArr);
+      formData.append('skillArr', JSON.stringify(skillArr));
       formData.append('interestArr', interestArr);
       formData.append('profileImg', registerInfo.profileImg);
       axios.patch(`/user/${userObj?.id}`, formData).then((res) => {

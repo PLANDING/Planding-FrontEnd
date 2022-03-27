@@ -27,7 +27,7 @@ const SkillForm = () => {
   return (
     <FieldWrapper skill>
       <Label>기술 스택</Label>
-      <Flex className="col" gap="10px">
+      <Flex className="col" gap="20px">
         <Wrapper dir="row">
           <input
             type="text"

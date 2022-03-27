@@ -7,7 +7,7 @@ import Gage from '../common/Gage';
 const ProjectCard = ({ projectObj }) => {
   const totalCurriCnt = 20;
   let gage = parseInt(
-    ((projectObj.devCurriculum + projectObj.planCurriculum) / totalCurriCnt) * 100,
+    ((projectObj?.devCurriculum + projectObj?.planCurriculum) / totalCurriCnt) * 100,
   );
   return (
     <>
