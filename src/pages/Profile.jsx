@@ -22,7 +22,9 @@ const Profile = () => {
 
   const { profileObj } = useSelector((state) => ({ profileObj: state.profile.profileObj })); //prifile user 정보
   useEffect(() => {
-    axios.get(`/user/${userId}`).then((res) => dispatch(setProfileInfo(res.data.user)));
+    axios.get(`/user/${userId}`).then((res) => {
+      dispatch(setProfileInfo(res.data.user));
+    });
   }, []);
 
   /*계정 user 정보 Get -> 프로픨 수정*/
@@ -34,8 +36,8 @@ const Profile = () => {
   };
 
   const onClickLogout = () => {
+    cookie.remove('token', { path: '/' });
     dispatch(logout());
-    cookie.remove('token');
     history.push('/');
   };
   return (
