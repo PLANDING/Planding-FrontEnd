@@ -22,6 +22,7 @@ const Comment = ({ projectId, commentObj, isUser }) => {
         <ProfileBox
           profileUrl={commentObj.User.ProfileImg?.url}
           nickName={commentObj.User.nickName}
+          isNickName
         />
         <Side className="row-container">
           <DateBox dateString={commentObj.createdAt} />

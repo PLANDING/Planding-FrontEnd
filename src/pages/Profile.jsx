@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Cookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import styled from 'styled-components';
 import { GreenBorderBtn } from '../components/common/Button';
 import Header from '../components/common/Header';
@@ -16,24 +17,21 @@ import { logout } from '../modules/user';
 const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { userNickName } = useParams();
   const cookie = new Cookies();
   const userId = cookie.get('userId');
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
-
   const { profileObj } = useSelector((state) => ({ profileObj: state.profile.profileObj })); //prifile user 정보
+
   useEffect(() => {
-    axios.get(`/user/${userId}`).then((res) => {
-      console.log(res.data);
+    axios.get(`/user/${userNickName}`).then((res) => {
       dispatch(setProfileInfo(res.data.user));
     });
   }, []);
 
   /*계정 user 정보 Get -> 프로픨 수정*/
   const onClickEdit = () => {
-    axios.get(`/user/${userId}`).then((res) => {
-      dispatch(setRegsiterInfo(res.data.user));
-      history.push('/profile/edit');
-    });
+    history.push('/profile/edit');
   };
 
   const onClickLogout = () => {

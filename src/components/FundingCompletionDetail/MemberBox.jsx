@@ -50,7 +50,7 @@ const MemberBox = ({ user, projectId, member_plan, member_dev }) => {
       <HeadLine>팀원 모집</HeadLine>
 
       <h5>리더</h5>
-      <ProfileBox nickName={user.nickName} />
+      <ProfileBox nickName={user.nickName} isNickName />
 
       <h5>모집 인원</h5>
       <div className="row-container">

@@ -38,7 +38,13 @@ const MatchingCard = ({ profile, projectId }) => {
       <LineBox></LineBox>
       <Card className="row-container">
         <Profile className="col-container">
-          <ProfileBox size={'120px'} userId={profile.id} profileUrl={profile.ProfileImg?.url} />
+          <ProfileBox
+            size={'120px'}
+            userId={profile.id}
+            profileUrl={profile.ProfileImg?.url}
+            nickName={profile.nickName}
+            isNickName={false}
+          />
           <div className="row-container">
             <img
               src={require('../../assets/imgs/' + LevelImgs[profile.level / 4].fill).default}

@@ -17,14 +17,13 @@ const ProfileEdit = () => {
   const { userObj } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const cookie = new Cookies();
-  const userId = cookie.get('userId');
-
+  // const cookie = new Cookies();
+  // const userId = cookie.get('userId');
   useEffect(() => {
-    axios.get(`/user/${userId}`).then((res) => {
+    axios.get(`/user/${userObj?.nickName}`).then((res) => {
       dispatch(setPrevInfo(res.data.user));
     });
-  }, []);
+  }, [userObj]);
 
   const onSubmit = (e) => {
     e.preventDefault();
