@@ -46,7 +46,7 @@ const EmailForm = () => {
     dispatch(setCheckInfo({ ...checkInfo, [name]: false }));
   };
   return (
-    <FlexContainer gap="20px">
+    <FlexContainer gap="10px">
       <Wrapper dir="row">
         <Point>*</Point>
         <Label>아이디</Label>
