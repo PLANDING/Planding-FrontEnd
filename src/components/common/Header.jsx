@@ -51,9 +51,12 @@ const Header = () => {
                 {isOpenModal && <AlertModal alertArr={alertArr} />}
               </Modal>
             </AlertButton>
-            <Link to="profile">
-              <ProfileBox profileUrl={userObj.ProfileImg?.url} userId={userObj.id} />
-            </Link>
+            <ProfileBox
+              profileUrl={userObj.ProfileImg?.url}
+              userId={userObj.id}
+              nickName={userObj?.nickName}
+              isNickName={false}
+            />
           </>
         ) : (
           <Link to="login">

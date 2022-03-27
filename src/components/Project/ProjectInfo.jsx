@@ -22,6 +22,7 @@ const ProjectInfo = () => {
             userId={Member.User.id}
             slackId={Member.User.slackId}
             profileUrl={Member.User.ProfileImg?.url}
+            nickName={Member.User.nickName}
           />
         ))}
       </MemberBox>

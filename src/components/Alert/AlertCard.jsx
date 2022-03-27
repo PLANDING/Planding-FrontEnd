@@ -17,7 +17,11 @@ const AlertCard = ({ content, date, projectId, fromUser, alertId }) => {
       <Content className="row-container">
         {fromUser ? (
           <>
-            <ProfileBox profileUrl={fromUser.ProfileImg?.url} />
+            <ProfileBox
+              profileUrl={fromUser.ProfileImg?.url}
+              nickName={fromUser?.nickName}
+              isNickName={false}
+            />
             {`'${fromUser?.nickName}'${content}`}
           </>
         ) : (

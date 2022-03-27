@@ -45,6 +45,7 @@ const ContentBox = ({ writer, isWriter, content, type }) => {
           nickName={writer.nickName}
           userId={writer.id}
           profileUrl={writer.ProfileImg?.url}
+          isNickName
         />
         {isWriter && <FontAwesomeIcon id="menu" onClick={onClickMenu} icon={faEllipsisV} />}
         {isOpenMenu && (

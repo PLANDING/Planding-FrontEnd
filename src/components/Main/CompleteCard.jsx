@@ -29,6 +29,7 @@ const CompleteCard = ({ projectObj }) => {
             nickName={projectObj.User.nickName}
             userId={projectObj.User.id}
             profileUrl={projectObj.User.ProfileImg?.url}
+            isNickName
           />
         </Header>
         <Body>

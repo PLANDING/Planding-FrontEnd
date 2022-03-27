@@ -34,7 +34,12 @@ const CommentForm = ({ commentArr, projectId }) => {
       <div id="label">댓글</div>
       {isLoggedin && (
         <From className="row-container" onSubmit={onSubmit}>
-          <ProfileBox profileUrl={userObj?.ProfileImg?.url} borderNone />
+          <ProfileBox
+            profileUrl={userObj?.ProfileImg?.url}
+            borderNone
+            nickName={userObj?.nickName}
+            isNickName={false}
+          />
           <textarea
             type="text"
             placeholder="댓글을 입력해주세요. (최대 300자)"

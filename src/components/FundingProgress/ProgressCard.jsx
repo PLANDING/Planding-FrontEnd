@@ -56,6 +56,7 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
           nickName={progress.User.nickName}
           userId={progress.User.id}
           profileUrl={progress.User.ProfileImg?.url}
+          isNickName
         />
       </ProjectHead>
       <div className="row-container">
