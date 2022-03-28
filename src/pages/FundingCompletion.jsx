@@ -32,7 +32,7 @@ const FundingCompletion = () => {
           ) : (
             projectArr.map((completion, idx) => (
               <CompletionCard
-                key={idx}
+                key={completion.id}
                 idx={idx}
                 projectObj={completion}
                 usage={userObj?.id === completion.User.id && 'isNone'}

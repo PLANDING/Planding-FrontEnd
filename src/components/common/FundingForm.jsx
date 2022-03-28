@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { categoryArr } from '../../assets/objects/Category';
 import MemberForm from '../FundingCreation/MemberForm';
 import GreenBtn, { GrayBtn } from './Button';
+import { Flex } from './Flex';
 import InterestForm from './InterestForm';
 import QuillEditor from './QuillEditor';
 import Select from './Select';
@@ -41,8 +42,7 @@ const FundingForm = ({
         onChange={onChangeFunding}
         required
       />
-
-      <Wrapper>
+      <Flex dir="column">
         <Label>
           프로젝트 주제 <span>*헤드라인</span>
         </Label>
@@ -54,9 +54,8 @@ const FundingForm = ({
           onChange={onChangeFunding}
           required
         />
-      </Wrapper>
-
-      <Wrapper>
+      </Flex>
+      <Flex dir="column">
         <Label>주제 카테고리</Label>
         <Select
           label={category ? category : '카테고리'}
@@ -64,28 +63,26 @@ const FundingForm = ({
           setValue={setCategory}
           required={true}
         />
-      </Wrapper>
-
-      <Wrapper>
+      </Flex>
+      <Flex dir="column" height="500px">
         <Label>기획 내용</Label>
         <QuillEditor htmlContent={fundingObj.content} setHtmlContent={onChangeContent} />
-      </Wrapper>
-      <Wrapper>
+      </Flex>
+      <Flex dir="column">
         <Label>기술 카테고리</Label>
         <InterestForm
           fundingInterestArr={interestArr}
           setFundingInterestArr={setInterestArr}
           type="funding"
         />
-      </Wrapper>
-
-      <Wrapper>
+      </Flex>
+      <Flex dir="column">
         <Label>모집 인원</Label>
         <div className="row-container member-wrapper">
           <MemberForm fundingObj={fundingObj} setFundingObj={setFundingObj} type="member_plan" />
           <MemberForm fundingObj={fundingObj} setFundingObj={setFundingObj} type="member_dev" />
         </div>
-      </Wrapper>
+      </Flex>
       <BtnGroup>
         <GrayBtn onClick={onClickBack}>취소</GrayBtn>
         <GreenBtn animation>확인</GreenBtn>
@@ -96,9 +93,9 @@ const FundingForm = ({
 const Form = styled.form`
   width: 70%;
   margin-top: 30px;
-  & > div {
-    margin: 50px 0;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   input[name='idea'] {
     all: unset;
     font-size: xx-large;
@@ -114,12 +111,6 @@ const Form = styled.form`
   .member-wrapper {
     gap: 10px;
   }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 `;
 const Label = styled.span`
   font-size: x-large;

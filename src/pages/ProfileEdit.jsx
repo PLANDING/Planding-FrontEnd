@@ -4,25 +4,26 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import Cookies from 'universal-cookie';
 import GreenBtn from '../components/common/Button';
 import Header from '../components/common/Header';
 import TopDiv from '../components/common/TopDIv';
 import PersonalInfo from '../components/ProfileEdit/PersonalInfo';
 import SkillInfo from '../components/Register/SkillInfo';
-import { setPrevInfo } from '../modules/register';
+import { initRegsiterInfo, setPrevInfo } from '../modules/register';
 
 const ProfileEdit = () => {
   const { registerInfo, interestArr, skillArr, checkInfo } = useSelector((state) => state.register);
   const { userObj } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  // const cookie = new Cookies();
-  // const userId = cookie.get('userId');
+
   useEffect(() => {
     axios.get(`/user/${userObj?.nickName}`).then((res) => {
       dispatch(setPrevInfo(res.data.user));
     });
+    return () => {
+      dispatch(initRegsiterInfo());
+    };
   }, [userObj]);
 
   const onSubmit = (e) => {
@@ -35,11 +36,12 @@ const ProfileEdit = () => {
       formData.append('nickName', registerInfo.nickName);
       formData.append('site', registerInfo.site);
       formData.append('github', registerInfo.github);
+      formData.append('slackId', registerInfo.slackId);
       formData.append('skillArr', JSON.stringify(skillArr));
       formData.append('interestArr', interestArr);
       formData.append('profileImg', registerInfo.profileImg);
       axios.patch(`/user/${userObj?.id}`, formData).then((res) => {
-        res.status == 200 && history.push('/profile');
+        res.status == 200 && history.push(`/profile/${registerInfo.nickName}`);
       });
     } catch (err) {
       alert(err.message);

@@ -61,6 +61,7 @@ const ContentBox = ({ writer, isWriter, content, type }) => {
           </Modal>
         )}
       </div>
+      {console.log(content)}
       <QuillContent content={content} />
     </Wrapper>
   );
