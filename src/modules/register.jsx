@@ -1,4 +1,5 @@
 const SET_INFO = 'register/SET_INFO';
+const INIT_INFO = 'register/INIT_INFO';
 const SET_PREV_INFO = 'register/SET_PREV_INFO';
 const SET_CHECK_INFO = 'register/SET_CHECK_INFO';
 const RESET_CHECK_INFO = 'register/RESET_CHECK_INFO';
@@ -27,6 +28,11 @@ const initialState = {
   interestArr: [],
 };
 
+export const initRegsiterInfo = () => {
+  return {
+    type: INIT_INFO,
+  };
+};
 export const setRegsiterInfo = (registerInfo) => {
   return {
     type: SET_INFO,
@@ -82,6 +88,14 @@ export const delInterest = (index) => {
 };
 export default function register(state = initialState, action) {
   switch (action.type) {
+    case INIT_INFO:
+      return {
+        ...state,
+        registerInfo: initialState.registerInfo,
+        checkInfo: initialState.checkInfo,
+        skillArr: [],
+        interestArr: [],
+      };
     case SET_INFO:
       return { ...state, registerInfo: action.registerInfo };
     case SET_PREV_INFO:

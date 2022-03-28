@@ -11,9 +11,11 @@ const Matching = ({ match }) => {
   const { projectId } = match.params;
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
   const [devProfileArr, setDevProfileArr] = useState();
-  useEffect(() => {
+  useEffect(async () => {
+    const { data } = await axios.get(`/myProject/${userObj?.id}`);
+    const memberArr = data.MyProject.UserProjects.map((user) => user.UserId);
     axios.get(`/myProject/matching/${projectId}`).then((res) => {
-      setDevProfileArr(res.data.Devs);
+      setDevProfileArr(res.data.Devs.filter((dev) => !memberArr.includes(dev.id)));
     });
   }, []);
   return (
@@ -26,12 +28,9 @@ const Matching = ({ match }) => {
             <Notice>잠시만 기다려주세요.</Notice>
           ) : (
             <Wrapper className="col-container">
-              {devProfileArr.map(
-                (profile) =>
-                  profile.id != userObj.id && (
-                    <MatchingCard profile={profile} projectId={projectId} />
-                  ),
-              )}
+              {devProfileArr.map((profile) => (
+                <MatchingCard key={profile.id} profile={profile} projectId={projectId} />
+              ))}
             </Wrapper>
           )}
         </MainContainer>

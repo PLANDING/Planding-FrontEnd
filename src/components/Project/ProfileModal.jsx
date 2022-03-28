@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import slackImg from '../../assets/imgs/slack_logo.png';
 import { setProfileInfo } from '../../modules/profile';
+import { Flex } from '../common/Flex';
 import Modal from '../common/Modal';
 
 const ProfileModal = ({ setIsOpen, slackId, nickName }) => {
@@ -21,7 +22,10 @@ const ProfileModal = ({ setIsOpen, slackId, nickName }) => {
     <Modal setIsOpen={setIsOpen} abs>
       <Container>
         <Wrapper>
-          <img src={slackImg} />
+          <Flex dir="row" alignCenter width="100%">
+            <img src={slackImg} />
+            <Span>{nickName}</Span>
+          </Flex>
           <IdSpan>{slackId}</IdSpan>
         </Wrapper>
         <Hr />
@@ -57,6 +61,13 @@ const Hr = styled.hr`
   border-bottom: solid thin #dadada;
   width: 100%;
   margin: 0;
+`;
+const Span = styled.span`
+  font-weight: bold;
+  font-size: small;
+  flex: 1;
+  text-align: right;
+  color: #37c56e;
 `;
 const IdSpan = styled.span`
   font-weight: lighter;

@@ -26,11 +26,11 @@ const CompletionCard = ({ projectObj, usage, idx, alertId }) => {
     });
   };
   useEffect(() => {
-    !isEnd &&
-      date > 14 &&
+    if (!isEnd && date > 14) {
       axios
         .patch(`/project/end/${projectObj.id}`)
         .then((res) => res.status === 200 && setIsEnd(true));
+    }
   }, []);
   return (
     <Card id={idx} onClick={onClickCard}>

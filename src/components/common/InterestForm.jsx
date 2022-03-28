@@ -46,7 +46,7 @@ const InterestForm = ({ fundingInterestArr, setFundingInterestArr, type }) => {
       <div className="row-container">
         <Select
           label={'분야'}
-          optionArr={['기획', '프론트엔드', '백엔드', '데이터분석']}
+          optionArr={['기획', '프론트엔드', '백엔드', '데이터']}
           value={first}
           setValue={setFirst}
         />
