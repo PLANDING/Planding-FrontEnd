@@ -43,7 +43,7 @@ const PwForm = () => {
   return (
     <>
       <Flex gap="20px" height="30px">
-        <Wrapper className="row-container">
+        <Wrapper dir="row">
           <Point>*</Point>
           <Label>비밀번호</Label>
           <input
@@ -57,7 +57,7 @@ const PwForm = () => {
         {!checkInfo.pw && pwNotice && <Notice>{pwNotice}</Notice>}
       </Flex>
       <Flex gap="20px" height="30px">
-        <Wrapper className="row-container" checking={checkInfo.pwCheck && 'pwCheck'}>
+        <Wrapper dir="row" checking={checkInfo.pwCheck && 'pwCheck'}>
           <Point>*</Point>
           <Label>비밀번호 확인</Label>
           <input

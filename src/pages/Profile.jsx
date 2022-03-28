@@ -6,12 +6,12 @@ import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import styled from 'styled-components';
 import { GreenBorderBtn } from '../components/common/Button';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import CompleteProject from '../components/Profile/CompleteProject';
 import ProfileCard from '../components/Profile/ProfileCard';
 import ProfileInfo from '../components/Profile/ProfileInfo';
 import { setProfileInfo } from '../modules/profile';
-import { setRegsiterInfo } from '../modules/register';
 import { logout } from '../modules/user';
 
 const Profile = () => {
@@ -19,7 +19,6 @@ const Profile = () => {
   const history = useHistory();
   const { userNickName } = useParams();
   const cookie = new Cookies();
-  const userId = cookie.get('userId');
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
   const { profileObj } = useSelector((state) => ({ profileObj: state.profile.profileObj })); //prifile user 정보
 
@@ -29,7 +28,6 @@ const Profile = () => {
     });
   }, []);
 
-  /*계정 user 정보 Get -> 프로픨 수정*/
   const onClickEdit = () => {
     history.push('/profile/edit');
   };
@@ -43,17 +41,17 @@ const Profile = () => {
     <>
       <Header />
       <div className="main-container">
-        <ProfileWrapper className="col-container">
+        <ProfileWrapper dir="column" jCCenter>
           <ProfileInfo profile={profileObj} />
         </ProfileWrapper>
-        <CardWrapper className="col-container">
-          {userObj?.id == profileObj.id && (
+        <CardWrapper dir="column" jCCenter>
+          {userObj?.id === profileObj.id && (
             <BtnWrapper>
               <GreenBorderBtn onClick={onClickEdit}>프로필 수정</GreenBorderBtn>
               <RedBorderBtn onClick={onClickLogout}>로그아웃</RedBorderBtn>
             </BtnWrapper>
           )}
-          <ProfileCard profileObj={profileObj} />
+          <ProfileCard {...{ profileObj }} />
 
           <CompleteProject projectArr={profileObj.MyProjects} />
         </CardWrapper>
@@ -64,10 +62,10 @@ const Profile = () => {
 
 export default Profile;
 
-const ProfileWrapper = styled.div`
+const ProfileWrapper = styled(Flex)`
   margin-top: 50px;
 `;
-const CardWrapper = styled.div`
+const CardWrapper = styled(Flex)`
   width: 65%;
 `;
 

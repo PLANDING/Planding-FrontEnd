@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { useEffect } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import { ProjectHead } from '../components/common/Card';
+import { Flex } from '../components/common/Flex';
 import FundingBtnBox from '../components/common/FundingBtnBox';
 import FundingGage from '../components/common/FundingGage';
 import Header from '../components/common/Header';
@@ -46,7 +47,7 @@ const FundingProgressDetail = () => {
           isDetail
           marginTop="30px"
         >
-          <SideBtnBox className="col-container">
+          <SideBtnBox dir="column" jCCenter>
             {!isWriter && !projectObj.isEnd && (
               <FundingBtnBox
                 dDay={7 - date}
@@ -67,7 +68,7 @@ const FundingProgressDetail = () => {
           </SideBtnBox>
         </ProjectHead>
         <Wrapper>
-          <Container className="col-container">
+          <Container dir="column" jCCenter>
             <ContentBox
               writer={projectObj.User}
               isWriter={isWriter}
@@ -76,7 +77,7 @@ const FundingProgressDetail = () => {
             />
             <CommentForm commentArr={projectObj.Comments} projectId={projectObj.id} />
           </Container>
-          <SideContainer className="col-container">
+          <SideContainer dir="column" jCCenter gap="30px">
             <CategoryBox category={projectObj.Category.name} interestArr={projectObj.Interests} />
           </SideContainer>
         </Wrapper>
@@ -91,12 +92,12 @@ const Wrapper = styled.div`
   width: 80%;
   gap: 20px;
 `;
-const Container = styled.div`
+const Container = styled(Flex)`
   flex: 1;
   border: solid thin #37c56e;
   border-radius: 10px;
 `;
-const SideBtnBox = styled.div`
+const SideBtnBox = styled(Flex)`
   width: 240px;
   button {
     padding: 5px 20px;
@@ -114,8 +115,7 @@ const SideBtnBox = styled.div`
     color: #5f5f5f;
   }
 `;
-const SideContainer = styled.div`
-  gap: 30px;
+const SideContainer = styled(Flex)`
   h4 {
     margin-top: 0;
   }

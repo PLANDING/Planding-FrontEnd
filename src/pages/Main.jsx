@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import MainFundingCompletion from '../components/Main/MainFundingCompletion';
 import MainFundingIng from '../components/Main/MainFundingIng';
@@ -24,7 +25,7 @@ const Main = () => {
   return (
     <>
       <Header />
-      <Wrapper className="col-container">
+      <Wrapper dir="column" center gap="50px">
         <MainFundingCompletion projectArr={completionArr} />
         <MainFundingIng projectArr={progressArr} />
       </Wrapper>
@@ -34,9 +35,6 @@ const Main = () => {
 
 export default Main;
 
-const Wrapper = styled.div`
+const Wrapper = styled(Flex)`
   margin: 50px 3%;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
 `;

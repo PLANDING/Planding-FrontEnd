@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import FilterTool from '../components/common/FilterTool';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import TopDIv from '../components/common/TopDIv';
 import CompletionCard from '../components/FundingCompletion/CompletionCard';
@@ -23,10 +24,10 @@ const FundingCompletion = () => {
   return (
     <>
       <Header />
-      <div className="completion main-container">
+      <div className="main-container">
         <TopDIv pageLabel={'펀딩완료'} subLabel={'프로젝트에 참여하세요!'} />
         <FilterTool />
-        <CardWrapper className="col-container">
+        <CardWrapper dir="column" jCCenter>
           {projectArr.length === 0 ? (
             <Wrapper>해당 조건의 펀딩이 없습니다.</Wrapper>
           ) : (
@@ -44,7 +45,7 @@ const FundingCompletion = () => {
     </>
   );
 };
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(Flex)`
   width: 80%;
   gap: 20px;
 `;

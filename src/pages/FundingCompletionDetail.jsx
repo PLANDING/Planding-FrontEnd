@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
 import { ProjectHead } from '../components/common/Card';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import JoinBtnBox from '../components/common/JoinBtnBox';
 import TopDiv from '../components/common/TopDIv';
@@ -41,8 +42,8 @@ const FundingCompletionDetail = () => {
             <JoinBtnBox project={projectObj} dDay={3} width="240px" content={'모집 종료까지'} />
           )}
         </ProjectHead>
-        <Wrapper>
-          <Container className="col-container">
+        <Wrapper dir="row" width="80%" gap="20px">
+          <Container dir="column" jCCenter>
             <ContentBox
               writer={projectObj.User}
               isWriter={isWriter}
@@ -51,7 +52,7 @@ const FundingCompletionDetail = () => {
             />
             <CommentForm projectId={projectObj.id} commentArr={projectObj.Comments} />
           </Container>
-          <SideContainer className="col-container">
+          <SideContainer dir="column" jCCenter gap="30px">
             <CategoryBox category={projectObj.Category?.name} interestArr={projectObj.Interests} />
             <MemberBox
               user={projectObj.User}
@@ -65,20 +66,15 @@ const FundingCompletionDetail = () => {
     </>
   );
 };
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+const Wrapper = styled(Flex)`
   align-items: flex-start;
-  width: 80%;
-  gap: 20px;
 `;
-const Container = styled.div`
+const Container = styled(Flex)`
   flex: 1;
   border: solid thin #37c56e;
   border-radius: 10px;
 `;
-const SideContainer = styled.div`
-  gap: 30px;
+const SideContainer = styled(Flex)`
   h4 {
     margin-top: 0;
   }

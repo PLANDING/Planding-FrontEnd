@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     cookie.get('token') ? sendJwtTokenToServer() : dispatch(setLoggedInfo(false, null));
   }, []);
-  /* 자동 로그인 */
+
   const sendJwtTokenToServer = () => {
     axios.post('/auth').then((res) => {
       if (res.status == 200) {
@@ -22,7 +22,6 @@ function App() {
           res.status === 200 && dispatch(setGaInfo(res.data.Ga));
         }); */
       } else {
-        //자동 로그인 실패
         dispatch(setLoggedInfo(false, null));
       }
     });
