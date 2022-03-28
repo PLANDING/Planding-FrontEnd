@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { setRegsiterInfo } from '../../modules/register';
 import { Devider, InfoWrapper, Label } from '../../pages/Register';
 import { Flex } from '../common/Flex';
@@ -73,12 +73,12 @@ export const FieldWrapper = styled(Flex)`
   }
   ${(props) =>
     props.skill &&
-    `
-    display:flex;
-    flex-direction:row;
-    &>div{
-        flex:1;
-    }
+    css`
+      display: flex;
+      flex-direction: row;
+      & > div {
+        flex: 1;
+      }
     `}
 `;
 const Span = styled.span`

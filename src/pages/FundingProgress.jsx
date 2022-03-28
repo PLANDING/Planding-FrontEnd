@@ -48,7 +48,7 @@ const FundingProgress = () => {
           </GreenBtn>
         </TopDIv>
         <FilterTool />
-        <CardWrapper className="col-container">
+        <CardWrapper dir="column">
           {projectArr.length === 0 ? (
             <Wrapper>해당 조건의 펀딩이 없습니다.</Wrapper>
           ) : (

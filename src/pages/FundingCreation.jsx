@@ -33,7 +33,7 @@ const FundingCreation = () => {
           res.status == 200 && history.push('/progress');
         });
     } catch (error) {
-      alert(error.message);
+      console.error(error);
     }
   };
   return (
@@ -42,12 +42,14 @@ const FundingCreation = () => {
       <div className="creation main-container">
         <TopDiv pageLabel="펀딩 생성" />
         <FundingForm
-          interestArr={interestArr}
-          setInterestArr={setInterestArr}
-          fundingObj={fundingObj}
-          setFundingObj={setFundingObj}
-          setCategory={setCategory}
-          onSubmit={onSubmit}
+          {...{
+            interestArr,
+            setInterestArr,
+            fundingObj,
+            setFundingObj,
+            setCategory,
+            onSubmit,
+          }}
         />
       </div>
     </>

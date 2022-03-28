@@ -35,7 +35,7 @@ const NickNameForm = ({ onChangeInfo, isEdit }) => {
   };
   return (
     <>
-      <Wrapper className="row-container" checking={checkInfo.nickName && 'nickName'}>
+      <Wrapper dir="row" checking={checkInfo.nickName && 'nickName'}>
         {!isEdit && <Point>*</Point>}
         <Label>닉네임</Label>
         <input

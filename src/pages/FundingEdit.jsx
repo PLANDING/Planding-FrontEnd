@@ -49,16 +49,18 @@ const FundingEdit = () => {
   return (
     <>
       <Header />
-      <div className="creation main-container">
+      <div className="main-container">
         <TopDiv pageLabel="펀딩 수정" />
         <FundingForm
-          interestArr={interestArr}
-          setInterestArr={setInterestArr}
-          fundingObj={fundingObj}
-          setFundingObj={setFundingObj}
-          category={category}
-          setCategory={setCategory}
-          onSubmit={onSubmit}
+          {...{
+            interestArr,
+            setInterestArr,
+            fundingObj,
+            setFundingObj,
+            category,
+            setCategory,
+            onSubmit,
+          }}
         />
       </div>
     </>

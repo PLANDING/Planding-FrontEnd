@@ -16,7 +16,7 @@ const Login = () => {
       <Header />
       <div className="main-container">
         <TopDiv pageLabel="로그인" />
-        <Borderbox className="col-container">
+        <Borderbox dir="column" center width="50%">
           <img src={logoImg} width="100px" />
           <Flex dir="column" width="50%" gap="30px">
             <LoginForm />
@@ -28,9 +28,7 @@ const Login = () => {
   );
 };
 export default Login;
-const Borderbox = styled.div`
-  width: 50%;
-  align-items: center;
+const Borderbox = styled(Flex)`
   padding: 50px 0;
   margin-top: 50px;
   border: solid thin #37c56e;

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import AlertCard from '../components/Alert/AlertCard';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import TopDiv from '../components/common/TopDIv';
 
@@ -13,7 +14,7 @@ const Alert = () => {
   const { userObj } = useSelector((state) => ({ userObj: state.user.userObj })); //계정 user 정보
 
   const [alertArr, setAlertArr] = useState([]);
-  /* 모든 alert get  */
+
   useEffect(() => {
     axios.get(`/alert/${userObj?.id}`).then((res) => {
       setAlertArr(res.data.Alerts);
@@ -25,10 +26,10 @@ const Alert = () => {
       <Header />
       <Container className="main-container">
         <TopDiv pageLabel={'알림함'} />
-        <AlertContainer className="col-container">
+        <AlertContainer dir="column" jCCenter gap="30px" width="80%">
           {alertArr.length == 0 ? (
-            <NoticeBox className="row-container">
-              <FontAwesomeIcon icon={faSearch} style={{ 'font-size': '50px', color: '#37C56E' }} />
+            <NoticeBox dir="row" center gap="10px">
+              <FontAwesomeIcon icon={faSearch} />
               {'알림 내역이 없습니다.'}
             </NoticeBox>
           ) : (
@@ -50,18 +51,18 @@ const Alert = () => {
 };
 export default Alert;
 const Container = styled.div``;
-const AlertContainer = styled.div`
+const AlertContainer = styled(Flex)`
   border: solid thin #37c56e;
   padding: 30px;
-  width: 80%;
   border-radius: 10px;
   margin-top: 20px;
-  gap: 30px;
 `;
-const NoticeBox = styled.div`
-  justify-content: center;
+const NoticeBox = styled(Flex)`
   font-weight: lighter;
   color: #bdbdbd;
-  gap: 10px;
   padding: 20px 0;
+  & > svg {
+    font-size: 50px;
+    color: #37c56e;
+  }
 `;

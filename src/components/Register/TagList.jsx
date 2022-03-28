@@ -8,14 +8,14 @@ const TagList = ({ arr, onClickDel, isInterest }) => {
         <TagWrapper>
           {arr.map((ele, idx) =>
             isInterest ? (
-              <GreenBorderLabel key={idx}>
+              <GreenBorderLabel key={ele + idx}>
                 {ele.split(':')[1]}
                 <button type="button" name={idx} id="del-btn" onClick={onClickDel}>
                   X
                 </button>
               </GreenBorderLabel>
             ) : (
-              <GreenLabel key={idx}>
+              <GreenLabel key={ele.name + idx}>
                 {ele.name}
                 <button type="button" name={idx} id="del-btn" onClick={onClickDel}>
                   X

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
+import { Flex } from '../components/common/Flex';
 import Header from '../components/common/Header';
 import MatchingCard from '../components/Matching/MatchingCard';
 import { Container } from './Project';
@@ -27,9 +28,9 @@ const Matching = ({ match }) => {
           {devProfileArr === undefined ? (
             <Notice>잠시만 기다려주세요.</Notice>
           ) : (
-            <Wrapper className="col-container">
+            <Wrapper dir="column" jCCenter>
               {devProfileArr.map((profile) => (
-                <MatchingCard key={profile.id} profile={profile} projectId={projectId} />
+                <MatchingCard key={profile.id} {...{ profile, projectId }} />
               ))}
             </Wrapper>
           )}
@@ -53,7 +54,7 @@ const MainContainer = styled.div`
   margin-top: 50px;
   height: 100%;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled(Flex)`
   gap: 30px;
 `;
 const Notice = styled.div`
