@@ -34,7 +34,7 @@ const ProgressCard = ({ projectObj, usage, idx }) => {
   }, []);
 
   const [isFunding, setIsFunding] = useState(
-    isLoggedin ? projectObj.Fundings.findIndex((i) => i.User.id == userObj?.id) != -1 : false,
+    isLoggedin ? projectObj.Fundings.findIndex((i) => i.User?.id === userObj?.id) != -1 : false,
   );
   useEffect(() => {
     axios.get(`/project/card/${projectObj.id}`).then((res) => {
