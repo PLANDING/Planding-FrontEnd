@@ -9,19 +9,26 @@ import MainFundingCompletion from '../components/Main/MainFundingCompletion';
 import MainFundingIng from '../components/Main/MainFundingIng';
 
 const Main = () => {
-  const { gaObj } = useSelector((state) => ({ gaObj: state.user.gaObj }));
+  const { isLoggedin, userObj } = useSelector((state) => state.user);
   const [progressArr, setProgressArr] = useState([]);
   const [completionArr, setCompletionArr] = useState([]);
   useEffect(() => {
     try {
-      axios.post('/project', gaObj).then((res) => {
-        setProgressArr(res.data.Progresses);
-        setCompletionArr(res.data.Completions);
-      });
+      if (isLoggedin) {
+        axios.get(`/ga/${userObj?.id}`).then((res) => {
+          setProgressArr(res.data.Progresses);
+          setCompletionArr(res.data.Completions);
+        });
+      } else {
+        axios.get(`/project`).then((res) => {
+          setProgressArr(res.data.Progresses);
+          setCompletionArr(res.data.Completions);
+        });
+      }
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [isLoggedin]);
   return (
     <>
       <Header />
